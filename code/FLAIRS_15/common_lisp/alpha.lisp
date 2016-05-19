@@ -66,7 +66,6 @@
 
 
 ;;calculate alpha for all effects
-;;@param        str                 a string
 ;;@param        result-file         file containing relationships and their causal significance
 (defmethod get-all-alpha (result-file)
   ;;output heading
