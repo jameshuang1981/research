@@ -1,4 +1,4 @@
-;;;This is the code for calculating causal significance using alpha
+;;;This is the common lisp code for calculating causal significance using alpha
 
 (use-package "SPLIT-SEQUENCE")
 
@@ -32,7 +32,7 @@
 ;;val: E[e], the expectation of e
 (defvar *E-e-hash* (make-hash-table :test #'equal))
 
-;;key: t, the time of e being measured
+;;key: (list c r s), i.e. a list including potential cause c, start and end of time window, r and s
 ;;val: t (true) or nil (false)
 ;;t,   if c is the potential cause of e measured at time t
 ;;nil, otherwise
