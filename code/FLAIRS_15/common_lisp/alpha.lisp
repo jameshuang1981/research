@@ -43,7 +43,7 @@
 (defvar *Xt-L-hash* (make-hash-table :test #'equal))
 
 ;;key: time t
-;;val: list of discrete or discretized vars occuring at t
+;;val: list of discrete or discretized vars occurring at t
 (defvar *discrete-value-hash* (make-hash-table :test #'equal))
 
 ;;key: continuous-valued var
