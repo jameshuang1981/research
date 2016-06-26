@@ -532,7 +532,7 @@ def get_var_time_val_LLL(time_series_file, header, transpose, data_type):
 
       # get time_val_LL
       for time in range(len(val_L)):
-        time_val_LL.append([time, val_L[j]])
+        time_val_LL.append([time, val_L[time]])
 
       # get var_time_val_LLL
       var_time_val_LLL.append([var, time_val_LL])
