@@ -539,11 +539,10 @@
     (loop for (var time-value-LL) in continuous-var-time-value-LLL
           do (loop for (time value) in time-value-LL
 		   when (and time value);;ignore nil
-		   do (if (not (gethash var *continuous-value-L-hash*))
-			  (progn
+		   do (progn
+			(if (not (gethash var *continuous-value-L-hash*))
 			    (setf (gethash var *continuous-value-L-hash*)
-				  (make-hash-table :test #'equal))
-			    (setf (gethash time (gethash var *continuous-value-L-hash*)) value))
+				  (make-hash-table :test #'equal)))
 			(setf (gethash time (gethash var *continuous-value-L-hash*)) value))))
 
     ;;get *alphabet*
@@ -691,6 +690,5 @@
     (/ (reduce '+ value-L)
        (length value-L)))
   )
-
 
 
