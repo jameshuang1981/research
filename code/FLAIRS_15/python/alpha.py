@@ -617,4 +617,29 @@ def add_relationship(c, e, r, s):
 
 # main function
 if __name__=="__main__":
-  if not
+  # get the parameters
+  disc_data_file = sys.argv[0]
+  cont_data_file = sys.argv[1]
+  header = sys.argv[2]
+  transpose = sys.argv[3]
+  win_L = sys.argv[4]
+  rel_type = sys.argv[5]
+  result_file = sys.argv[6]
+
+  # make directory
+  if not os.path.exists(result_file):
+    os.makedirs(result_file)
+
+  # get global variables
+  get_global_variables(disc_data_file, cont_data_file, header, transpose)
+
+  # generate and test hypotheses
+  for [r, s] in win_L:
+    hyp = generate_hypotheses(alphabet_disc, alphabet_cont, r, s)
+    test_hypotheses(hyp, rel_type)
+
+  # calculate alpha for each relationship
+  get_all_alpha(result_file)
+
+
+
