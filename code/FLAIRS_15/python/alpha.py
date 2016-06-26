@@ -615,4 +615,6 @@ def get_E_e(e):
 def add_relationship(c, e, r, s):
   relations_dic[e].append([c, r, s])
 
-def
+# main function
+if __name__=="__main__":
+  if not
