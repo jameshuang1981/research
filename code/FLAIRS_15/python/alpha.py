@@ -150,7 +150,8 @@ def get_N_e_c_x(c_L, x_L):
 # get *T_e_ct_LL_Dic*
 # @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
 def get_T_e_ct_LL(c_L):
-  if not c_L in T_e_ct_LL_Dic:
+  c, r, s = c_L
+  if not (c, r, s) in T_e_ct_LL_Dic:
     c, r, s = c_L
     T_c_L = get_T_c_L(c)
     T_e_ct_LL = []
@@ -161,8 +162,8 @@ def get_T_e_ct_LL(c_L):
           T_e_ct_L.append(time)
       if T_e_ct_L:
         T_e_ct_LL.append(T_e_ct_L)
-    T_e_ct_LL_Dic[c_L] = T_e_ct_LL
-  return T_e_ct_LL_Dic[c_L]
+    T_e_ct_LL_Dic[(c, r, s)] = T_e_ct_LL
+  return T_e_ct_LL_Dic[(c, r, s)]
 
 
 # get *T_c_L_Dic*
@@ -180,15 +181,16 @@ def get_T_c_L(c):
 # get *T_e_c_L_Dic*
 # @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
 def get_T_e_c_L(c_L):
-  if not c_L in T_e_c_L_Dic:
+  c, r, s = c_L
+  if not (c, r, s) in T_e_c_L_Dic:
     T_e_ct_LL = get_T_e_ct_LL(c_L)
     T_e_c_L = []
     for T_e_ct_L in T_e_ct_LL:
       for time in T_e_ct_L:
         T_e_c_L.append(time)
     T_e_c_L = set(T_e_c_L)
-    T_e_c_L_Dic[c_L] = T_e_c_L
-  return T_e_c_L_Dic[c_L]
+    T_e_c_L_Dic[(c, r, s)] = T_e_c_L
+  return T_e_c_L_Dic[(c, r, s)]
 
 
 # get *N_e_c_Dic*
@@ -218,7 +220,7 @@ def is_full_rank(A_array):
       if abs(A_array[i * n + k]) > max_val:
         max_val = abs(A_array[ i * n + k])
         max_row = i
-    if max_val = 0:
+    if max_val == 0:
       full_rank = False
       break
     # switch it with row k
@@ -297,7 +299,7 @@ def is_full_rank_greedy(A_array):
             A_array[i * N + j] -= A_array[k * N + j] * multiplier
 
     # return
-    if full_rank == False or A_array[(N - 1) * N) + N - 1] == 0:
+    if full_rank == False or A_array[(N - 1) * N + N - 1] == 0:
       return False
     else:
       # update coefficient_Dic
@@ -312,7 +314,7 @@ def is_full_rank_greedy(A_array):
 # @param        A_array             the coefficient matrix of the system of linear equations
 # @param        X_L                 the set of potential causes
 # @param        e                   an effect
-def get_B_array(X_L e):
+def get_B_array(X_L, e):
   n = len(X_L)
   B_array = np.zero(n)
   for i in range(n):
@@ -360,7 +362,7 @@ def solve_system_of_linear_equations(A_array, B_array):
         max_val = abs(A_array[i * n + k])
         max_row = i
     # switch it with row k
-    if k /= max_row:
+    if k != max_row:
       for j in range(k, n):
         A_array[max_row * n + j], A_array[k * n + j] = A_array[k * n + j], A_array[max_row * n + j]
     # division
@@ -398,7 +400,7 @@ def get_result_file(X_L, e, B_array, result_file):
 # get a linearly independent subset of X
 # @param        X_L                 the set of potential causes
 # @param        e                   an effect
-def get_X_LIS_L(X_L e):
+def get_X_LIS_L(X_L, e):
   print "get_X_LIS_L"
   n = len(X_L)
   X_LIS_L = []
@@ -442,29 +444,33 @@ def get_X_LIS_L(X_L e):
 #                                   var1_t1, var2_t1, ..., varn_t1
 #                                   var1_t2, var2_t2, ..., varn_tn
 def get_global_variables(disc_data_file, cont_data_file, header, transpose):
-  print "discrete_file: %s" disc_data_file
-  print "continuous_file: %s" cont_data_file
+  print "discrete_file: %s" %disc_data_file
+  print "continuous_file: %s" %cont_data_file
 
   disc_var_time_val_LLL = get_var_time_val_LLL(disc_data_file, header, transpose, "discrete")
-  cont_var_time_val_LLL = get_var_time_val_LLL(cont_data_file, header, transpose "continuous")
+  cont_var_time_val_LLL = get_var_time_val_LLL(cont_data_file, header, transpose, "continuous")
 
   # initialize global variables
   relations = {}
   disc_val_Dic = {}
-  time_cont_val_Dic = {}
+  time_cont_val_L_Dic = {}
   cont_val_L_Dic = {}
 
   # get disc_val_Dic
   for [var, time_val_LL] in disc_var_time_val_LLL:
     for [time, val] in time_val_LL:
       if time and val:
-        disc_val_Dic[time].append(val)
+        if not time in disc_val_Dic:
+          disc_val_Dic[time] = []
+        disc_val_Dic[time].append(var + "_" + val)
 
   # get time_cont_val_L_Dic
   for [var, time_val_LL] in cont_var_time_val_LLL:
     for [time, val] in time_val_LL:
       if time and val:
-        time_cont_val_Dic[var].append([time, val])
+        if not var in time_cont_val_L_Dic:
+          time_cont_val_L_Dic[var] = []
+        time_cont_val_L_Dic[var].append([time, val])
 
   # get cont_val_L_Dic
   # for cases where variables are not measured at every timepoint
@@ -475,15 +481,15 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
           cont_val_L_Dic[var] = {}
         cont_val_L_Dic[var][time] = val
 
-  # get alphabet_disc_Dic
+  # get alphabet_disc
   for time in disc_val_Dic:
     for var in disc_val_Dic[time]:
-      if not var in alphabet_disc_Dic:
-        alphabet_disc_Dic.append(var)
+      if not var in alphabet_disc:
+        alphabet_disc.append(var)
 
-  # get alphabet_cont_Dic
+  # get alphabet_cont
   for var in time_cont_val_L_Dic:
-    alphabet_cont_Dic.append(var)
+    alphabet_cont.append(var)
 
 
 # get [var, [time, val]]
@@ -504,7 +510,7 @@ def get_var_time_val_LLL(time_series_file, header, transpose, data_type):
     spamreader = list(csv.reader(f, delimiter = ','))
     if transpose:
       # transpose the data
-      zip(*spamreader)
+      spamreader = zip(*spamreader)
 
     var_time_val_LLL = []
     for i in range(len(spamreader)):
@@ -516,7 +522,7 @@ def get_var_time_val_LLL(time_series_file, header, transpose, data_type):
       val_start = 0
       if header:
         # the name of the var lies in the first column in each row
-        var = spamreader[i][0]
+        var = spamreader[i][0].strip()
         # the value of the var starts from the second column in each row
         val_start = 1
       else:
@@ -525,10 +531,10 @@ def get_var_time_val_LLL(time_series_file, header, transpose, data_type):
       for j in range(val_start, len(spamreader[i])):
         if data_type == "discrete":
           # discrete val is a string, e.g. "High", "Normal", or "Low"
-          val_L.append(spamreader[i][j])
+          val_L.append(spamreader[i][j].strip())
         else:
           # continuous val is a number, e.g. 0.5, thus needs to be converted to float
-          val_L.append(float(spamreader[i][j]))
+          val_L.append(float(spamreader[i][j].strip()))
 
       # get time_val_LL
       for time in range(len(val_L)):
@@ -550,20 +556,21 @@ def generate_hypotheses(c_L, e_L, r, s):
   for e in e_L:
     for c in c_L:
       c_e_r_s_L.append([c, e, r, s])
+  return c_e_r_s_L
 
 
 # test hypotheses
 # for hypothesis [c, e, r, s], test whether c is a potential cause of e related to time window [r, s] and get *relations*
 # @param        hypotheses          a hypothesis is of form: [c, e, r, s]
 # @param        rel_type            type of hypotheses we want to test
-                                    "not_equal" for hypotheses s.t. E_e_c != E_e
-                                    "positive"  for hypotheses s.t. E_e_c > E_e
-                                    "negative"  for hypotheses s.t. E_e_c < E_e
-                                    "all"       for all hypotheses
+#                                   "not_equal" for hypotheses s.t. E_e_c != E_e
+#                                   "positive"  for hypotheses s.t. E_e_c > E_e
+#                                   "negative"  for hypotheses s.t. E_e_c < E_e
+#                                   "all"       for all hypotheses
 def test_hypotheses(hypotheses, rel_type):
   for [c, e, r, s] in hypotheses:
     if c and e and r and s:
-      E_e_c = get_E_e_c([c, r, s])
+      E_e_c = get_E_e_c(e, [c, r, s])
       E_e = get_E_e(e)
       if E_e_c:
         if rel_type == "not_equal":
@@ -618,20 +625,23 @@ def add_relationship(c, e, r, s):
 # main function
 if __name__=="__main__":
   # get the parameters
-  disc_data_file = sys.argv[0]
-  cont_data_file = sys.argv[1]
-  header = sys.argv[2]
-  transpose = sys.argv[3]
-  win_L = sys.argv[4]
+  disc_data_file = sys.argv[1]
+  cont_data_file = sys.argv[2]
+  header = sys.argv[3]
+  transpose = sys.argv[4]
   rel_type = sys.argv[5]
   result_file = sys.argv[6]
-
+  win_L = [[1, 1]]
+  print win_L
   # make directory
   if not os.path.exists(result_file):
     os.makedirs(result_file)
 
   # get global variables
   get_global_variables(disc_data_file, cont_data_file, header, transpose)
+
+  print alphabet_disc
+  print alphabet_cont
 
   # generate and test hypotheses
   for [r, s] in win_L:
