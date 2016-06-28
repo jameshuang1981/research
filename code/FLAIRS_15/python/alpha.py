@@ -55,7 +55,7 @@ disc_val_Dic = {}
 cont_val_L_Dic = {}
 
 # key: continuous_valued var
-# val: list of time and var's continuous value at a time, i.e. (list (list time val))
+# val: list of time and var's continuous value at a time, i.e. [[time, val]]
 time_cont_val_L_Dic = {}
 
 # list of discrete or discretized vars in the time series
@@ -450,37 +450,41 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
   disc_var_time_val_LLL = get_var_time_val_LLL(disc_data_file, header, transpose, "discrete")
   cont_var_time_val_LLL = get_var_time_val_LLL(cont_data_file, header, transpose, "continuous")
 
+  # print disc_var_time_val_LLL
+  # print cont_var_time_val_LLL
+
   # initialize global variables
-  relations = {}
-  disc_val_Dic = {}
-  time_cont_val_L_Dic = {}
-  cont_val_L_Dic = {}
+  # relations = {}
+  # disc_val_Dic = {}
+  # time_cont_val_L_Dic = {}
+  # cont_val_L_Dic = {}
 
   # get disc_val_Dic
   for [var, time_val_LL] in disc_var_time_val_LLL:
     for [time, val] in time_val_LL:
-      if time and val:
-        if not time in disc_val_Dic:
-          disc_val_Dic[time] = []
-        disc_val_Dic[time].append(var + "_" + val)
+      if not time in disc_val_Dic:
+        disc_val_Dic[time] = []
+      disc_val_Dic[time].append(var + "_" + val)
 
   # get time_cont_val_L_Dic
-  for [var, time_val_LL] in cont_var_time_val_LLL:
-    for [time, val] in time_val_LL:
-      if time and val:
-        if not var in time_cont_val_L_Dic:
-          time_cont_val_L_Dic[var] = []
-        time_cont_val_L_Dic[var].append([time, val])
+  for cont_var_time_val_LL in cont_var_time_val_LLL:
+    var, time_val_LL = cont_var_time_val_LL
+    for time, val in time_val_LL:
+      if not var in time_cont_val_L_Dic:
+        time_cont_val_L_Dic[var] = []
+      time_cont_val_L_Dic[var].append([time, val])
 
   # get cont_val_L_Dic
   # for cases where variables are not measured at every timepoint
   for [var, time_val_LL] in cont_var_time_val_LLL:
     for [time, val] in time_val_LL:
-      if time and val:
-        if not var in cont_val_L_Dic:
-          cont_val_L_Dic[var] = {}
-        cont_val_L_Dic[var][time] = val
+      if not var in cont_val_L_Dic:
+        cont_val_L_Dic[var] = {}
+      cont_val_L_Dic[var][time] = val
 
+  for var in cont_val_L_Dic:
+    print var
+  
   # get alphabet_disc
   for time in disc_val_Dic:
     for var in disc_val_Dic[time]:
@@ -506,6 +510,7 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
 # @param        data_type           "discrete",   if discrete data
 #                                   "continuous", if continuous_valued data
 def get_var_time_val_LLL(time_series_file, header, transpose, data_type):
+  # TODO: check empty string
   with open(time_series_file, 'rb') as f:
     spamreader = list(csv.reader(f, delimiter = ','))
     if transpose:
@@ -592,7 +597,7 @@ def test_hypotheses(hypotheses, rel_type):
 def get_E_e_c(e, c_L):
   T_e_c_L = get_T_e_c_L(c_L)
   if T_e_c_L:
-    if not [e, c_L] in E_e_c_Dic:
+    if not (e, c_L) in E_e_c_Dic:
       val_L = []
       for time in T_e_c_L:
         val_L.append(cont_val_L_Dic[e][time])
@@ -607,6 +612,8 @@ def get_E_e_c(e, c_L):
 def get_E_e(e):
   if not e in E_e_Dic:
     val_L = []
+    for var in cont_val_L_Dic:
+      print var
     for time in cont_val_L_Dic[e]:
       val_L.append(cont_val_L_Dic[e][time])
     E_e = np.mean(val_L)
@@ -640,8 +647,8 @@ if __name__=="__main__":
   # get global variables
   get_global_variables(disc_data_file, cont_data_file, header, transpose)
 
-  print alphabet_disc
-  print alphabet_cont
+  for var in cont_val_L_Dic:
+    print var
 
   # generate and test hypotheses
   for [r, s] in win_L:
