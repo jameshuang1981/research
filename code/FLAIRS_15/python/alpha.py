@@ -69,11 +69,6 @@ alphabet_cont = []
 # val: list of [c r s] where c is a potential cause, r and s the start and end of time window
 relations_Dic = {}
 
-# Dictionaries for the greedy version of is_full_rank (i.e. is_full_rank_greedy) 
-max_row_Dic = {}
-coefficient_Dic = {}
-denominator_Dic = {}
-multiplier_Dic = {}
 # calculate causal significance for all relationships
 # @param        result_file         file containing relationships and their causal significance
 def get_all_alpha(result_file):
@@ -95,14 +90,13 @@ def get_alpha(e, result_file):
   X_L = relations_Dic[e]
   if X_L:
     A_array = get_A_array(X_L)
-    # temp_array is the same as A_array and is used to check whether A_array is full rank
-    temp_array = get_A_array(X_L)
-    if is_full_rank(temp_array):
+    rank = np.linalg.matrix_rank(A_array) 
+    if rank == len(A_array):
       # if A_array is full rank, solve system of linear equations
       B_array = get_B_array(X_L, e)
       #A_array = [1, 1, 1, 2, 3, 4, 5, 6, 8]
       #B_array = [3, 9, 19]
-      B_array = solve_system_of_linear_equations(A_array, B_array)
+      B_array = np.linalg.solve(A_array, B_array)
       get_result_file(X_L, e, B_array, result_file)
     else:
       # if A_array is not full rank, get the subsystem of linear equations
@@ -112,7 +106,7 @@ def get_alpha(e, result_file):
         # solve the subsystem of linear equations
         A_LIS_array = get_A_array(X_LIS_L)
         B_LIS_array = get_B_array(X_LIS_L, e)
-        B_LIS_array = solve_system_of_linear_equations(A_LIS_array, B_LIS_array)
+        B_LIS_array = np.linalg.solve(A_LIS_array, B_LIS_array)
         get_result_file(X_LIS_L, e, B_LIS_array, result_file)
 
 
@@ -120,8 +114,9 @@ def get_alpha(e, result_file):
 # @param        X_L                 the set of potential causes
 def get_A_array(X_L):
   n = len(X_L)
-  A_array = np.zeros(n * n)
+  A_array = []
   for i in range(n):
+    row_L = []
     for j in range(n):
       c_L = X_L[i]
       x_L = X_L[j]
@@ -133,7 +128,8 @@ def get_A_array(X_L):
       nominator = N_e_c_x * len_T_e - N_e_x * len(T_e_c_L)
       denominator = N_e_c * (len_T_e - len(T_e_c_L))
       f_e_c_x = nominator / denominator
-      A_array[i * n + j] = f_e_c_x
+      row_L.append(f_e_c_x)
+    A_array.append(row_L)
   return A_array
 
 
@@ -347,7 +343,7 @@ def is_full_rank_greedy(A_array):
 # @param        e                   an effect
 def get_B_array(X_L, e):
   n = len(X_L)
-  B_array = np.zeros(n)
+  B_array = []
   for i in range(n):
     c_L = X_L[i]
     T_e_c_L = get_T_e_c_L(c_L)
@@ -358,7 +354,7 @@ def get_B_array(X_L, e):
     nominator = len_T_e * len(T_e_c_L)
     denominator = N_e_c * (len_T_e - len(T_e_c_L))
     f_e_c = nominator / denominator
-    B_array[i] = f_e_c * (E_e_c - E_e)
+    B_array.append(f_e_c * (E_e_c - E_e))
   return B_array
 
 
@@ -449,26 +445,13 @@ def get_X_LIS_L(X_L, e):
       if c_L_abs_dif_L[j][1] < c_L_abs_dif_L[j + 1][1]:
         c_L_abs_dif_L[j], c_L_abs_dif_L[j + 1] = c_L_abs_dif_L[j + 1], c_L_abs_dif_L[j]
 
-  # initialize global variables
-  # max_row_Dic = {}
-  # coefficient_Dic = {}
-  # denominator_Dic = {}
-  # multiplier_Dic = {}
-
   # greedy search
   for [c_L, abs_dif] in c_L_abs_dif_L:
     X_LIS_L.append(c_L)
     if len(X_LIS_L) > 1:
-#      if len(X_LIS_L) == 2:
-#        A_LIS_array = [0, 1, 0, 1]
-#      if len(X_LIS_L) == 3:
-#        A_LIS_array = [1, 0, 1, 1, 1, 1, 1, 1, 0]
-#      if len(X_LIS_L) == 4:
-#        A_LIS_array = [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1]
       A_LIS_array = get_A_array(X_LIS_L)
-      print X_LIS_L
-      if is_full_rank_greedy(A_LIS_array) == False:
-      #if is_full_rank(A_LIS_array) == False:
+      rank = np.linalg.matrix_rank(A_LIS_array)
+      if rank < len(A_LIS_array):
         X_LIS_L.remove(c_L)
   return X_LIS_L
 
