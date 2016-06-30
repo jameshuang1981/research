@@ -3,6 +3,7 @@ import sys
 import os
 import csv
 import numpy as np
+import math
 
 # This is the code for calculating causal significance using alpha
 
@@ -66,7 +67,7 @@ alphabet_cont = []
 
 # key: [effect]
 # val: list of [c r s] where c is a potential cause, r and s the start and end of time window
-relations = {}
+relations_Dic = {}
 
 # Dictionaries for the greedy version of is_full_rank (i.e. is_full_rank_greedy) 
 max_row_Dic = {}
@@ -81,8 +82,9 @@ def get_all_alpha(result_file):
     spamwriter = csv.writer(f, delimiter = ',')
     spamwriter.writerow(["cause", "effect", "window_start", "window_end", "alpha"])
 
-  for e in relations:
-    get_alpha(e, result_file)
+  for e in relations_Dic:
+    if e == 'z':
+      get_alpha(e, result_file)
 
 
 # calculate alpha for one relationship
@@ -90,7 +92,7 @@ def get_all_alpha(result_file):
 # @param        result_file         file containing relationships and their causal significance
 def get_alpha(e, result_file):
   # get the set of potential causes and remove duplicates
-  X_L = set(relations[e])
+  X_L = relations_Dic[e]
   if X_L:
     A_array = get_A_array(X_L)
     # temp_array is the same as A_array and is used to check whether A_array is full rank
@@ -98,15 +100,18 @@ def get_alpha(e, result_file):
     if is_full_rank(temp_array):
       # if A_array is full rank, solve system of linear equations
       B_array = get_B_array(X_L, e)
+      #A_array = [1, 1, 1, 2, 3, 4, 5, 6, 8]
+      #B_array = [3, 9, 19]
       B_array = solve_system_of_linear_equations(A_array, B_array)
       get_result_file(X_L, e, B_array, result_file)
     else:
       # if A_array is not full rank, get the subsystem of linear equations
       X_LIS_L = get_X_LIS_L(X_L, e)
+      print X_LIS_L
       if X_LIS_L:
         # solve the subsystem of linear equations
         A_LIS_array = get_A_array(X_LIS_L)
-        B_LIS_array = get_B_array(X_LIS_L)
+        B_LIS_array = get_B_array(X_LIS_L, e)
         B_LIS_array = solve_system_of_linear_equations(A_LIS_array, B_LIS_array)
         get_result_file(X_LIS_L, e, B_LIS_array, result_file)
 
@@ -136,15 +141,17 @@ def get_A_array(X_L):
 # @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
 # @param        x_L                (list x r s), a list including potential cause x, start and end of time window, r and s
 def get_N_e_c_x(c_L, x_L):
-  if not [c_L, x_L] in N_e_c_x_Dic:
+  c, cr, cs = c_L
+  x, xr, xs = x_L
+  if not ((c, cr, cs), (x, xr, xs)) in N_e_c_x_Dic:
     T_e_xt_LL = get_T_e_ct_LL(x_L)
     N_e_c_x = 0
     for T_e_xt_L in T_e_xt_LL:
       for time in T_e_xt_L:
         if is_in_Xt(c_L, time):
           N_e_c_x += 1
-    N_e_c_x_Dic[[c_L, x_L]] = N_e_c_x
-  return N_e_c_x_Dic[[c_L, x_L]]
+    N_e_c_x_Dic[((c, cr, cs), (x, xr, xs))] = N_e_c_x
+  return N_e_c_x_Dic[((c, cr, cs), (x, xr, xs))]
 
 
 # get *T_e_ct_LL_Dic*
@@ -152,7 +159,6 @@ def get_N_e_c_x(c_L, x_L):
 def get_T_e_ct_LL(c_L):
   c, r, s = c_L
   if not (c, r, s) in T_e_ct_LL_Dic:
-    c, r, s = c_L
     T_c_L = get_T_c_L(c)
     T_e_ct_LL = []
     for tc in T_c_L:
@@ -188,7 +194,7 @@ def get_T_e_c_L(c_L):
     for T_e_ct_L in T_e_ct_LL:
       for time in T_e_ct_L:
         T_e_c_L.append(time)
-    T_e_c_L = set(T_e_c_L)
+    T_e_c_L = list(set(T_e_c_L))
     T_e_c_L_Dic[(c, r, s)] = T_e_c_L
   return T_e_c_L_Dic[(c, r, s)]
 
@@ -196,13 +202,14 @@ def get_T_e_c_L(c_L):
 # get *N_e_c_Dic*
 # @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
 def get_N_e_c(c_L):
-  if not c_L in N_e_c_Dic:
+  c, r, s = c_L
+  if not (c, r, s) in N_e_c_Dic:
     T_e_ct_LL = get_T_e_ct_LL(c_L)
     N_e_c = 0
     for T_e_ct_L in T_e_ct_LL:
       N_e_c += len(T_e_ct_L)
-    N_e_c_Dic[c_L] = N_e_c
-  return N_e_c_Dic[c_L]
+    N_e_c_Dic[(c, r, s)] = N_e_c
+  return N_e_c_Dic[(c, r, s)]
 
 
 # is A_array full rank?
@@ -220,6 +227,7 @@ def is_full_rank(A_array):
       if abs(A_array[i * n + k]) > max_val:
         max_val = abs(A_array[ i * n + k])
         max_row = i
+    print max_val
     if max_val == 0:
       full_rank = False
       break
@@ -236,8 +244,15 @@ def is_full_rank(A_array):
       multiplier = A_array[i * n + k]
       for j in range(k, n):
         A_array[i * n + j] -= A_array[k * n + j] * multiplier
+    for i in range(n):
+      val_L = []
+      for j in range(n):
+        val_L.append(A_array[i * n + j])
+      print val_L
+    print
+  print [full_rank, A_array[(n - 1) * n + n - 1]]
   # return
-  if full_rank == False or A_array[(n - 1) * n + (n - 1)] == 0:
+  if full_rank == False or A_array[(n - 1) * n + n - 1] == 0:
     return False
   else:
     return True
@@ -249,23 +264,25 @@ def is_full_rank_greedy(A_array):
   N = int(math.sqrt(len(A_array)))
   N_local = N - 2
   full_rank = True
-
   # gaussian elimination
   for k in range(N - 1):
+    print k
     # update the denominator
     if N_local > 0 and k == N_local:
-      A_array[N_local * N + N_local] = coefficient_Dic[[N_local, N_local]]
+      A_array[N_local * N + N_local] = coefficient_Dic[(N_local, N_local)]
     # find the max row and switch it with row k
     max_row = k
     if k >= N_local:
+
       max_val = abs(A_array[k * N + k])
       # find the max row
-      for i in range(K + 1, N):
+      for i in range(k + 1, N):
         if abs(A_array[i * N + k]) > max_val:
           max_val = abs(A_array[i * N + k])
           max_row = i
       # check rank
-      if max == 0:
+      print max_val
+      if max_val == 0:
         full_rank = False
         break
       # record max row
@@ -279,35 +296,49 @@ def is_full_rank_greedy(A_array):
         A_array[max_row * N + j], A_array[k * N + j] = A_array[k * N + j], A_array[max_row * N + j]
 
     # division
-    if not k in denominator_Dic:
+    denominator = 0
+    if k < N_local:
+      denominator = denominator_Dic[k]
+    else:
       denominator_Dic[k] = A_array[k * N + k]
-    denominator = denominator_Dic[k]
+      denominator = denominator_Dic[k]
     for j in range(k, N):
       if j > N_local or (j == k and j == N_local):
         A_array[k * N + j] /= denominator
 
     # subtraction
     for i in range(k + 1, N):
-      if not [i, k] in multiplier_Dic:
-        multiplier_Dic[[i, k]] = A_array[i * N + k]
-      multiplier = multiplier_Dic[[i, k]]
+      multiplier = 0
+      if i <= N_local:
+        multiplier = multiplier_Dic[(i, k)]
+      else:
+        multiplier_Dic[(i, k)] = A_array[i * N + k]
+        multiplier = multiplier_Dic[(i, k)]
       for j in range(k, N):
-        if i > N_local and j > N_local:
+        if i > N_local or j > N_local:
           if j <= N_local and k < N_local:
-            A_array[i * N + j] -= coefficient_Dic[[k, j]] * multiplier
+            A_array[i * N + j] -= coefficient_Dic[(k, j)] * multiplier
           else:
             A_array[i * N + j] -= A_array[k * N + j] * multiplier
 
-    # return
-    if full_rank == False or A_array[(N - 1) * N + N - 1] == 0:
-      return False
-    else:
-      # update coefficient_Dic
-      for i in range(N):
-        for j in range(N):
-          if i > N_local or j > N_local or (i == j and i == N_local):
-            coefficient_Dic[[i, j]] = A_array[i * N + j]
-      return True
+    for i in range(N):
+      val_L = []
+      for j in range(N):
+        val_L.append(A_array[i * N + j])
+      print val_L
+    print
+  
+  # return
+  print [full_rank, A_array[(N - 1) * N + N - 1]]
+  if full_rank == False or A_array[(N - 1) * N + N - 1] == 0:
+    return False
+  else:
+    # update coefficient_Dic
+    for i in range(N):
+      for j in range(N):
+        if i > N_local or j > N_local or (i == j and i == N_local):
+          coefficient_Dic[(i, j)] = A_array[i * N + j]
+    return True
 
 
 # get B_array, the value vector of the system of linear equations
@@ -316,10 +347,10 @@ def is_full_rank_greedy(A_array):
 # @param        e                   an effect
 def get_B_array(X_L, e):
   n = len(X_L)
-  B_array = np.zero(n)
+  B_array = np.zeros(n)
   for i in range(n):
     c_L = X_L[i]
-    T_e_c_L = ge_T_e_c_L(c_L)
+    T_e_c_L = get_T_e_c_L(c_L)
     N_e_c = get_N_e_c(c_L)
     E_e_c = get_E_e_c(e, c_L)
     E_e = get_E_e(e)
@@ -335,12 +366,15 @@ def get_B_array(X_L, e):
 # @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
 # @param        time               the time where e is measured
 def is_in_Xt(c_L, time):
-  if not c_L in is_in_Xt_L_Dic:
+  c, r, s = c_L
+  if not (c, r, s) in is_in_Xt_L_Dic:
     T_e_c_L = get_T_e_c_L(c_L)
     for te in T_e_c_L:
+      if not te in Xt_L_Dic:
+        Xt_L_Dic[te] = []
       Xt_L_Dic[te].append(c_L)
-    is_in_Xt_L_Dic[c_L] = True
-  if c_L in Xt_L_Dic:
+    is_in_Xt_L_Dic[(c, r, s)] = True
+  if time in Xt_L_Dic and c_L in Xt_L_Dic[time]:
     return True
   else:
     return False
@@ -353,6 +387,7 @@ def solve_system_of_linear_equations(A_array, B_array):
   n = int(math.sqrt(len(A_array)))
   # gaussian elimination
   for k in range(n - 1):
+    n = int(math.sqrt(len(A_array)))
     # find the max row and switch it with row k
     max_val = abs(A_array[k * n + k])
     max_row = k
@@ -365,6 +400,7 @@ def solve_system_of_linear_equations(A_array, B_array):
     if k != max_row:
       for j in range(k, n):
         A_array[max_row * n + j], A_array[k * n + j] = A_array[k * n + j], A_array[max_row * n + j]
+      B_array[max_row], B_array[k] = B_array[k], B_array[max_row]
     # division
     denominator = A_array[k * n + k]
     for j in range(k, n):
@@ -382,7 +418,7 @@ def solve_system_of_linear_equations(A_array, B_array):
   for i in reversed(range(n - 1)):
     for j in range(i + 1, n):
       B_array[i] -= A_array[i * n + j] * B_array[j]
-
+  return B_array
 
 # get result_file
 # @param        X_L                 the set of potential causes
@@ -392,7 +428,7 @@ def solve_system_of_linear_equations(A_array, B_array):
 def get_result_file(X_L, e, B_array, result_file):
   for i in range(len(X_L)):
     c, r, s = X_L[i]
-    with open(result_file, 'wb') as f:
+    with open(result_file, 'a') as f:
       spamwriter = csv.writer(f, delimiter = ',')
       spamwriter.writerow([c, e, r, s, B_array[i]])
 
@@ -414,17 +450,25 @@ def get_X_LIS_L(X_L, e):
         c_L_abs_dif_L[j], c_L_abs_dif_L[j + 1] = c_L_abs_dif_L[j + 1], c_L_abs_dif_L[j]
 
   # initialize global variables
-  max_row_Dic = {}
-  coefficient_Dic = {}
-  denominator_Dic = {}
-  multiplier_Dic = {}
+  # max_row_Dic = {}
+  # coefficient_Dic = {}
+  # denominator_Dic = {}
+  # multiplier_Dic = {}
 
   # greedy search
   for [c_L, abs_dif] in c_L_abs_dif_L:
     X_LIS_L.append(c_L)
-    if len(c_L) > 1:
+    if len(X_LIS_L) > 1:
+#      if len(X_LIS_L) == 2:
+#        A_LIS_array = [0, 1, 0, 1]
+#      if len(X_LIS_L) == 3:
+#        A_LIS_array = [1, 0, 1, 1, 1, 1, 1, 1, 0]
+#      if len(X_LIS_L) == 4:
+#        A_LIS_array = [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1]
       A_LIS_array = get_A_array(X_LIS_L)
+      print X_LIS_L
       if is_full_rank_greedy(A_LIS_array) == False:
+      #if is_full_rank(A_LIS_array) == False:
         X_LIS_L.remove(c_L)
   return X_LIS_L
 
@@ -450,11 +494,8 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
   disc_var_time_val_LLL = get_var_time_val_LLL(disc_data_file, header, transpose, "discrete")
   cont_var_time_val_LLL = get_var_time_val_LLL(cont_data_file, header, transpose, "continuous")
 
-  # print disc_var_time_val_LLL
-  # print cont_var_time_val_LLL
-
   # initialize global variables
-  # relations = {}
+  # relations_Dic = {}
   # disc_val_Dic = {}
   # time_cont_val_L_Dic = {}
   # cont_val_L_Dic = {}
@@ -481,10 +522,7 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
       if not var in cont_val_L_Dic:
         cont_val_L_Dic[var] = {}
       cont_val_L_Dic[var][time] = val
-
-  for var in cont_val_L_Dic:
-    print var
-  
+ 
   # get alphabet_disc
   for time in disc_val_Dic:
     for var in disc_val_Dic[time]:
@@ -565,7 +603,7 @@ def generate_hypotheses(c_L, e_L, r, s):
 
 
 # test hypotheses
-# for hypothesis [c, e, r, s], test whether c is a potential cause of e related to time window [r, s] and get *relations*
+# for hypothesis [c, e, r, s], test whether c is a potential cause of e related to time window [r, s] and get relations_Dic
 # @param        hypotheses          a hypothesis is of form: [c, e, r, s]
 # @param        rel_type            type of hypotheses we want to test
 #                                   "not_equal" for hypotheses s.t. E_e_c != E_e
@@ -574,36 +612,36 @@ def generate_hypotheses(c_L, e_L, r, s):
 #                                   "all"       for all hypotheses
 def test_hypotheses(hypotheses, rel_type):
   for [c, e, r, s] in hypotheses:
-    if c and e and r and s:
-      E_e_c = get_E_e_c(e, [c, r, s])
-      E_e = get_E_e(e)
-      if E_e_c:
-        if rel_type == "not_equal":
-          if E_e_c != E_e:
-            add_relationship(c, e, r, s)
-        elif rel_type == "positive":
-          if E_e_c > E_e:
-            add_relationship(c, e, r, s)
-        elif rel_type == "negative":
-          if E_e_c < E_e:
-            add_relationship(c, e, r, s)
-        elif rel_type == "all":
+    E_e_c = get_E_e_c(e, [c, r, s])
+    E_e = get_E_e(e)
+    if E_e_c != None:
+      if rel_type == "not_equal":
+        if E_e_c != E_e:
           add_relationship(c, e, r, s)
+      elif rel_type == "positive":
+        if E_e_c > E_e:
+          add_relationship(c, e, r, s)
+      elif rel_type == "negative":
+        if E_e_c < E_e:
+          add_relationship(c, e, r, s)
+      elif rel_type == "all":
+        add_relationship(c, e, r, s)
 
 
 # get E[e|c]
 # @param        e                   an effect
 # @param        c_L                 [c, r, s], a list including potential cause c, start and end of time window, r and s
 def get_E_e_c(e, c_L):
+  c, r, s = c_L
   T_e_c_L = get_T_e_c_L(c_L)
   if T_e_c_L:
-    if not (e, c_L) in E_e_c_Dic:
+    if not (e, (c, r, s)) in E_e_c_Dic:
       val_L = []
       for time in T_e_c_L:
         val_L.append(cont_val_L_Dic[e][time])
       E_e_c = np.mean(val_L)
-      E_e_c_Dic[[e, c_L]] = E_e_c
-    return E_e_c_Dic[[e, c_L]]
+      E_e_c_Dic[(e, (c, r, s))] = E_e_c
+    return E_e_c_Dic[(e, (c, r, s))]
   else:
     return None
 
@@ -612,8 +650,6 @@ def get_E_e_c(e, c_L):
 def get_E_e(e):
   if not e in E_e_Dic:
     val_L = []
-    for var in cont_val_L_Dic:
-      print var
     for time in cont_val_L_Dic[e]:
       val_L.append(cont_val_L_Dic[e][time])
     E_e = np.mean(val_L)
@@ -621,13 +657,15 @@ def get_E_e(e):
   return E_e_Dic[e]
 
 
-# add relationship [c, e, r, s] to relations_dic
+# add relationship [c, e, r, s] to relations_Dic
 # @param        c                   a potential cause
 # @param        e                   an effect
 # @param        r                   the start of a time window, i.e. r in window [r, s]
 # @param        s                   the end of a time window, i.e. s in window [r, s]
 def add_relationship(c, e, r, s):
-  relations_dic[e].append([c, r, s])
+  if not e in relations_Dic:
+    relations_Dic[e] = []
+  relations_Dic[e].append([c, r, s])
 
 # main function
 if __name__=="__main__":
@@ -639,16 +677,12 @@ if __name__=="__main__":
   rel_type = sys.argv[5]
   result_file = sys.argv[6]
   win_L = [[1, 1]]
-  print win_L
   # make directory
-  if not os.path.exists(result_file):
-    os.makedirs(result_file)
+  # if not os.path.exists(result_file):
+    # os.makedirs(result_file)
 
   # get global variables
   get_global_variables(disc_data_file, cont_data_file, header, transpose)
-
-  for var in cont_val_L_Dic:
-    print var
 
   # generate and test hypotheses
   for [r, s] in win_L:
