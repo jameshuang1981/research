@@ -298,34 +298,39 @@ def get_X_LIS_L(X_L, e):
 #                                   var1_t1, var2_t1, ..., varn_t1
 #                                   var1_t2, var2_t2, ..., varn_tn
 def get_global_variables(disc_data_file, cont_data_file, header, transpose):
-  print "discrete_file: %s" %disc_data_file
-  print "continuous_file: %s" %cont_data_file
-
   disc_var_time_val_LLL = get_var_time_val_LLL(disc_data_file, header, transpose, "discrete")
   cont_var_time_val_LLL = get_var_time_val_LLL(cont_data_file, header, transpose, "continuous")
 
   # get disc_val_Dic
   for [var, time_val_LL] in disc_var_time_val_LLL:
     for [time, val] in time_val_LL:
-      if not time in disc_val_Dic:
-        disc_val_Dic[time] = []
-      disc_val_Dic[time].append(var + "_" + val)
+      # discrete val is a string, e.g. "High", "Normal", or "Low"
+      # check empty string
+      if val:
+        if not time in disc_val_Dic:
+          disc_val_Dic[time] = []
+        disc_val_Dic[time].append(var + "_" + val)
 
   # get time_cont_val_L_Dic
-  for cont_var_time_val_LL in cont_var_time_val_LLL:
-    var, time_val_LL = cont_var_time_val_LL
-    for time, val in time_val_LL:
-      if not var in time_cont_val_L_Dic:
-        time_cont_val_L_Dic[var] = []
-      time_cont_val_L_Dic[var].append([time, val])
+  for [var, time_val_LL] in cont_var_time_val_LLL:
+    for [time, val] in time_val_LL:
+      # check string that is not a number
+      if is_number(val):
+        val = float(val)
+        if not var in time_cont_val_L_Dic:
+          time_cont_val_L_Dic[var] = []
+        time_cont_val_L_Dic[var].append([time, val])
 
   # get cont_val_L_Dic
   # for cases where variables are not measured at every timepoint
   for [var, time_val_LL] in cont_var_time_val_LLL:
     for [time, val] in time_val_LL:
-      if not var in cont_val_L_Dic:
-        cont_val_L_Dic[var] = {}
-      cont_val_L_Dic[var][time] = val
+      # check string that is not a number
+      if is_number(val):
+        val = float(val)
+        if not var in cont_val_L_Dic:
+          cont_val_L_Dic[var] = {}
+        cont_val_L_Dic[var][time] = val
 
   # get alphabet_disc
   for time in disc_val_Dic:
@@ -351,9 +356,8 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
 #                                   var1_t2, var2_t2, ..., varn_tn
 # @param        data_type           "discrete",   if discrete data
 #                                   "continuous", if continuous_valued data
-def get_var_time_val_LLL(time_series_file, header, transpose, data_type):
-  # TODO: check empty string
-  with open(time_series_file, 'rb') as f:
+def get_var_time_val_LLL(data_file, header, transpose, data_type):
+  with open(data_file, 'rb') as f:
     spamreader = list(csv.reader(f, delimiter = ','))
     if transpose:
       # transpose the data
@@ -376,12 +380,8 @@ def get_var_time_val_LLL(time_series_file, header, transpose, data_type):
         # we use the number of the row as the name of the var in that row
         var = str(i)
       for j in range(val_start, len(spamreader[i])):
-        if data_type == "discrete":
-          # discrete val is a string, e.g. "High", "Normal", or "Low"
-          val_L.append(spamreader[i][j].strip())
-        else:
-          # continuous val is a number, e.g. 0.5, thus needs to be converted to float
-          val_L.append(float(spamreader[i][j].strip()))
+        val = spamreader[i][j].strip()
+        val_L.append(val)
 
       # get time_val_LL
       for time in range(len(val_L)):
@@ -390,6 +390,16 @@ def get_var_time_val_LLL(time_series_file, header, transpose, data_type):
       # get var_time_val_LLL
       var_time_val_LLL.append([var, time_val_LL])
     return var_time_val_LLL
+
+
+# check whether string is a number
+# @param        val                 a string
+def is_number(val):
+  try:
+    float(val)
+    return True
+  except ValueError:
+    return False
 
 
 # generate hypotheses for an effect
@@ -418,7 +428,7 @@ def test_hypotheses(hypotheses, rel_type):
   for [c, e, r, s] in hypotheses:
     E_e_c = get_E_e_c(e, [c, r, s])
     E_e = get_E_e(e)
-    if E_e_c != None:
+    if E_e_c != None and E_e != None:
       if rel_type == "not_equal":
         if E_e_c != E_e:
           add_relationship(c, e, r, s)
@@ -442,7 +452,10 @@ def get_E_e_c(e, c_L):
     if not (e, (c, r, s)) in E_e_c_Dic:
       val_L = []
       for time in T_e_c_L:
-        val_L.append(cont_val_L_Dic[e][time])
+        if time in cont_val_L_Dic[e]:
+          val_L.append(cont_val_L_Dic[e][time])
+      if not val_L:
+        return None
       E_e_c = np.mean(val_L)
       E_e_c_Dic[(e, (c, r, s))] = E_e_c
     return E_e_c_Dic[(e, (c, r, s))]
@@ -457,6 +470,8 @@ def get_E_e(e):
     val_L = []
     for time in cont_val_L_Dic[e]:
       val_L.append(cont_val_L_Dic[e][time])
+    if not val_L:
+      return None
     E_e = np.mean(val_L)
     E_e_Dic[e] = E_e
   return E_e_Dic[e]
@@ -474,17 +489,23 @@ def add_relationship(c, e, r, s):
 
 # main function
 if __name__=="__main__":
-  # get the parameters
+  # get parameters
   disc_data_file = sys.argv[1]
   cont_data_file = sys.argv[2]
   header = sys.argv[3]
   transpose = sys.argv[4]
   rel_type = sys.argv[5]
   alpha_file = sys.argv[6]
-  win_L = [[1, 1]]
+  lag_L = sys.argv[7:]
+  win_L = []
+  for i in range(0, len(lag_L), 2):
+    win = [int(lag_L[i]), int(lag_L[i + 1])]
+    win_L.append(win)
+
   # make directory
-  # if not os.path.exists(alpha_file):
-    # os.makedirs(alpha_file)
+  directory = os.path.dirname(alpha_file)
+  if not os.path.exists(directory):
+    os.makedirs(directory)
 
   # get global variables
   get_global_variables(disc_data_file, cont_data_file, header, transpose)
