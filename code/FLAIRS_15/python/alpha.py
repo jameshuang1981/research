@@ -1,4 +1,5 @@
 from __future__ import division
+from scipy import stats
 import sys
 import os
 import csv
@@ -9,27 +10,27 @@ import math
 
 # Define global variables
 
-# key: [c r s], i.e. a list including potential cause c, start and end of time window, r and s  
+# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s  
 # val: [T(e | c_t)], i.e. a list of T(e | c_t), which is the set of timepoints where e is measured in c_t's window (c_t is the instance of c occurring at time t)
 T_e_ct_LL_Dic = {}
 
-# key: [c r s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
 # val: T(e | c), which is the set of timepoints where e is measured in c's time window
 T_e_c_L_Dic = {}
 
-# key: [c r s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
 # val: T(c), which is the set of timepoints where c occurs 
 T_c_L_Dic = {}
 
-# key: [c r s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
 # val: N(e | c, x), the total number of e being measured in the intersection of c and x's windows
 N_e_c_x_Dic = {}
 
-# key: [c r s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
 # val: N(e | c), the total number of e being measured in c's window
 N_e_c_Dic = {}
 
-# key: [c r s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
 # val: E[e | c], the expectation of e conditioned on c
 E_e_c_Dic = {}
 
@@ -37,7 +38,7 @@ E_e_c_Dic = {}
 # val: E[e], the expectation of e
 E_e_Dic = {}
 
-# key: [c r s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
 # val: true or false
 # true, if c is the potential cause of e measured at time t
 # false, otherwise
@@ -65,9 +66,13 @@ alphabet_disc = []
 # list of continuous_valued vars in the time series
 alphabet_cont = []
 
-# key: [effect]
-# val: list of [c r s] where c is a potential cause, r and s the start and end of time window
+# key: effect
+# val: list of [c, r, s] where c is a potential cause, r and s the start and end of time window
 relations_Dic = {}
+
+# key: e->[c, r, s], i.e. effect and a list including potential cause c, start and end of time window, r and s
+# val: alpha([c, r, s], e)
+alpha_Dic = {}
 
 # calculate causal significance for all relationships
 # @param        alpha_file         file containing relationships and their causal significance
@@ -249,11 +254,16 @@ def is_in_Xt(c_L, time):
 # @param        B_L             the value vector of the system of linear equations
 # @param        alpha_file         file containing relationships and their causal significance
 def get_alpha_file(X_L, e, B_L, alpha_file):
-  for i in range(len(X_L)):
-    c, r, s = X_L[i]
-    with open(alpha_file, 'a') as f:
+  with open(alpha_file, 'a') as f:
+    for i in range(len(X_L)):
+      c, r, s = X_L[i]
+      alpha = B_L[i]
       spamwriter = csv.writer(f, delimiter = ',')
-      spamwriter.writerow([c, e, r, s, B_L[i]])
+      spamwriter.writerow([c, e, r, s, alpha])
+      # get alpha_Dic
+      if not e in alpha_Dic:
+        alpha_Dic[e] = {}
+      alpha_Dic[e][(c, r, s)] = alpha
 
 
 # get a linearly independent subset of X
@@ -487,6 +497,75 @@ def add_relationship(c, e, r, s):
     relations_Dic[e] = []
   relations_Dic[e].append([c, r, s])
 
+
+# get significant relationships based on significance test
+# @param        sig_rel_file        significant relationship file
+# @param        p_val cutoff        p value cutoff
+# @param        family_type         "one", significance test based on one family
+#                                   "all", significance test based on all families
+# @param        tail_type           "positive", if p_val < p_val_cutoff and z_val > 0
+#                                   "negative", if p_val < p_val_cutoff and z_val < 0
+#                                   "both",     if p_val < p_val_cutoff
+def significance_test(sig_rel_file, p_val_cutoff, family_type, tail_type):
+  # output heading
+  with open(sig_rel_file, 'wb') as f:
+    spamwriter = csv.writer(f, delimiter = ',')
+    spamwriter.writerow(["cause", "effect", "window_start", "window_end", "alpha", "p_val"])
+
+  if family_type == "all":
+    # get sig_rel_file
+    get_sig_rel_file(sig_rel_file, p_val_cutoff, tail_type, alpha_Dic)
+  else:
+    for e in alpha_Dic:
+      # get sig_rel_file
+      get_sig_rel_file(sig_rel_file, p_val_cutoff, tail_type, [e])
+
+
+# get significant relationship file
+# @param        sig_rel_file        significant relationship file
+# @param        p_val cutoff        p value cutoff
+# @param        tail_type           "positive", if p_val < p_val_cutoff and z_val > 0
+#                                   "negative", if p_val < p_val_cutoff and z_val < 0
+#                                   "both",     if p_val < p_val_cutoff
+# @param        e_L                 [e], a list of effects
+def get_sig_rel_file(sig_rel_file, p_val_cutoff, tail_type, e_L):
+  # get alpha_LL
+  alpha_LL = []
+  for e in e_L:
+    for (c, r, s) in alpha_Dic[e]:
+      alpha = alpha_Dic[e][(c, r, s)]
+      alpha_LL.append([c, e, r, s, alpha])
+
+  # get alpha_L  
+  alpha_L = [alpha for [c, e, r, s, alpha] in alpha_LL]
+
+  # check if std == 0
+  if np.std(alpha_L) == 0:
+    return
+
+  # get z_val_L
+  z_val_L = stats.zscore(alpha_L)
+
+  # get p_val_L
+  p_val_L = stats.norm.sf([abs(z_val) for z_val in z_val_L])
+
+  # get sig_rel_LL
+  sig_rel_LL = []
+  for i in range(len(alpha_LL)):
+    if math.isnan(p_val_L[i]) or p_val_L[i] >= p_val_cutoff:
+      continue
+    if tail_type == "positive" and z_val_L[i] > 0 or tail_type == "negative" and z_val_L[i] < 0 or tail_type == "both":
+      sig_rel_L = alpha_LL[i] + [p_val_L[i]]
+      sig_rel_LL.append(sig_rel_L)
+
+  # output sig_rel_L
+  with open(sig_rel_file, 'a') as f:
+    for sig_rel_L in sig_rel_LL:
+      spamwriter = csv.writer(f, delimiter = ',')
+      if sig_rel_L:
+        spamwriter.writerow(sig_rel_L)
+
+
 # main function
 if __name__=="__main__":
   # get parameters
@@ -496,7 +575,11 @@ if __name__=="__main__":
   transpose = sys.argv[4]
   rel_type = sys.argv[5]
   alpha_file = sys.argv[6]
-  lag_L = sys.argv[7:]
+  sig_rel_file = sys.argv[7]
+  p_val_cutoff = float(sys.argv[8])
+  family_type = sys.argv[9]
+  tail_type = sys.argv[10]
+  lag_L = sys.argv[11:]
   win_L = []
   for i in range(0, len(lag_L), 2):
     win = [int(lag_L[i]), int(lag_L[i + 1])]
@@ -504,6 +587,9 @@ if __name__=="__main__":
 
   # make directory
   directory = os.path.dirname(alpha_file)
+  if not os.path.exists(directory):
+    os.makedirs(directory)
+  directory = os.path.dirname(sig_rel_file)
   if not os.path.exists(directory):
     os.makedirs(directory)
 
@@ -518,5 +604,5 @@ if __name__=="__main__":
   # calculate alpha for each relationship
   get_all_alpha(alpha_file)
 
-
-
+  # get significant relationships where p_val(alpha) < p_val_cutoff
+  significance_test(sig_rel_file, p_val_cutoff, family_type, tail_type)
