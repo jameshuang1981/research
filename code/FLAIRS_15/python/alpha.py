@@ -355,15 +355,18 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
 
 # get [var, [time, val]]
 # @param        time_series_file    time series data of form
-#                                   var1_t1, var1_t2, ..., var1_tn
-#                                   var2_t1, var2_t2, ..., varn_tn
-# @param        header              True,  if there is a header
+#                                   var1_t1, ..., var1_tn
+#                                   , ...,
+#                                   varn_t1, ..., varn_tn
+# @param        header              tells us whether the data file has a header
+#                                   True,  if there is a header
 #                                   False, otherwise
 # @param        transpose           tells us whether the data need to be transposed
 #                                   False, when the data are of the above form
-#                                   True,  when the data are of the following form
-#                                   var1_t1, var2_t1, ..., varn_t1
-#                                   var1_t2, var2_t2, ..., varn_tn
+#                                   True,  when the data are of the following form, thus need to be transposed
+#                                   var1_t1, ..., varn_t1
+#                                   , ...,
+#                                   var1_tn, ..., varn_tn
 # @param        data_type           "discrete",   if discrete data
 #                                   "continuous", if continuous_valued data
 def get_var_time_val_LLL(data_file, header, transpose, data_type):
