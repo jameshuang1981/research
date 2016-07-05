@@ -1,3 +1,9 @@
+# This is the python code for discovering causal relationships from time series data
+# Please cite the following paper when using the code
+# Y. Huang and S. Kleinberg. Fast and Accurate Causal Inference from Time Series Data. Florida Artificial Intelligence Research Society Conference (FLAIRS), 2015.
+
+
+# modules
 from __future__ import division
 from scipy import stats
 import sys
@@ -6,58 +12,64 @@ import csv
 import numpy as np
 import math
 
-# This is the code for calculating causal significance using alpha
+
+# Notations
+# _L      : indicates the data structure is a list
+# _LL     : indicates the data structure is a list of list
+# _Dic    : indicates the data structure is a dictionary
+# _L_Dic  : indicates the data structure is a dictionary, where the value is a list
+# _LL_Dic : indicates the data structure is a dictionary, where the value is a list of list
+
 
 # Define global variables
-
-# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s  
-# val: [T(e | c_t)], i.e. a list of T(e | c_t), which is the set of timepoints where e is measured in c_t's window (c_t is the instance of c occurring at time t)
+# key: (c, r, s), which is a tuple including potential cause c, start and end of time window, r and s  
+# val: [T(e | c_t)], which is a list of T(e | c_t). Here T(e | c_t) is the set of timepoints where e is measured in c_t's window (c_t is the instance of c occurring at time t)
 T_e_ct_LL_Dic = {}
 
-# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: (c, r, s), which is a tuple including potential cause c, start and end of time window, r and s  
 # val: T(e | c), which is the set of timepoints where e is measured in c's time window
 T_e_c_L_Dic = {}
 
-# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: (c, r, s), which is a tuple including potential cause c, start and end of time window, r and s  
 # val: T(c), which is the set of timepoints where c occurs 
 T_c_L_Dic = {}
 
-# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
-# val: N(e | c, x), the total number of e being measured in the intersection of c and x's windows
+# key: (c, r, s), which is a tuple including potential cause c, start and end of time window, r and s  
+# val: N(e | c, x), which is the total number of e being measured in the intersection of c and x's windows
 N_e_c_x_Dic = {}
 
-# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
-# val: N(e | c), the total number of e being measured in c's window
+# key: (c, r, s), which is a tuple including potential cause c, start and end of time window, r and s  
+# val: N(e | c), which is the total number of e being measured in c's window
 N_e_c_Dic = {}
 
-# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
-# val: E[e | c], the expectation of e conditioned on c
+# key: (c, r, s), which is a tuple including potential cause c, start and end of time window, r and s  
+# val: E[e | c], which is the expectation of e conditioned on c
 E_e_c_Dic = {}
 
-# key: e, an effect
-# val: E[e], the expectation of e
+# key: e, which is an effect
+# val: E[e], which is the expectation of e
 E_e_Dic = {}
 
-# key: [c, r, s], i.e. a list including potential cause c, start and end of time window, r and s
+# key: (c, r, s), which is a tuple including potential cause c, start and end of time window, r and s  
 # val: true or false
-# true, if c is the potential cause of e measured at time t
-# false, otherwise
+#      true, if c is the potential cause of e measured at time t
+#      false, otherwise
 is_in_Xt_L_Dic = {}
 
-# key: t, the time of e being measured
-# val: X_t, the set of potential causes of e measured at time t 
+# key: time t, which is the time of e being measured
+# val: X_t, which is the set of potential causes of e measured at time t 
 Xt_L_Dic = {}
 
 # key: time t
 # val: list of discrete or discretized vars occurring at t
-disc_val_Dic = {}
+disc_val_L_Dic = {}
 
 # key: continuous_valued var
-# val: list of var's continuous value at a time
+# val: list of var's continuous value at each time
 cont_val_L_Dic = {}
 
 # key: continuous_valued var
-# val: list of time and var's continuous value at a time, i.e. [[time, val]]
+# val: list of time and var's continuous value at that time, i.e. [[time, val]]
 time_cont_val_L_Dic = {}
 
 # list of discrete or discretized vars in the time series
@@ -66,15 +78,15 @@ alphabet_disc = []
 # list of continuous_valued vars in the time series
 alphabet_cont = []
 
-# key: effect
-# val: list of [c, r, s] where c is a potential cause, r and s the start and end of time window
+# key: e, which is the effect
+# val: list of (c, r, s) where c is a potential cause, r and s the start and end of time window
 relations_Dic = {}
 
-# key: e->[c, r, s], i.e. effect and a list including potential cause c, start and end of time window, r and s
-# val: alpha([c, r, s], e)
+# key: e->(c, r, s), which is first the effect then a tuple including potential cause c, start and end of time window, r and s
+# val: alpha((c, r, s), e), which is the causal significance of c on e in time window [r, s]
 alpha_Dic = {}
 
-# calculate causal significance for all relationships
+# calculate alpha (causal significance) for all relationships
 # @param        alpha_file         file containing relationships and their causal significance
 def get_all_alpha(alpha_file):
   # output heading
@@ -82,36 +94,50 @@ def get_all_alpha(alpha_file):
     spamwriter = csv.writer(f, delimiter = ',')
     spamwriter.writerow(["cause", "effect", "window_start", "window_end", "alpha"])
 
+  # calculate alpha for each relationship
   for e in relations_Dic:
     get_alpha(e, alpha_file)
 
 
 # calculate alpha for one relationship
-# @param        effect_L            (list e), a list of e
+# @param        e                  a continuous-valued variable
 # @param        alpha_file         file containing relationships and their causal significance
 def get_alpha(e, alpha_file):
-  # get the set of potential causes and remove duplicates
+  # the key is building a system of linear equations, A * alpha = B
+  # where A is a matrix (denoted by A_LL) and B a column vector (denoted by B_L)
+  # please see details of A and B in the FLAIRS paper
+  # get the set of potential causes, X_L
   X_L = relations_Dic[e]
   if X_L:
+    # get A_LL
     A_LL = get_A_LL(X_L)
+    # get the rank of A_LL
     rank = np.linalg.matrix_rank(A_LL)
+    # if A_LL is full rank (i.e. the system of linear equations has unique solutions)
     if rank == len(A_LL):
-      # if A_LL is full rank, solve system of linear equations
+      # if A_LL is full rank
+      # get B_L
       B_L = get_B_L(X_L, e)
+      # solve the system of linear equations
       B_L = np.linalg.solve(A_LL, B_L)
+      # output the relationships and their alpha (causal significance)
       get_alpha_file(X_L, e, B_L, alpha_file)
     else:
       # if A_LL is not full rank, get the subsystem of linear equations
       X_LIS_L = get_X_LIS_L(X_L, e)
       if X_LIS_L:
-        # solve the subsystem of linear equations
+        # get A_LL 
         A_LIS_LL = get_A_LL(X_LIS_L)
+        # get B_L
         B_LIS_array = get_B_L(X_LIS_L, e)
+        # solve the subsystem of linear equations
         B_LIS_array = np.linalg.solve(A_LIS_LL, B_LIS_array)
+        # output the relationships and their alpha (causal significance)
         get_alpha_file(X_LIS_L, e, B_LIS_array, alpha_file)
 
 
 # get A_LL, the coefficient matrix of the system of linear equations
+# please see details of A_LL in the FLAIRS paper mentioned in the beginning
 # @param        X_L                 the set of potential causes
 def get_A_LL(X_L):
   n = len(X_L)
@@ -125,7 +151,7 @@ def get_A_LL(X_L):
       N_e_x = get_N_e_c(x_L)
       T_e_c_L = get_T_e_c_L(c_L)
       N_e_c = get_N_e_c(c_L)
-      len_T_e = len(disc_val_Dic)
+      len_T_e = len(disc_val_L_Dic)
       nominator = N_e_c_x * len_T_e - N_e_x * len(T_e_c_L)
       denominator = N_e_c * (len_T_e - len(T_e_c_L))
       f_e_c_x = nominator / denominator
@@ -135,7 +161,7 @@ def get_A_LL(X_L):
 
 
 # get *N_e_c_x_Dic*
-# @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
+# @param        c_L                (c, r, s), a list including potential cause c, start and end of time window, r and s
 # @param        x_L                (list x r s), a list including potential cause x, start and end of time window, r and s
 def get_N_e_c_x(c_L, x_L):
   c, cr, cs = c_L
@@ -152,7 +178,7 @@ def get_N_e_c_x(c_L, x_L):
 
 
 # get *T_e_ct_LL_Dic*
-# @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
+# @param        c_L                (c, r, s), a list including potential cause c, start and end of time window, r and s
 def get_T_e_ct_LL(c_L):
   c, r, s = c_L
   if not (c, r, s) in T_e_ct_LL_Dic:
@@ -161,7 +187,7 @@ def get_T_e_ct_LL(c_L):
     for tc in T_c_L:
       T_e_ct_L = []
       for time in range(tc + r, tc + s + 1):
-        if time in disc_val_Dic:
+        if time in disc_val_L_Dic:
           T_e_ct_L.append(time)
       if T_e_ct_L:
         T_e_ct_LL.append(T_e_ct_L)
@@ -174,15 +200,15 @@ def get_T_e_ct_LL(c_L):
 def get_T_c_L(c):
   if not c in T_c_L_Dic:
     T_c_L = []
-    for time in disc_val_Dic:
-      if c in disc_val_Dic[time]:
+    for time in disc_val_L_Dic:
+      if c in disc_val_L_Dic[time]:
         T_c_L.append(time)
     T_c_L_Dic[c] = T_c_L
   return T_c_L_Dic[c]
 
 
 # get *T_e_c_L_Dic*
-# @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
+# @param        c_L                (c, r, s), a list including potential cause c, start and end of time window, r and s
 def get_T_e_c_L(c_L):
   c, r, s = c_L
   if not (c, r, s) in T_e_c_L_Dic:
@@ -197,7 +223,7 @@ def get_T_e_c_L(c_L):
 
 
 # get *N_e_c_Dic*
-# @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
+# @param        c_L                (c, r, s), a list including potential cause c, start and end of time window, r and s
 def get_N_e_c(c_L):
   c, r, s = c_L
   if not (c, r, s) in N_e_c_Dic:
@@ -222,7 +248,7 @@ def get_B_L(X_L, e):
     N_e_c = get_N_e_c(c_L)
     E_e_c = get_E_e_c(e, c_L)
     E_e = get_E_e(e)
-    len_T_e = len(disc_val_Dic)
+    len_T_e = len(disc_val_L_Dic)
     nominator = len_T_e * len(T_e_c_L)
     denominator = N_e_c * (len_T_e - len(T_e_c_L))
     f_e_c = nominator / denominator
@@ -231,7 +257,7 @@ def get_B_L(X_L, e):
 
 
 # is c in Xt? i.e. is c a potential cause of e being measured at time t
-# @param        c_L                [c, r, s], a list including potential cause c, start and end of time window, r and s
+# @param        c_L                (c, r, s), a list including potential cause c, start and end of time window, r and s
 # @param        time               the time where e is measured
 def is_in_Xt(c_L, time):
   c, r, s = c_L
@@ -293,7 +319,7 @@ def get_X_LIS_L(X_L, e):
   return X_LIS_L
 
 
-# get global_variables: disc_val_Dic, time_cont_val_L_Dic, alphabet_disc, alphabet_cont
+# get global_variables: disc_val_L_Dic, time_cont_val_L_Dic, alphabet_disc, alphabet_cont
 # @param        disc_data_file      time series data of form
 #                                   var1_t1, var1_t2, ..., var1_tn
 #                                   var2_t1, var2_t2, ..., varn_tn
@@ -311,15 +337,15 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
   disc_var_time_val_LLL = get_var_time_val_LLL(disc_data_file, header, transpose, "discrete")
   cont_var_time_val_LLL = get_var_time_val_LLL(cont_data_file, header, transpose, "continuous")
 
-  # get disc_val_Dic
+  # get disc_val_L_Dic
   for [var, time_val_LL] in disc_var_time_val_LLL:
     for [time, val] in time_val_LL:
       # discrete val is a string, e.g. "High", "Normal", or "Low"
       # check empty string
       if val:
-        if not time in disc_val_Dic:
-          disc_val_Dic[time] = []
-        disc_val_Dic[time].append(var + "_" + val)
+        if not time in disc_val_L_Dic:
+          disc_val_L_Dic[time] = []
+        disc_val_L_Dic[time].append(var + "_" + val)
 
   # get time_cont_val_L_Dic
   for [var, time_val_LL] in cont_var_time_val_LLL:
@@ -343,8 +369,8 @@ def get_global_variables(disc_data_file, cont_data_file, header, transpose):
         cont_val_L_Dic[var][time] = val
 
   # get alphabet_disc
-  for time in disc_val_Dic:
-    for var in disc_val_Dic[time]:
+  for time in disc_val_L_Dic:
+    for var in disc_val_L_Dic[time]:
       if not var in alphabet_disc:
         alphabet_disc.append(var)
 
@@ -417,7 +443,7 @@ def is_number(val):
 
 # generate hypotheses for an effect
 # a hypothesis is of form: [cause, effect, window_start, window_end], or [c, e, r, s] for simplicity
-# @param        c_L                 [c, r, s], a list including potential cause c, start and end of time window, r and s
+# @param        c_L                 (c, r, s), a list including potential cause c, start and end of time window, r and s
 # @param        e_L                 [e]
 # @param        r                   the start of a time window, i.e. r in window [r, s]
 # @param        s                   the end of a time window, i.e. s in window [r, s]
@@ -439,7 +465,7 @@ def generate_hypotheses(c_L, e_L, r, s):
 #                                   "all"       for all hypotheses
 def test_hypotheses(hypotheses, rel_type):
   for [c, e, r, s] in hypotheses:
-    E_e_c = get_E_e_c(e, [c, r, s])
+    E_e_c = get_E_e_c(e, (c, r, s))
     E_e = get_E_e(e)
     if E_e_c != None and E_e != None:
       if rel_type == "not_equal":
@@ -457,7 +483,7 @@ def test_hypotheses(hypotheses, rel_type):
 
 # get E[e|c]
 # @param        e                   an effect
-# @param        c_L                 [c, r, s], a list including potential cause c, start and end of time window, r and s
+# @param        c_L                 (c, r, s), a list including potential cause c, start and end of time window, r and s
 def get_E_e_c(e, c_L):
   c, r, s = c_L
   T_e_c_L = get_T_e_c_L(c_L)
@@ -498,7 +524,7 @@ def get_E_e(e):
 def add_relationship(c, e, r, s):
   if not e in relations_Dic:
     relations_Dic[e] = []
-  relations_Dic[e].append([c, r, s])
+  relations_Dic[e].append((c, r, s))
 
 
 # get significant relationships based on significance test
