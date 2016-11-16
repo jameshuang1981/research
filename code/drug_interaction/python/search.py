@@ -31,6 +31,12 @@ src_L = []
 # The list of targets
 trg_L = []
 
+# The dictionary of data types
+# key: var
+# val: "discrete" or "continuous"
+data_type_Dic = {}
+
+# The dictionary of value
 # key: var->time
 # val: value of var at the time
 val_Dic = {}
@@ -39,7 +45,9 @@ val_Dic = {}
 slice_LL = []
 
 # The dictionary of pies
-pie_Dic = []
+# key: target
+# val: list of pies
+pie_Dic = {}
 
 
 # Load data: src_var_val_L_Dic, time_val_Dic, val_Dic, alphabet_src_L, alphabet_trg_L
@@ -62,9 +70,18 @@ pie_Dic = []
 #                                  , ...,
 #                                  var1_tn (i.e. val), ..., varn_tn (i.e. val)
 def load_data(src_file, trg_file):
-	# get data from files
-	src_var_time_val_LLL = get_var_time_val_LLL(src_file)
-	trg_var_time_val_LLL = get_var_time_val_LLL(trg_file)
+	# get val_Dic from source file
+	get_global_var(src_file, "source")
+    # get src_L
+    for var in val_Dic:
+        src_L.append(var)
+
+    # get val_Dic from target file
+    get_val_Dic(trg_file, "target")
+    # get trg_L
+    for var in val_Dic:
+        if not var in src_L:
+            trg_L.append(var)
 
 	# get src_var_val_L_Dic
 	# the key is time and the value is a list of discrete or discretized variables being true and the time
@@ -139,7 +156,7 @@ def load_data(src_file, trg_file):
 #                                  var1_tn (i.e. val), ..., varn_tn (i.e. val)
 # @param        data_type          "discrete",   if discrete data
 #                                  "continuous", if continuous_valued data
-def get_val_Dic(data_file, transpose):
+def get_global_var(data_file, transpose, src_F):
 	with open(data_file, 'rb') as f:
 		spamreader = list(csv.reader(f, delimiter = ','))
 		if transpose:
@@ -151,20 +168,48 @@ def get_val_Dic(data_file, transpose):
 			# The var's name lies in the first column in each row
 			var = spamreader[i][0].strip()
 
+            # Get the type of var (discrete or continuous-valued)
+            # Default is discrete
+            cont_F = False
 			for time in range(1, len(spamreader[i])):
 				if spamreader[i][j]:
                     val = spamreader[i][j].strip()
                     # If continuous-valued
                     if is_number(val):
+                        # var is continuous-valued, flip cont_F 
+                        cont_F = True
+                    break
+
+            # If continuous-valued data, update src_L (when src_F = True, i.e. source file) or trg_L (when src_F = False, i.e. trg file)
+            if cont_F:
+                if src_F:
+                    src_L.append(var)
+                else:
+                    trg_L.append(var)
+
+            # Get val_Dic, update src_L (when src_F = True, i.e. source file) or trg_L (when src_F = False, i.e. trg file)
+			for time in range(1, len(spamreader[i])):
+				if spamreader[i][j]:
+                    val = spamreader[i][j].strip()
+                    # If continuous-valued
+                    if is_number(val):
+                        # Update val_Dic
                         if not val_Dic[var]:
                             val_Dic[var] = {}
                         val_Dic[var][time] = (float) val
                     # If discrete
                     else:
+                        # Update var and val_Dic
                         var += "_" + val
                         if not val_Dic[var]:
                             val_Dic[var] = {}
+                        # This says var is True at the time
                         val_Dic[var][time] = 1
+                        # Update src_L or trg_L
+                        if scr_F:
+                            src_L.append(var)
+                        else:
+                            trg_L.append(var)
 
 
 # check whether string is a number
