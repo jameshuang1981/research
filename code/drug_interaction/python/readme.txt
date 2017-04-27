@@ -9,7 +9,7 @@ Y. Huang and S. Kleinberg. Fast and Accurate Causal Inference from Time Series D
 
 
 Here is the command for running the code from terminal 
-python alpha.py disc_data_file cont_data_file header transpose rel_type alpha_file sig_rel_file family_type p_val_cutoff tail_type lag_L
+python3 causal_pie.py /Users/yjh/Documents/github/research/code/drug_interaction/python/test/data/0_src.csv /Users/yjh/Documents/github/research/code/drug_interaction/python/test/data/0_trg.csv /Users/yjh/Documents/github/research/code/drug_interaction/python/test/result/pie.txt /Users/yjh/Documents/github/research/code/drug_interaction/python/test/result/log.txt 0 0.01 0 1 2
 
 
 
