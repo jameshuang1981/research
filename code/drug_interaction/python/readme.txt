@@ -4,12 +4,31 @@ This is the instruction for running the python code to discover causal relations
 
 
 Please cite the following paper when using the code
-Y. Huang and S. Kleinberg. Fast and Accurate Causal Inference from Time Series Data. Florida Artificial Intelligence Research Society Conference (FLAIRS), 2015.
+
+
+
+Here is the command for generating the source setting from terminal 
+python3 generate_setting.py /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/setting/source/src_setting_0.txt 2 2 0.8 1.0 'src'
+
+
+
+Here is the command for generating the target setting from terminal 
+python3 generate_setting.py /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt 1 1 0 0 'trg'
+
+
+
+Here is the command for generating the causal pie from terminal 
+python3 generate_causal_pie.py /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/setting/source/src_setting_0.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/causal_pie/causal_pie_0.txt 1 1 2 2 1 5 1.0 1.0
+
+
+
+Here is the command for generating the data from terminal 
+python3 generate_data.py /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/setting/source/src_setting_0.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/causal_pie/causal_pie_0.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/data/source/src_0.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/data/target/trg_0.txt 100
 
 
 
 Here is the command for running the code from terminal 
-python3 causal_pie.py /Users/yjh/Documents/github/research/code/drug_interaction/python/test/data/0_src.csv /Users/yjh/Documents/github/research/code/drug_interaction/python/test/data/0_trg.csv /Users/yjh/Documents/github/research/code/drug_interaction/python/test/result/pie.txt /Users/yjh/Documents/github/research/code/drug_interaction/python/test/result/log.txt 0 0.01 0 1 2
+python3 search_4_causal_pie.py /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/data/source/src_0.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/data/target/trg_0.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/result/pie.txt /Users/yjh/Documents/github/research/code/drug_interaction/simulated_data/log/log.txt 0 0.01 10 1 5
 
 
 

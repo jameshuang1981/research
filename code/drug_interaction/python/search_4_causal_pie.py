@@ -49,7 +49,7 @@ max_time_stamp = 0
 
 # The dictionary of data types
 # key: var
-# val: "discrete" or "continuous_valued"
+# val: "discrete" or "continuous"
 data_type_Dic = {}
 
 # The dictionary of value
@@ -65,6 +65,12 @@ slice_LL = []
 # val: list of pies
 pie_Dic = {}
 
+sample_size_cutoff = 30
+
+spamwriter_log = None
+
+spamwriter_pie = None
+
 
 # Initialization
 # @param        src_file           source data file, which includes variables that can be the causes, the data are of the following form
@@ -77,10 +83,10 @@ pie_Dic = {}
 #                                  varn (i.e. header), varn_t1 (i.e. val), ..., varn_tn (i.e. val)
 def initialization(src_file, trg_file):
     # Load source file
-    load_data(src_file, True)
+    load_data(src_file, True, False)
 
     # Load target file
-    load_data(trg_file, False)
+    load_data(trg_file, False, False)
 
     # Get windows
     get_win_LL(lag_L)
@@ -106,23 +112,17 @@ def initialization(src_file, trg_file):
 # @param        src_F              Flag variable              
 #                                  True,  if target data
 #                                  False, if source data
-def load_data(data_file, src_F):
+# Flag, indicating whether the var is continuous
+# Default is True
+cont_F = True
+def load_data(data_file, src_F, cont_F):
     with open(data_file, 'r') as f:
         spamreader = list(csv.reader(f, delimiter = ','))
 
         # Get data_type_Dic, val_Dic, src_Dic and trg_Dic
         # From the second line to the last (since the first line is the header)
         for i in range(1, len(spamreader)):
-            # Time lies in the first column in each row
-            time = int(spamreader[i][0].strip())
-
-            # From the second column to the last (since the first column is the time)
-            for j in range(1, len(spamreader[0])):
-                # Flag, indicating whether the var is continuous_valued
-                # Default is True 
-                cont_F = True
-
-                # For continuous_valued var, its name is var itself (e.g. Glucose) 
+            for j in range(len(spamreader[0])):
                 # var's name lies in jth column in the first row
                 var = spamreader[0][j].strip()
 
@@ -131,18 +131,10 @@ def load_data(data_file, src_F):
                     # Get the value
                     val = spamreader[i][j].strip()
 
-                    # If discrete
-                    if not is_number(val):
-                        # Flip cont_F
-                        cont_F = False
-
-                        # For discrete var, its name is var_val (e.g. Insulin_True)
-                        var += "_" + val
-
                     # Get data_type_Dic
                     if not var in data_type_Dic:
                         if cont_F:
-                            data_type_Dic[var] = "continuous_valued"
+                            data_type_Dic[var] = "continuous"
                         else:
                             data_type_Dic[var] = "discrete"
 
@@ -150,9 +142,12 @@ def load_data(data_file, src_F):
                     if not var in val_Dic:
                         val_Dic[var] = {}
                     if cont_F:
-                        val_Dic[var][time] = float(val)
+                        val_Dic[var][i] = float(val)
                     else:
-                        val_Dic[var][time] = 1
+                        if val == '1':
+                            val_Dic[var][i] = 1
+                        else:
+                            val_Dic[var][i] = 0
 
                     # If source file
                     if src_F:
@@ -209,6 +204,8 @@ def get_time_series():
 # Search for the causal pies
 def search(spamwriter_log, spamwriter_pie):
     for target in trg_Dic:
+        #print(['target:', target])
+
         # Used for BFS
         q = queue.Queue()
 
@@ -227,10 +224,11 @@ def search(spamwriter_log, spamwriter_pie):
             for i in range(size):
                 # Poll a pie from queue
                 pie_L = q.get()
-                print(['pie_L:', pie_L])
 
                 # Check sufficient condition, i.e., P(target | pie) >> P(target)
-                if not check_sff_cnd(target, pie_L, val_trg_L):
+                #if not check_sff_cnd(target, pie_L, val_trg_L):
+                if True:
+                    #print(['pie_L:', decode(pie_L)])
                     # Flag, indicating whether the pie has been expanded
                     # Default is False
                     expand_F = False
@@ -242,23 +240,34 @@ def search(spamwriter_log, spamwriter_pie):
                     for j in range(index + 1, len(slice_LL)):
                         # The new pie including the slice
                         pie_inc_L = pie_L + [j]
+                        #if not (['y_T', 1, 1] in decode(pie_inc_L) and ['z_T', 1, 1] in decode(pie_inc_L)):
+                            #continue
+
+                        #print(decode(pie_inc_L))
                         # Get sample with respect to [pie_L \wedge [j]] (i.e. the pie including the slice)
                         val_inc_L = get_pie_A_not_B_val_L(target, pie_inc_L, None)
+                        #print(['val_inc_L: ', val_inc_L])
 
                         # Get sample with respect to [pie_L \wedge \neg [j]] (i.e. the pie excluding the slice)
                         val_exc_S_L = get_pie_A_not_B_val_L(target, pie_L, [j])
+                        #print(['val_exc_S_L: ', val_exc_S_L])
 
                         # Get sample with respect to [[j] \wedge \neg pie_L] (i.e. the slice excluding the pie)
                         val_exc_P_L = get_pie_A_not_B_val_L(target, [j], pie_L)
+                        #print(['val_exc_P_L: ', val_exc_P_L])
 
-                        # Get dyn_p_val_cutoff
-                        dyn_p_val_cutoff = get_dynamic_p_val_cutoff(target, pie_inc_L)
+                        # Check statistic significance, i.e. # samples >= sample size cutoff
+                        if len(val_inc_L) >= sample_size_cutoff and len(val_exc_S_L) >= sample_size_cutoff and len(val_exc_P_L) >= sample_size_cutoff:
+                            #print(['after: ', decode(pie_inc_L)])
 
-                        # Mutual Benefit test
-                        if MB_test(target, pie_inc_L, [j], val_inc_L, val_exc_S_L, dyn_p_val_cutoff) and MB_test(target, pie_inc_L, pie_L, val_inc_L, val_exc_P_L, dyn_p_val_cutoff):
-                            # Add the new pie to the queue
-                            q.put(pie_inc_L)
-                            expand_F = True
+                            # Get dyn_p_val_cutoff
+                            dyn_p_val_cutoff = get_dynamic_p_val_cutoff(target, pie_inc_L)
+
+                            # Mutual Benefit test
+                            if MB_test(target, pie_inc_L, [j], val_inc_L, val_exc_S_L, dyn_p_val_cutoff, spamwriter_log) and MB_test(target, pie_inc_L, pie_L, val_inc_L, val_exc_P_L, dyn_p_val_cutoff, spamwriter_log):
+                                # Add the new pie to the queue
+                                q.put(pie_inc_L)
+                                expand_F = True
 
                 # If the pie:
                 # either is sufficient, i.e., P(target | pie) >> P(target),
@@ -273,13 +282,19 @@ def search(spamwriter_log, spamwriter_pie):
                         pie_Dic[target].append(pie_L)
 
                         # Write pie_file
-                        pie_print_L = []
-                        for index in pie_L:
-                            pie_print_L.append(slice_LL[index])
-                            spamwriter_pie.writerow([target + ': ', pie_print_L])
+                        spamwriter_pie.writerow([target + ': ', decode(pie_L)])
 
                         # Print the pie
-                        print([target + ': ', pie_print_L])
+                        print([target + ': ', decode(pie_L)])
+
+
+def decode(pie_L):
+    temp_L = []
+    if pie_L:
+        for index in pie_L:
+            temp_L.append(slice_LL[index])
+
+    return temp_L
 
 
 # Check sufficient condition, i.e., P(target | pie) >> P(target)
@@ -287,8 +302,8 @@ def check_sff_cnd(target, pie_L, val_trg_L):
     # Get val_trg_cnd_pie_L
     val_trg_cnd_pie_L = get_pie_A_not_B_val_L(target, pie_L, None)
 
-    print(['1:', val_trg_cnd_pie_L])
-    print(['2:', val_trg_L])
+    #print(['1:', val_trg_cnd_pie_L])
+    #print(['2:', val_trg_L])
 
 
     # Unpaired t test
@@ -300,7 +315,7 @@ def check_sff_cnd(target, pie_L, val_trg_L):
         # If the pie does not significantly increase the occurrence of the target
         if t <= 0 or p >= p_val_cutoff:
             return False
-    # If 1) target is continuous_valued and 2) the pie does not significantly increase or decrease the value of the target
+    # If 1) target is continuous and 2) the pie does not significantly increase or decrease the value of the target
     elif p >= p_val_cutoff:
         return False
 
@@ -309,7 +324,7 @@ def check_sff_cnd(target, pie_L, val_trg_L):
 def get_dynamic_p_val_cutoff(target, pie_L):
     # Get P(target | pie)
     val_L = get_pie_A_not_B_val_L(target, pie_L, None)
-    p_target_cnd_pie = min(val_L)
+    p_target_cnd_pie = np.mean(val_L)
 
     # Get dynamic p_val_cutoff
     dyn_p_val_cutoff = np.exp(np.log(p_val_cutoff) * p_target_cnd_pie)
@@ -341,7 +356,7 @@ def exclusion(target, pie_L, val_trg_L):
             # If the pie does not significantly increase the occurrence of the target
             if t > 0 and p < p_val_cutoff:
                 pie_L.remove(index)
-        # If 1) target is continuous_valued and 2) the pie does not significantly increase or decrease e's value
+        # If 1) target is continuous and 2) the pie does not significantly increase or decrease e's value
         elif p < p_val_cutoff:
             pie_L.remove(index)
 
@@ -349,9 +364,14 @@ def exclusion(target, pie_L, val_trg_L):
 
 
 def get_pie_A_not_B_val_L(target, pie_A_L, pie_B_L):
+    #print([decode(pie_A_L), decode(pie_B_L)])
+
     pie_A_time_LL = get_pie_time_LL(pie_A_L)
     pie_B_time_LL = get_pie_time_LL(pie_B_L)
     pie_A_not_B_time_LL = get_pie_A_not_B_time_LL(pie_A_time_LL, pie_B_time_LL)
+    #print(['pie_A_time_LL: ', pie_A_time_LL])
+    #print(['pie_B_time_LL: ', pie_B_time_LL])
+    #print(['pie_A_not_B_time_LL: ', pie_A_not_B_time_LL])
 
     # Test
     pie_A_print_L = []
@@ -362,12 +382,12 @@ def get_pie_A_not_B_val_L(target, pie_A_L, pie_B_L):
     if pie_B_L:
         for index in pie_B_L:
             pie_B_print_L.append(slice_LL[index])
-    print(["pie_A_L", pie_A_print_L])
-    print(["pie_B_L", pie_B_print_L])
-    print(["pie_A_time_LL", pie_A_time_LL])
-    print(["pie_B_time_LL", pie_B_time_LL])
-    print(["pie_A_not_B_time_LL", pie_A_not_B_time_LL])
-    print
+    # print(["pie_A_L", pie_A_print_L])
+    # print(["pie_B_L", pie_B_print_L])
+    # print(["pie_A_time_LL", pie_A_time_LL])
+    # print(["pie_B_time_LL", pie_B_time_LL])
+    # print(["pie_A_not_B_time_LL", pie_A_not_B_time_LL])
+    # print
 
     val_L = get_val_L(target, pie_A_not_B_time_LL)
     return val_L
@@ -381,9 +401,18 @@ def get_pie_time_LL(pie_L):
     if not pie_L:
         return pie_time_LL
 
+    # Get maximum length of intersection
+    max_len = None
+    for index in pie_L:
+        win_start = slice_LL[index][1]
+        win_end = slice_LL[index][2]
+        length = win_end - win_start + 1
+        if not max_len or max_len > length:
+            max_len = length
+
     # Get dictionary of start and end
     [start_Dic, end_Dic] = get_start_end_Dic(pie_L)
-    print([start_Dic, end_Dic])
+    #print([start_Dic, end_Dic])
 
     # Test
     # print(["start_Dic", start_Dic])
@@ -410,24 +439,23 @@ def get_pie_time_LL(pie_L):
                 if pie_time_Dic[index] == 0:
                     del pie_time_Dic[index]
         # If all the slices in the pie are present
-        print(['len(pie_time_Dic): ', len(pie_time_Dic)])
+        #print(['len(pie_time_Dic): ', len(pie_time_Dic)])
         if len(pie_time_Dic) == len(pie_L):
             if not recorded_F:
                 time_L = []
                 recorded_F = True
             time_L.append(time)
+            # If the last timepoint or the length of the intersection equals the maximum length
+            if time == max_time_stamp or len(time_L) == max_len:
+                pie_time_LL.append(time_L)
+                recorded_F = False
         # If some slices are absent and we have been recording time
         else:
             if recorded_F:
                 pie_time_LL.append(time_L)
                 recorded_F = False
 
-    # If all the slices in the pie are present and we have been recording time
-    if recorded_F:
-        pie_time_LL.append(time_L)
-        recorded_F = False
-
-    print(['pie_time_LL:', pie_time_LL])
+    #print(['pie_time_LL:', pie_time_LL])
     return pie_time_LL
 
 
@@ -446,8 +474,10 @@ def get_start_end_Dic(pie_L):
 
         for time in val_Dic[var]:
             if val_Dic[var][time] == 1:
-                start_time = min(time + win_start, max_time_stamp)
-                end_time = min(time + win_end + 1, max_time_stamp)
+                #start_time = min(time + win_start, max_time_stamp)
+                #end_time = min(time + win_end + 1, max_time_stamp)
+                start_time = time + win_start
+                end_time = time + win_end + 1
                 start_Dic[index][start_time] = 1
                 end_Dic[index][end_time] = 1
     return [start_Dic, end_Dic]
@@ -464,38 +494,25 @@ def get_pie_A_not_B_time_LL(pie_A_time_LL, pie_B_time_LL):
         for time in pie_B_time_L:
             pie_B_time_Dic[time] = 1
 
-    # Get pie_A_not_B_time_LL
-    # Flag, indicating whether we have started recording the timepoints where pie_A is present but pie_B is absent
-    recorded_F = False
-
     # Initialization 
     pie_A_not_B_time_LL = []
-
     for pie_A_time_L in pie_A_time_LL:
         pie_A_not_B_time_L = []
         for time in pie_A_time_L:
             if not time in pie_B_time_Dic:
-                if not recorded_F:
-                    pie_A_not_B_time_L = []
-                    recorded_F = True
                 pie_A_not_B_time_L.append(time)
-            else:
-                if recorded_F:
-                    pie_A_not_B_time_LL.append(pie_A_not_B_time_L)
-                    recorded_F = False
-        if recorded_F:
-            pie_A_not_B_time_LL.append(pie_A_not_B_time_L)
-            recorded_F = False
+        pie_A_not_B_time_LL.append(pie_A_not_B_time_L)
+
     return pie_A_not_B_time_LL
 
 
 # Get the value of target in the time slots
 def get_val_L(target, time_LL):
-    if not time_LL:
-        return None
-
     # Initialization
     val_L = []
+
+    if not time_LL or len(time_LL) == 0:
+        return val_L
 
     # For each time_L, get the maximum absolute value
     for time_L in time_LL:
@@ -516,66 +533,38 @@ def get_val_L(target, time_LL):
 
 
 # Mutual Benefit test
-def MB_test(target, pie_inc_L, pie_exc_L, val_inc_L, val_exc_L, dyn_p_val_cutoff):
+def MB_test(target, pie_inc_L, pie_exc_L, val_inc_L, val_exc_L, dyn_p_val_cutoff, spamwriter_log):
     # Output log file
-    with open(log_file, 'a') as f:
-        spamwriter = csv.writer(f, delimiter = ' ')
-
-        spamwriter.writerow(["target: ", target])
-
-        pie_inc_print_L = []
-        for index in pie_inc_L:
-            pie_inc_print_L.append(slice_LL[index])
-        spamwriter.writerow(["pie_inc_L: ", pie_inc_print_L])
-
-        pie_exc_print_L = []
-        for index in pie_exc_L:
-            pie_exc_print_L.append(slice_LL[index])
-        spamwriter.writerow(["pie_exc_L: ", pie_exc_print_L])
-
-        spamwriter.writerow(["val_inc_L: ", val_inc_L])
-
-        spamwriter.writerow(["val_exc_L: ", val_exc_L])
-
-    if not val_inc_L or not val_exc_L:
-        return False
+    spamwriter_log.writerow(["target: ", target])
+    spamwriter_log.writerow(["pie_inc_L: ", decode(pie_inc_L)])
+    spamwriter_log.writerow(["pie_exc_L: ", decode(pie_exc_L)])
+    spamwriter_log.writerow(["val_inc_L: ", val_inc_L])
+    spamwriter_log.writerow(["val_exc_L: ", val_exc_L])
 
     # Unpaired t test
     t, p = stats.ttest_ind(val_inc_L, val_exc_L, equal_var = False)
 
     # Output log file
-    with open(log_file, 'a') as f:
-        spamwriter = csv.writer(f, delimiter = ' ')
+    spamwriter_log.writerow(["t: ", t])
+    spamwriter_log.writerow(["p: ", p])
+    spamwriter_log.writerow(["dyn_p_val_cutoff: ", dyn_p_val_cutoff])
+    spamwriter_log.writerow(["mean(val_inc_L): ", np.mean(val_inc_L)])
+    spamwriter_log.writerow(["mean(val_exc_L): ", np.mean(val_exc_L)])
+    spamwriter_log.writerow('')
 
-        spamwriter.writerow(["t: ", t])
-
-        spamwriter.writerow(["p: ", p])
 
     # If target is discrete
     if data_type_Dic[target] == "discrete":
         # If compared to exclusion, inclusion does not significantly increase e's occurrence
-        if t <= 0 or p >= p_val_cutoff:
+        if np.mean(val_inc_L) <= np.mean(val_exc_L) or p >= dyn_p_val_cutoff:
             # Will not include
             return False
-    # If 1) target is continuous_valued and 2) inclusion does not significantly increase or decrease e's value
-    elif p >= p_val_cutoff:
+    # If 1) target is continuous and 2) inclusion does not significantly increase or decrease e's value
+    elif p >= dyn_p_val_cutoff:
             # Will not include
             return False
     # Include
     return True
-
-
-# Output candidates
-def output_candidates():
-    with open(pie_file, 'wb') as f:
-        spamwriter = csv.writer(f, delimiter = ',')
-        for trg in pie_Dic:
-            if pie_Dic[trg]:
-                for pie in pie_Dic[trg]:
-                    pie_print_L = []
-                    for index in pie:
-                        pie_print_L.append(slice_LL[index])
-                    spamwriter.writerow([trg, pie_print_L])
 
 
 # Main function
@@ -602,15 +591,9 @@ if __name__=="__main__":
     # Initialization
     initialization(src_file, trg_file)
 
-    # Write log file
     with open(log_file, 'w') as f:
         spamwriter_log = csv.writer(f, delimiter = ' ')
-        spamwriter_log.writerow("This is the log file.")
-
-        # Write pie file
         with open(pie_file, 'w') as f:
             spamwriter_pie = csv.writer(f, delimiter = ' ')
-            spamwriter_pie.writerow("This is the pie file.")
-
             # Get candidates
             search(spamwriter_log, spamwriter_pie)

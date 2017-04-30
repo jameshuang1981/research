@@ -1,0 +1,2 @@
+target,probability,causal pie
+trg_0,1.0,src_0,1,4,src_1,4,4
