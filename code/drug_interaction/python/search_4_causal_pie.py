@@ -213,11 +213,6 @@ def search(spamwriter_log, spamwriter_pie):
         for i in range(len(slice_LL)):
             q.put([i])
 
-        # Get val_trg_L
-        val_trg_L = []
-        for time in val_Dic[target]:
-            val_trg_L.append(val_Dic[target][time])
-
         # BFS
         while not q.empty():
             size = q.qsize()
@@ -226,13 +221,7 @@ def search(spamwriter_log, spamwriter_pie):
                 pie_L = q.get()
 
                 # Check sufficient condition, i.e., P(target | pie) >> P(target)
-                #if not check_sff_cnd(target, pie_L, val_trg_L):
-                if True:
-                    #print(['pie_L:', decode(pie_L)])
-                    # Flag, indicating whether the pie has been expanded
-                    # Default is False
-                    expand_F = False
-
+                if not check_sff_cnd(target, pie_L, spamwriter_log):
                     # Get the index of the last slice
                     index = pie_L[len(pie_L) - 1]
 
@@ -256,36 +245,82 @@ def search(spamwriter_log, spamwriter_pie):
                         val_exc_P_L = get_pie_A_not_B_val_L(target, [j], pie_L)
                         #print(['val_exc_P_L: ', val_exc_P_L])
 
+                        #print([len(val_inc_L), len(val_exc_S_L), len(val_exc_P_L)])
+
                         # Check statistic significance, i.e. # samples >= sample size cutoff
                         if len(val_inc_L) >= sample_size_cutoff and len(val_exc_S_L) >= sample_size_cutoff and len(val_exc_P_L) >= sample_size_cutoff:
                             #print(['after: ', decode(pie_inc_L)])
 
                             # Get dyn_p_val_cutoff
-                            dyn_p_val_cutoff = get_dynamic_p_val_cutoff(target, pie_inc_L)
+                            #dyn_p_val_cutoff = get_dynamic_p_val_cutoff(target, pie_inc_L)
+                            dyn_p_val_cutoff = 1
 
                             # Mutual Benefit test
+                            spamwriter_log.writerow(['Inclusion'])
                             if MB_test(target, pie_inc_L, [j], val_inc_L, val_exc_S_L, dyn_p_val_cutoff, spamwriter_log) and MB_test(target, pie_inc_L, pie_L, val_inc_L, val_exc_P_L, dyn_p_val_cutoff, spamwriter_log):
                                 # Add the new pie to the queue
                                 q.put(pie_inc_L)
-                                expand_F = True
 
-                # If the pie:
-                # either is sufficient, i.e., P(target | pie) >> P(target),
-                # or cannot be expanded
-                if not expand_F:
-                    pie_L = exclusion(target, pie_L, val_trg_L)
-                    # If the pie consists of more than one piece
-                    if len(pie_L) > 1:
-                        # Update pie_Dic
-                        if target not in pie_Dic:
-                            pie_Dic[target] = []
+                # If the pie is sufficient, i.e., P(target | pie) >> P(target)
+                else:
+                    print(['before: ', decode(pie_L)])
+                    spamwriter_log.writerow(['Exclusion'])
+                    pie_L = exclusion(target, pie_L, spamwriter_log)
+                    if len(pie_L) == 0:
+                        continue
+                    # Update pie_Dic
+                    if target not in pie_Dic:
+                        pie_Dic[target] = []
                         pie_Dic[target].append(pie_L)
+                    else:
+                        # Check whether there is a subset or superset of pie_L in pie_Dic[target]
+                        subset_F = False
+                        superset_F = False
+                        for i in range(len(pie_Dic[target])):
+                            piei_L = pie_Dic[target][i]
+                            if check_subset(piei_L, pie_L):
+                                subset_F = True
+                                break
+                            elif check_subset(pie_L, piei_L):
+                                pie_Dic[target][i] = pie_L
+                                superset_F = True
+                                break
+                        if not subset_F and not superset_F:
+                            print(['after: ', decode(pie_L)])
+                            # Update pie_Dic
+                            pie_Dic[target].append(pie_L)
 
-                        # Write pie_file
-                        spamwriter_pie.writerow([target + ': ', decode(pie_L)])
+        # Write pie_file
+        if target in pie_Dic:
+            for pie_L in pie_Dic[target]:
+                spamwriter_pie.writerow([target + ': ', decode(pie_L)])
+                # Print the pie
+                print([target + ': ', decode(pie_L)])
 
-                        # Print the pie
-                        print([target + ': ', decode(pie_L)])
+
+def get_min_len_int(pie_L):
+    min_len_int = None
+
+    if not pie_L or len(pie_L) == 0:
+        return min_len_int
+
+    for index in pie_L:
+        win_start = slice_LL[index][1]
+        win_end = slice_LL[index][2]
+        len_intersection = win_end - win_start + 1
+        if not min_len_int or min_len_int > len_intersection:
+            min_len_int = len_intersection
+
+    return min_len_int
+
+
+# Check whether there is a set in i_LLL that is a subset of the sets in j_LLL
+def check_subset(i_LL, j_LL):
+    # Check whether i_LL is a subset of j_LL
+    for i_L in i_LL:
+        if not i_L in j_LL:
+            return False
+    return True
 
 
 def decode(pie_L):
@@ -297,18 +332,50 @@ def decode(pie_L):
     return temp_L
 
 
+def get_val_L_min_len_int(target, min_len_int):
+    # Get val_LL
+    val_L = []
+    temp_L = []
+
+    for time in val_Dic[target]:
+        if len(temp_L) < min_len_int:
+            temp_L.append(val_Dic[target][time])
+        else:
+            val_L.append(max(temp_L))
+            temp_L = []
+
+    if len(temp_L) > 0:
+        val_L.append(max(temp_L))
+
+    return val_L
+
+
 # Check sufficient condition, i.e., P(target | pie) >> P(target)
-def check_sff_cnd(target, pie_L, val_trg_L):
+def check_sff_cnd(target, pie_L, spamwriter_log):
+    # Output log file
+    spamwriter_log.writerow(["check_sff_cnd: ", target])
+    spamwriter_log.writerow(["target: ", target])
+    spamwriter_log.writerow(["pie_L: ", decode(pie_L)])
+
     # Get val_trg_cnd_pie_L
     val_trg_cnd_pie_L = get_pie_A_not_B_val_L(target, pie_L, None)
+
+    min_len_int = get_min_len_int(pie_L)
+    val_L = get_val_L_min_len_int(target, min_len_int)
+    #print(val_L)
 
     #print(['1:', val_trg_cnd_pie_L])
     #print(['2:', val_trg_L])
 
-
     # Unpaired t test
-    t, p = stats.ttest_ind(val_trg_cnd_pie_L, val_trg_L, equal_var = False)
+    t, p = stats.ttest_ind(val_trg_cnd_pie_L, val_L, equal_var = False)
 
+    # Output log file
+    spamwriter_log.writerow(["t: ", t])
+    spamwriter_log.writerow(["p: ", p])
+    spamwriter_log.writerow(["mean(val_trg_cnd_pie_L): ", np.mean(val_trg_cnd_pie_L)])
+    spamwriter_log.writerow(["mean(val_L): ", np.mean(val_L)])
+    spamwriter_log.writerow('')
 
     # If target is discrete
     if data_type_Dic[target] == "discrete":
@@ -319,6 +386,7 @@ def check_sff_cnd(target, pie_L, val_trg_L):
     elif p >= p_val_cutoff:
         return False
 
+    return True
 
 # Get dynamic p_val_cutoff
 def get_dynamic_p_val_cutoff(target, pie_L):
@@ -333,7 +401,7 @@ def get_dynamic_p_val_cutoff(target, pie_L):
 
 
 # Exclude the pieces that are not in the causal pie
-def exclusion(target, pie_L, val_trg_L):
+def exclusion(target, pie_L, spamwriter_log):
     # Backup pie_L
     backup_pie_L = [] + pie_L
 
@@ -345,11 +413,25 @@ def exclusion(target, pie_L, val_trg_L):
         if len(temp) == 0:
             return temp
 
+        # Output log file
+        spamwriter_log.writerow(["target: ", target])
+        spamwriter_log.writerow(["pie_L: ", decode(pie_L)])
+
         # Get sample with respect to [pie \ piece \wedge \neg piece] (i.e. the pie \ piece excluding the piece)
         val_exc_L = get_pie_A_not_B_val_L(target, temp, [index])
 
+        min_len_int = get_min_len_int(pie_L)
+        val_L = get_val_L_min_len_int(target, min_len_int)
+
         # Unpaired t test
-        t, p = stats.ttest_ind(val_exc_L, val_trg_L, equal_var = False)
+        t, p = stats.ttest_ind(val_exc_L, val_L, equal_var = False)
+
+        # Output log file
+        spamwriter_log.writerow(["t: ", t])
+        spamwriter_log.writerow(["p: ", p])
+        spamwriter_log.writerow(["mean(val_trg_L): ", np.mean(val_L)])
+        spamwriter_log.writerow(["mean(val_exc_L): ", np.mean(val_exc_L)])
+        spamwriter_log.writerow('')
 
         # If target is discrete
         if data_type_Dic[target] == "discrete":
@@ -538,8 +620,8 @@ def MB_test(target, pie_inc_L, pie_exc_L, val_inc_L, val_exc_L, dyn_p_val_cutoff
     spamwriter_log.writerow(["target: ", target])
     spamwriter_log.writerow(["pie_inc_L: ", decode(pie_inc_L)])
     spamwriter_log.writerow(["pie_exc_L: ", decode(pie_exc_L)])
-    spamwriter_log.writerow(["val_inc_L: ", val_inc_L])
-    spamwriter_log.writerow(["val_exc_L: ", val_exc_L])
+    #spamwriter_log.writerow(["val_inc_L: ", val_inc_L])
+    #spamwriter_log.writerow(["val_exc_L: ", val_exc_L])
 
     # Unpaired t test
     t, p = stats.ttest_ind(val_inc_L, val_exc_L, equal_var = False)
@@ -556,7 +638,8 @@ def MB_test(target, pie_inc_L, pie_exc_L, val_inc_L, val_exc_L, dyn_p_val_cutoff
     # If target is discrete
     if data_type_Dic[target] == "discrete":
         # If compared to exclusion, inclusion does not significantly increase e's occurrence
-        if np.mean(val_inc_L) <= np.mean(val_exc_L) or p >= dyn_p_val_cutoff:
+        #if np.mean(val_inc_L) <= np.mean(val_exc_L) or p >= dyn_p_val_cutoff:
+        if p >= dyn_p_val_cutoff:
             # Will not include
             return False
     # If 1) target is continuous and 2) inclusion does not significantly increase or decrease e's value
