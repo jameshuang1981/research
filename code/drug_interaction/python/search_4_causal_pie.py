@@ -194,13 +194,21 @@ def search(spamwriter_log, spamwriter_pie):
             if val_Dic[target][time] == 1:
                 time_L.append(time)
 
+        # The list of value of the target
+        val_L = []
+        for time in val_Dic[target]:
+            val_L.append(val_Dic[target][time])
+
         # The dictionary records the visited slice
         visited_Dic = {}
 
         # The loop continues if there are unvisited nodes
         while (len(visited_Dic)) < len(slice_LL):
-            # The list of timepoints where 1) the target occurs and 2) the slices cooccur
+            # The list of timepoints where 1) the target occurs and 2) the pie and slice cooccur
             cooccur_time_L = time_L
+
+            # The list of value at timepoints where 1) the target occurs, 2) the pie occurs, and 3) slice does not occur
+            not_occur_val_L = val_L
 
             # The list of slices in the pie
             pie_L = []
@@ -210,16 +218,19 @@ def search(spamwriter_log, spamwriter_pie):
 
             # The loop continues if:
             #     1) the number of timepoints in cooccur_time_L is not smaller than sample size cutoff
-            # and 2) the pie includes at least two slices, or the pie is not sufficient
-            while len(cooccur_time_L) >= sample_size_cutoff and (len(pie_L) < 2 or check_sff_cnd(target, pie_L, spamwriter_log) is False):
+            # and 2) the number of value in not_occur_val_L is not smaller than sample size cutoff
+            # and 3) the pie includes at least two slices, or the pie is not sufficient
+            while len(cooccur_time_L) >= sample_size_cutoff and len(not_occur_val_L) >= sample_size_cutoff and (len(pie_L) < 2 or check_sff_cnd(target, pie_L, spamwriter_log) is False):
                 #temp_L = []
                 #for index in visited_Dic:
                     #temp_L.append(slice_LL[index])
                 #print(temp_L)
-                # This is the slice that yields the maximum cooccurrence with the pie
+                # This is the slice that yields the maximum: cooccurrence * (1 - P(target | pie_L and not slice))
                 max_slice = None
                 # This is the list of timepoints where max_slice and pie_L cooccur
                 max_time_L = None
+                # This is the list of value at timepoints where the pie occurs but max_slice does not occur
+                max_val_L = None
 
                 # For each slice in slice_LL
                 for index in range(len(slice_LL)):
@@ -227,10 +238,17 @@ def search(spamwriter_log, spamwriter_pie):
                     if not index in visited_Dic:
                         # Get the list of timepoints where slice_LL[index] and pie_L cooccur
                         temp_time_L = get_cooccur_time_L(cooccur_time_L, slice_LL[index])
-                        # Update max_slice and max_time_L
-                        if max_time_L is None or len(max_time_L) < len(temp_time_L):
+
+                        # Get the list of value at timepoints where the pie occurs but max_slice does not occur
+                        temp_val_L = get_pie_A_not_B_val_L(target, pie_L, [index])
+
+                        print([slice_LL[index], len(temp_time_L), np.mean(temp_val_L), len(temp_time_L) * (1 - np.mean(temp_val_L))])
+
+                        # Update max_slice, max_time_L and max_val_L
+                        if max_time_L is None and max_val_L is None or len(max_time_L) * (1 - np.mean(max_val_L)) < len(temp_time_L) * (1 - np.mean(temp_val_L)):
                             max_slice = index
                             max_time_L = temp_time_L
+                            max_val_L = temp_val_L
 
                 # If no max_slice can be found
                 if max_slice is None:
@@ -254,9 +272,13 @@ def search(spamwriter_log, spamwriter_pie):
 
                 # Update cooccur_time_L (with fewer timepoints since a new slice, max_slices, has been added to pie_L)
                 cooccur_time_L = max_time_L
-
-                # Write pie_L to spamwriter_log
+                # Write len(cooccur_time_L) to spamwriter_log
                 spamwriter_log.writerow(['len(cooccur_time_L)' + ': ', len(cooccur_time_L)])
+
+                # Update not_occur_val_L (with fewer value since a new slice, max_slices, has been added to pie_L)
+                not_occur_val_L = max_val_L
+                # Write not_occur_val_L to spamwriter_log
+                spamwriter_log.writerow(['len(not_occur_val_L)' + ': ', len(not_occur_val_L)])
 
             # If the pie is not empty
             if len(pie_L) > 0:
@@ -329,13 +351,21 @@ def check_sff_cnd(target, pie_L, spamwriter_log):
 
 # Get the list of value of the target due to pie A but not pie B
 def get_pie_A_not_B_val_L(target, pie_A_L, pie_B_L):
-    # Get the list of time where the target can be changed by pie A
-    pie_A_time_LL = get_pie_time_LL(pie_A_L)
+    # Get the list of timepoints where the target can be changed by pie A
+    # Initialization
+    pie_A_time_LL = []
+    # If there is no pie A, the list includes all timepoints
+    if pie_A_L is None or len(pie_A_L) == 0:
+        for time in val_Dic[target]:
+            pie_A_time_LL.append([time])
+    # Otherwise, the list only includes timepoints where the target can be changed by pie A
+    else:
+        pie_A_time_LL = get_pie_time_LL(pie_A_L)
 
-    # Get the list of time where the target can be changed by pie B
+    # Get the list of timepoints where the target can be changed by pie B
     pie_B_time_LL = get_pie_time_LL(pie_B_L)
 
-    # Get the list of time where the target can be changed by pie A but not pie B
+    # Get the list of timepoints where the target can be changed by pie A but not pie B
     pie_A_not_B_time_LL = get_pie_A_not_B_time_LL(pie_A_time_LL, pie_B_time_LL)
 
     # Get the list of value of the target due to pie A but not pie B
@@ -344,13 +374,13 @@ def get_pie_A_not_B_val_L(target, pie_A_L, pie_B_L):
     return val_L
 
 
-# Get the list of time where the target can be changed by the pie
+# Get the list of timepoints where the target can be changed by the pie
 def get_pie_time_LL(pie_L):
     # Initialization
     pie_time_LL = []
 
     # If the pie is None or empty, return empty list
-    if pie_L is None:
+    if pie_L is None or len(pie_L) == 0:
         return pie_time_LL
 
     # Get the minimum window length of slices in the pie
@@ -473,9 +503,9 @@ def get_start_end_Dic(pie_L):
     return [start_Dic, end_Dic]
 
 
-# Get the time when pie A is present whereas pie B is absent
+# Get the timepoints when pie A is present whereas pie B is absent
 def get_pie_A_not_B_time_LL(pie_A_time_LL, pie_B_time_LL):
-    if pie_B_time_LL is None:
+    if pie_B_time_LL is None or len(pie_B_time_LL) == 0:
         return pie_A_time_LL
 
     # Get time_Dic
