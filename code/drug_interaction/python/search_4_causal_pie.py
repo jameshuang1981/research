@@ -186,7 +186,7 @@ def get_time_series():
 def search(spamwriter_log, spamwriter_pie):
     for target in trg_Dic:
         # Write target to spamwriter_log
-        spamwriter_log.writerow([target + ': ', target])
+        spamwriter_log.writerow(['search ' + target + ': ', target])
 
         # The list of timepoints where the target occurs
         time_L = []
@@ -194,17 +194,22 @@ def search(spamwriter_log, spamwriter_pie):
             if val_Dic[target][time] == 1:
                 time_L.append(time)
 
-        # The dictionary records the visited slice
-        visited_Dic = {}
-
-        # The dictionary records the removed slice relative to the root
-        removed_Dic = {}
-
         # The list of slices in the pie
         pie_L = []
 
         # The first slice added to the pie
         root = None
+
+
+        # The dictionary records the visited slice
+        # key: slice
+        # val: 1
+        visited_Dic = {}
+
+        # The dictionary records the removed slice relative to the root
+        # key: root->slice
+        # val: 1
+        removed_Dic = {}
 
         # The loop continues if there are unvisited nodes
         while len(visited_Dic) < len(slice_LL):
@@ -224,16 +229,14 @@ def search(spamwriter_log, spamwriter_pie):
 
             # Check if the number of timepoints in cooccur_time_L is not smaller than sample size cutoff
             if len(cooccur_time_L) >= sample_size_cutoff:
-                print('hi')
-                # If the pie is sufficient
+                # If the pie is sufficient (to produce the effect)
                 if check_sff_cnd(target, pie_L, spamwriter_log) is True:
-                    print('morning')
                     # Mark each slice in the pie as unvisited (i.e., deleting the key from the dict), except for the root
                     for index in pie_L:
                         if index != root:
                             del visited_Dic[index]
 
-                    # Check the necessary condition and remove unnecessary slices
+                    # Check the necessary condition (to produce the effect) and remove unnecessary slices
                     pie_L = check_ncs_cnd(target, pie_L, spamwriter_log)
 
                     # Mark each slice in the pie as visited (i.e, adding the key to the dict)
@@ -241,11 +244,10 @@ def search(spamwriter_log, spamwriter_pie):
                         visited_Dic[index] = 1
 
                     # Write the pie to spamwriter_pie
-                    spamwriter_pie.writerow([target + ': ', decode(pie_L)])
+                    spamwriter_pie.writerow(['causal pie of ' + target + ': ', decode(pie_L)])
                     # Output the pie
-                    print(decode(pie_L))
+                    print(['causal pie of ' + target + ': ', decode(pie_L)])
                 else:
-                    print(root)
                     # Mark each slice in the pie as unvisited (i.e., deleting the key from the dict), except for the root
                     for index in pie_L:
                         if index != root:
@@ -255,7 +257,18 @@ def search(spamwriter_log, spamwriter_pie):
                 root = None
             else:
                 # Shrink
-                [pie_L, cooccur_time_L] = shrink(time_L, root, pie_L, visited_Dic, removed_Dic, spamwriter_log)
+                [pie_L, max_slice, cooccur_time_L] = shrink(time_L, root, pie_L, visited_Dic, removed_Dic, spamwriter_log)
+
+                # If the pie cannot be shrinked anymore
+                if max_slice is None:
+                    # Mark each slice in the pie as unvisited (i.e., deleting the key from the dict), except for the root
+                    for index in pie_L:
+                        if index != root:
+                            del visited_Dic[index]
+
+                    # Clear
+                    pie_L = []
+                    root = None
 
 
 # Check sufficient condition, i.e., P(target | pie) >> P(target)
@@ -264,9 +277,8 @@ def check_sff_cnd(target, pie_L, spamwriter_log):
         return False
 
     # Write log file
-    spamwriter_log.writerow(["check_sff_cnd: ", target])
-    spamwriter_log.writerow(["target: ", target])
-    spamwriter_log.writerow(["pie_L: ", decode(pie_L)])
+    spamwriter_log.writerow(['check_sff_cnd ' + target + ': ', target])
+    spamwriter_log.writerow(["check_sff_cnd pie_L: ", decode(pie_L)])
 
     # Get val_trg_cnd_pie_L
     val_trg_cnd_pie_L = get_pie_A_not_B_val_L(target, pie_L, None)
@@ -274,10 +286,6 @@ def check_sff_cnd(target, pie_L, spamwriter_log):
     # Get the minimum window length of slices in the pie
     min_win_len = get_min_win_len(pie_L)
     val_L = get_val_L_min_win_len(target, min_win_len)
-    # print(val_L)
-
-    # print(['1:', val_trg_cnd_pie_L])
-    # print(['2:', val_trg_L])
 
     # Unpaired t test
     t, p = stats.ttest_ind(val_trg_cnd_pie_L, val_L, equal_var=False)
@@ -527,18 +535,19 @@ def expand(cooccur_time_L, root, pie_L, visited_Dic, removed_Dic, spamwriter_log
             # Get the list of timepoints where slice_LL[index] and pie_L cooccur
             temp_time_L = get_cooccur_time_L(cooccur_time_L, slice_LL[index])
 
-            # Update max_slice, max_time_L and max_val_L
+            # Update max_slice, and max_time_L
             if max_time_L is None or len(max_time_L) < len(temp_time_L):
                 max_slice = index
                 max_time_L = temp_time_L
 
+    # If the pie cannot be expanded anymore
     if max_slice is None:
         return [pie_L, cooccur_time_L, root, max_slice]
 
     # Add max_slice to the pie
     pie_L.append(max_slice)
     # Write pie_L to spamwriter_log
-    spamwriter_log.writerow(['pie_L' + ': ', decode(pie_L)])
+    spamwriter_log.writerow(['expand pie_L' + ': ', decode(pie_L)])
     # Output the pie
     print(['expand pie_L: ', decode(pie_L)])
 
@@ -554,7 +563,7 @@ def expand(cooccur_time_L, root, pie_L, visited_Dic, removed_Dic, spamwriter_log
     # Update cooccur_time_L (with fewer timepoints since a new slice, max_slices, has been added to pie_L)
     cooccur_time_L = max_time_L
     # Write len(cooccur_time_L) to spamwriter_log
-    spamwriter_log.writerow(['len(cooccur_time_L)' + ': ', len(cooccur_time_L)])
+    spamwriter_log.writerow(['expand len(cooccur_time_L)' + ': ', len(cooccur_time_L)])
 
     return [pie_L, cooccur_time_L, root, max_slice]
 
@@ -578,10 +587,16 @@ def shrink(time_L, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
             if not other_index == index:
                 temp_time_L = get_cooccur_time_L(temp_time_L, slice_LL[other_index])
 
+        print([slice_LL[index], len(temp_time_L)])
+
         # Update max_slice and max_time_L
         if max_time_L is None or len(max_time_L) < len(temp_time_L):
             max_slice = index
             max_time_L = temp_time_L
+
+    # If the pie cannot be shrinked anymore
+    if max_slice is None:
+        return [pie_L, max_slice, max_time_L]
 
     # Remove max_slice from the pie
     pie_L.remove(max_slice)
@@ -599,7 +614,7 @@ def shrink(time_L, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
     if not max_slice in removed_Dic[root]:
         removed_Dic[root][max_slice] = 1
 
-    return [pie_L, max_time_L]
+    return [pie_L, max_slice, max_time_L]
 
 
 # Check the necessary condition and exclude the slices that are not in the causal pie

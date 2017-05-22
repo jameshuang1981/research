@@ -446,7 +446,8 @@
     ;;greedy search
     (loop for (c-L abs-dif) in c-L-abs-dif-L
 	  do (setf X-LIS-L (append X-LIS-L (list c-L)))
-	  do (if (> (length c-L) 1)
+          do (if (> (length X-LIS-L) 1)
+	  ;;do (if (> (length c-L) 1)
 		 (let ((A-LIS-array (get-A-array X-LIS-L)))
 		   (if (not (is-full-rank-greedy A-LIS-array))
 		       (setf X-LIS-L (remove c-L X-LIS-L :test #'equal))))))
