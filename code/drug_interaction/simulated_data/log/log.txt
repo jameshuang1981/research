@@ -1,1408 +1,931 @@
 "search trg_0: " trg_0
-"expand pie_L: " "[['src_16', 1, 5]]"
-"root: " "['src_16', 1, 5]"
-"expand len(cooccur_time_L): " 271
-"expand pie_L: " "[['src_16', 1, 5], ['src_18', 1, 5]]"
-"expand len(cooccur_time_L): " 96
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_16', 1, 5], ['src_18', 1, 5]]"
-"t: " 1.11976492111
-"p: " 0.262828969911
-"mean(val_trg_cnd_pie_L): " 0.0054184993944
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_16', 1, 5], ['src_18', 1, 5], ['src_20', 1, 5]]"
-"expand len(cooccur_time_L): " 65
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_16', 1, 5], ['src_18', 1, 5], ['src_20', 1, 5]]"
-"t: " 5.8210536867
-"p: " 6.60705473369e-09
-"mean(val_trg_cnd_pie_L): " 0.0220048899756
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_16', 1, 5], ['src_18', 1, 5], ['src_20', 1, 5]]"
-"t: " 5.8210536867
-"p: " 6.60705473369e-09
-"mean(val_trg_cnd_pie_L): " 0.0220048899756
-"mean(val_L): " 0.00474
-
-"target: " trg_0
-"pie_L: " "[['src_16', 1, 5], ['src_18', 1, 5], ['src_20', 1, 5]]"
-"t: " -3.03068716152
-"p: " 0.00244683290048
-"mean(val_trg_L): " 0.00474
-"mean(val_exc_L): " 0.00286997753931
-
-"target: " trg_0
-"pie_L: " "[['src_16', 1, 5], ['src_18', 1, 5], ['src_20', 1, 5]]"
-"t: " -6.38183761304
-"p: " 1.82115483985e-10
-"mean(val_trg_L): " 0.00474
-"mean(val_exc_L): " 0.00172910662824
-
-"target: " trg_0
-"pie_L: " "[['src_16', 1, 5], ['src_18', 1, 5], ['src_20', 1, 5]]"
-"t: " -6.29019893357
-"p: " 3.23815935882e-10
-"mean(val_trg_L): " 0.00474
-"mean(val_exc_L): " 0.00213940648723
-
-"expand pie_L: " "[['src_8', 1, 5]]"
-"root: " "['src_8', 1, 5]"
-"expand len(cooccur_time_L): " 265
-"expand pie_L: " "[['src_8', 1, 5], ['src_0', 1, 5]]"
-"expand len(cooccur_time_L): " 86
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_8', 1, 5], ['src_0', 1, 5]]"
-"t: " 4.07139669526
-"p: " 4.71457003501e-05
-"mean(val_trg_cnd_pie_L): " 0.00899712092131
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_8', 1, 5], ['src_0', 1, 5]]"
-"t: " 4.07139669526
-"p: " 4.71457003501e-05
-"mean(val_trg_cnd_pie_L): " 0.00899712092131
-"mean(val_L): " 0.00474
-
-"target: " trg_0
-"pie_L: " "[['src_8', 1, 5], ['src_0', 1, 5]]"
-"t: " -0.749867124472
-"p: " 0.453340240028
-"mean(val_trg_L): " 0.00474
-"mean(val_exc_L): " 0.00440528634361
-
-"target: " trg_0
-"pie_L: " "[['src_8', 1, 5], ['src_0', 1, 5]]"
-"t: " -1.68770663795
-"p: " 0.0914722855192
-"mean(val_trg_L): " 0.00474
-"mean(val_exc_L): " 0.00415612157236
-
-"expand pie_L: " "[['src_1', 1, 5]]"
-"root: " "['src_1', 1, 5]"
-"expand len(cooccur_time_L): " 252
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"expand len(cooccur_time_L): " 51
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_2', 1, 5]]"
-"expand len(cooccur_time_L): " 10
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_3', 1, 5]]"
-"expand len(cooccur_time_L): " 10
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_4', 1, 5]]"
-"expand len(cooccur_time_L): " 9
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_7', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_12', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_15', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5], ['src_21', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_1', 1, 5], ['src_13', 1, 5]]"
-"t: " -4.5096921186
-"p: " 6.52371237418e-06
-"mean(val_trg_cnd_pie_L): " 0.00281690140845
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5]]"
-"root: " "['src_13', 1, 5]"
-"expand len(cooccur_time_L): " 225
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 42
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 10
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_15', 1, 5]]"
-"expand len(cooccur_time_L): " 9
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_7', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_2', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_3', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_12', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_21', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_4', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_13', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.63135481315
-"p: " 0.102840107355
-"mean(val_trg_cnd_pie_L): " 0.00376209243999
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5]]"
-"root: " "['src_3', 1, 5]"
-"expand len(cooccur_time_L): " 220
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 40
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_12', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_2', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_7', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_4', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_21', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 2
-"pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
-"t: " -2.68005959447
-"p: " 0.00736929410462
-"mean(val_trg_cnd_pie_L): " 0.00328893274133
-"mean(val_L): " 0.00474
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " []
+"check_suff_cond t: " -0.967939836038
+"check_suff_cond p: " 0.333075401924
+"check_suff_cond mean(val_exc_L): " 0.0265791666667
+"check_suff_cond mean(val_L): " 0.0271333333333
 
 "expand pie_L: " "[['src_7', 1, 5]]"
 "root: " "['src_7', 1, 5]"
-"expand len(cooccur_time_L): " 213
-"expand pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"expand len(cooccur_time_L): " 37
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.48566020803
-"p: " 0.000492318396287
-"mean(val_trg_cnd_pie_L): " 0.00296236989592
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5], ['src_2', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.48566020803
-"p: " 0.000492318396287
-"mean(val_trg_cnd_pie_L): " 0.00296236989592
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.48566020803
-"p: " 0.000492318396287
-"mean(val_trg_cnd_pie_L): " 0.00296236989592
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.48566020803
-"p: " 0.000492318396287
-"mean(val_trg_cnd_pie_L): " 0.00296236989592
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.48566020803
-"p: " 0.000492318396287
-"mean(val_trg_cnd_pie_L): " 0.00296236989592
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5], ['src_12', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.48566020803
-"p: " 0.000492318396287
-"mean(val_trg_cnd_pie_L): " 0.00296236989592
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.48566020803
-"p: " 0.000492318396287
-"mean(val_trg_cnd_pie_L): " 0.00296236989592
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_15', 1, 5], ['src_21', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"t: " -2.26331887674
-"p: " 0.0236331348347
-"mean(val_trg_cnd_pie_L): " 0.00342212356641
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 12
-"pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"t: " -2.26331887674
-"p: " 0.0236331348347
-"mean(val_trg_cnd_pie_L): " 0.00342212356641
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"t: " -2.26331887674
-"p: " 0.0236331348347
-"mean(val_trg_cnd_pie_L): " 0.00342212356641
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"t: " -2.26331887674
-"p: " 0.0236331348347
-"mean(val_trg_cnd_pie_L): " 0.00342212356641
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"t: " -2.26331887674
-"p: " 0.0236331348347
-"mean(val_trg_cnd_pie_L): " 0.00342212356641
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 0
-"pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"t: " -2.26331887674
-"p: " 0.0236331348347
-"mean(val_trg_cnd_pie_L): " 0.00342212356641
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_7', 1, 5], ['src_21', 1, 5]]"
-"t: " -2.26331887674
-"p: " 0.0236331348347
-"mean(val_trg_cnd_pie_L): " 0.00342212356641
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5]]"
-"root: " "['src_4', 1, 5]"
-"expand len(cooccur_time_L): " 184
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"expand len(cooccur_time_L): " 37
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_2', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_21', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_12', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 2
-"pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_4', 1, 5], ['src_15', 1, 5]]"
-"t: " -3.39904975763
-"p: " 0.000678022119874
-"mean(val_trg_cnd_pie_L): " 0.00297692880179
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5]]"
-"root: " "['src_12', 1, 5]"
-"expand len(cooccur_time_L): " 183
-"expand pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5]]"
-"expand len(cooccur_time_L): " 31
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5]]"
-"t: " -4.99076284136
-"p: " 6.07882464259e-07
-"mean(val_trg_cnd_pie_L): " 0.00241351568785
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5]]"
-"t: " -4.99076284136
-"p: " 6.07882464259e-07
-"mean(val_trg_cnd_pie_L): " 0.00241351568785
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5]]"
-"t: " -4.99076284136
-"p: " 6.07882464259e-07
-"mean(val_trg_cnd_pie_L): " 0.00241351568785
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_2', 1, 5], ['src_15', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5], ['src_21', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 2
-"pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 2
-"pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_12', 1, 5], ['src_15', 1, 5]]"
-"t: " -4.16900688332
-"p: " 3.07741020405e-05
-"mean(val_trg_cnd_pie_L): " 0.00265433684391
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5]]"
-"root: " "['src_2', 1, 5]"
-"expand len(cooccur_time_L): " 181
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 36
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_15', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_21', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 2
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 2
-"pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_2', 1, 5], ['src_14', 1, 5]]"
-"t: " -2.3478803884
-"p: " 0.018896740336
-"mean(val_trg_cnd_pie_L): " 0.00336053768603
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5]]"
-"root: " "['src_15', 1, 5]"
-"expand len(cooccur_time_L): " 180
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 32
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 11
-"pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 8
-"pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 4
-"pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 2
-"pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5], ['src_21', 1, 5]]"
-"expand len(cooccur_time_L): " 1
-"pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_15', 1, 5], ['src_6', 1, 5]]"
-"t: " -1.50901738083
-"p: " 0.131328426762
-"mean(val_trg_cnd_pie_L): " 0.00370990904739
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_21', 1, 5]]"
-"root: " "['src_21', 1, 5]"
-"expand len(cooccur_time_L): " 175
-"expand pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 31
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5], ['src_9', 1, 5]]"
-"expand len(cooccur_time_L): " 7
-"pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 6
-"pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 5
-"pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 3
-"pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_21', 1, 5], ['src_14', 1, 5]]"
-"t: " -1.75087771643
-"p: " 0.0799986975835
-"mean(val_trg_cnd_pie_L): " 0.00358340076292
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_9', 1, 5]]"
-"root: " "['src_9', 1, 5]"
-"expand len(cooccur_time_L): " 167
-"expand pie_L: " "[['src_9', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 29
-"pie_L: " "[['src_9', 1, 5]]"
-"expand pie_L: " "[['src_9', 1, 5], ['src_14', 1, 5]]"
-"expand len(cooccur_time_L): " 28
-"pie_L: " "[['src_9', 1, 5]]"
-"expand pie_L: " "[['src_9', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 24
-"pie_L: " "[['src_9', 1, 5]]"
-"expand pie_L: " "[['src_9', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 22
-"pie_L: " "[['src_9', 1, 5]]"
-"expand pie_L: " "[['src_9', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 21
-"pie_L: " "[['src_9', 1, 5]]"
-"expand pie_L: " "[['src_9', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 19
-"pie_L: " "[['src_9', 1, 5]]"
-"expand pie_L: " "[['src_9', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 18
-"pie_L: " "[['src_9', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_9', 1, 5]]"
-"t: " -0.877979647688
-"p: " 0.379958642823
-"mean(val_trg_cnd_pie_L): " 0.0044119201099
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_14', 1, 5]]"
-"root: " "['src_14', 1, 5]"
-"expand len(cooccur_time_L): " 167
-"expand pie_L: " "[['src_14', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 25
-"pie_L: " "[['src_14', 1, 5]]"
-"expand pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 25
-"pie_L: " "[['src_14', 1, 5]]"
-"expand pie_L: " "[['src_14', 1, 5], ['src_19', 1, 5]]"
-"expand len(cooccur_time_L): " 25
-"pie_L: " "[['src_14', 1, 5]]"
-"expand pie_L: " "[['src_14', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 23
-"pie_L: " "[['src_14', 1, 5]]"
-"expand pie_L: " "[['src_14', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 19
-"pie_L: " "[['src_14', 1, 5]]"
-"expand pie_L: " "[['src_14', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 14
-"pie_L: " "[['src_14', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_14', 1, 5]]"
-"t: " -0.792556776462
-"p: " 0.428039650406
-"mean(val_trg_cnd_pie_L): " 0.00444073635483
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_19', 1, 5]]"
-"root: " "['src_19', 1, 5]"
-"expand len(cooccur_time_L): " 166
-"expand pie_L: " "[['src_19', 1, 5], ['src_17', 1, 5]]"
-"expand len(cooccur_time_L): " 26
-"pie_L: " "[['src_19', 1, 5]]"
-"expand pie_L: " "[['src_19', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 20
-"pie_L: " "[['src_19', 1, 5]]"
-"expand pie_L: " "[['src_19', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 18
-"pie_L: " "[['src_19', 1, 5]]"
-"expand pie_L: " "[['src_19', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 18
-"pie_L: " "[['src_19', 1, 5]]"
-"expand pie_L: " "[['src_19', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 14
-"pie_L: " "[['src_19', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_19', 1, 5]]"
-"t: " -0.572941761895
-"p: " 0.566686630291
-"mean(val_trg_cnd_pie_L): " 0.00452042409797
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_17', 1, 5]]"
-"root: " "['src_17', 1, 5]"
-"expand len(cooccur_time_L): " 157
-"expand pie_L: " "[['src_17', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 22
-"pie_L: " "[['src_17', 1, 5]]"
-"expand pie_L: " "[['src_17', 1, 5], ['src_10', 1, 5]]"
-"expand len(cooccur_time_L): " 19
-"pie_L: " "[['src_17', 1, 5]]"
-"expand pie_L: " "[['src_17', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 18
-"pie_L: " "[['src_17', 1, 5]]"
-"expand pie_L: " "[['src_17', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 15
-"pie_L: " "[['src_17', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_17', 1, 5]]"
-"t: " -0.470823721572
-"p: " 0.637768794534
-"mean(val_trg_cnd_pie_L): " 0.00455407969639
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_10', 1, 5]]"
-"root: " "['src_10', 1, 5]"
-"expand len(cooccur_time_L): " 154
-"expand pie_L: " "[['src_10', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 22
-"pie_L: " "[['src_10', 1, 5]]"
-"expand pie_L: " "[['src_10', 1, 5], ['src_6', 1, 5]]"
-"expand len(cooccur_time_L): " 15
-"pie_L: " "[['src_10', 1, 5]]"
-"expand pie_L: " "[['src_10', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 13
-"pie_L: " "[['src_10', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_10', 1, 5]]"
-"t: " -0.210576933134
-"p: " 0.833218367792
-"mean(val_trg_cnd_pie_L): " 0.00465481803893
-"mean(val_L): " 0.00474
-
-"expand pie_L: " "[['src_6', 1, 5]]"
-"root: " "['src_6', 1, 5]"
-"expand len(cooccur_time_L): " 153
-"expand pie_L: " "[['src_6', 1, 5], ['src_5', 1, 5]]"
-"expand len(cooccur_time_L): " 25
-"pie_L: " "[['src_6', 1, 5]]"
-"expand pie_L: " "[['src_6', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 12
-"pie_L: " "[['src_6', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_6', 1, 5]]"
-"t: " 0.327751021454
-"p: " 0.743101589991
-"mean(val_trg_cnd_pie_L): " 0.00487883164821
-"mean(val_L): " 0.00474
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 7201
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5]]"
+"check_suff_cond t: " 1.46412786444
+"check_suff_cond p: " 0.143190934803
+"check_suff_cond mean(val_exc_L): " 0.132203860575
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 2502
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5]]"
+"check_suff_cond t: " -8.54327404557
+"check_suff_cond p: " 2.04343347894e-17
+"check_suff_cond mean(val_exc_L): " 0.0779376498801
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 582
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5]]"
+"check_suff_cond t: " -5.37793070788
+"check_suff_cond p: " 1.07457081593e-07
+"check_suff_cond mean(val_exc_L): " 0.0687285223368
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 80
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_9', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 11
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_14', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 8
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_8', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 12
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_0', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 8
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_1', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 10
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_4', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 15
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_11', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 7
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_6', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 7
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_12', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 9
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_10', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 10
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_15', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 17
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5], ['src_2', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 15
+"shrink pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_7', 1, 5], ['src_5', 1, 5], ['src_3', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.375815574799
+"check_suff_cond p: " 0.708056934024
+"check_suff_cond mean(val_exc_L): " 0.1125
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " []
+"check_suff_cond t: " -0.967939836038
+"check_suff_cond p: " 0.333075401924
+"check_suff_cond mean(val_exc_L): " 0.0265791666667
+"check_suff_cond mean(val_L): " 0.0271333333333
 
 "expand pie_L: " "[['src_5', 1, 5]]"
 "root: " "['src_5', 1, 5]"
-"expand len(cooccur_time_L): " 144
-"expand pie_L: " "[['src_5', 1, 5], ['src_11', 1, 5]]"
-"expand len(cooccur_time_L): " 11
-"pie_L: " "[['src_5', 1, 5]]"
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_5', 1, 5]]"
-"t: " -0.312230539334
-"p: " 0.754866892105
-"mean(val_trg_cnd_pie_L): " 0.00461067225536
-"mean(val_L): " 0.00474
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 9689
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5]]"
+"check_suff_cond t: " 0.909186573107
+"check_suff_cond p: " 0.363266639609
+"check_suff_cond mean(val_exc_L): " 0.129321911446
+"check_suff_cond mean(val_L): " 0.125875
 
-"expand pie_L: " "[['src_11', 1, 5]]"
-"root: " "['src_11', 1, 5]"
-"expand len(cooccur_time_L): " 115
-"check_sff_cnd trg_0: " trg_0
-"check_sff_cnd pie_L: " "[['src_11', 1, 5]]"
-"t: " -0.313552641491
-"p: " 0.753862910814
-"mean(val_trg_cnd_pie_L): " 0.00459695955482
-"mean(val_L): " 0.00474
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 3030
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5]]"
+"check_suff_cond t: " -7.70712148021
+"check_suff_cond p: " 1.64096979166e-14
+"check_suff_cond mean(val_exc_L): " 0.0848184818482
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 438
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5]]"
+"check_suff_cond t: " -3.51517047711
+"check_suff_cond p: " 0.000483858883738
+"check_suff_cond mean(val_exc_L): " 0.0799086757991
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 59
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_13', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 10
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_9', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 12
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_6', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 4
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_10', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 11
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_0', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_11', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 12
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_2', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_12', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_4', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 9
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_8', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 11
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5], ['src_15', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 11
+"shrink pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_5', 1, 5], ['src_3', 1, 5], ['src_14', 1, 5], ['src_1', 1, 5]]"
+"check_suff_cond t: " 0.216036572867
+"check_suff_cond p: " 0.829715180247
+"check_suff_cond mean(val_exc_L): " 0.135593220339
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " []
+"check_suff_cond t: " -0.967939836038
+"check_suff_cond p: " 0.333075401924
+"check_suff_cond mean(val_exc_L): " 0.0265791666667
+"check_suff_cond mean(val_L): " 0.0271333333333
+
+"expand pie_L: " "[['src_3', 1, 5]]"
+"root: " "['src_3', 1, 5]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 8487
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5]]"
+"check_suff_cond t: " 0.552353806752
+"check_suff_cond p: " 0.580716016631
+"check_suff_cond mean(val_exc_L): " 0.128078237304
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 2320
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5]]"
+"check_suff_cond t: " -8.23559290581
+"check_suff_cond p: " 2.73008747361e-16
+"check_suff_cond mean(val_exc_L): " 0.0780172413793
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 472
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5]]"
+"check_suff_cond t: " -4.71579496446
+"check_suff_cond p: " 3.14386739657e-06
+"check_suff_cond mean(val_exc_L): " 0.0699152542373
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 86
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5]]"
+"check_suff_cond t: " -0.638445750358
+"check_suff_cond p: " 0.524891532887
+"check_suff_cond mean(val_exc_L): " 0.104651162791
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 11
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_2', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 7
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_12', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_6', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 11
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_0', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_13', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_11', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 13
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_14', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 8
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_8', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 10
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5], ['src_1', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 10
+"shrink pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_3', 1, 5], ['src_9', 1, 5], ['src_15', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " -0.220155542706
+"check_suff_cond p: " 0.826507639264
+"check_suff_cond mean(val_exc_L): " 0.116666666667
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " []
+"check_suff_cond t: " -0.967939836038
+"check_suff_cond p: " 0.333075401924
+"check_suff_cond mean(val_exc_L): " 0.0265791666667
+"check_suff_cond mean(val_L): " 0.0271333333333
+
+"expand pie_L: " "[['src_9', 1, 5]]"
+"root: " "['src_9', 1, 5]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 7255
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5]]"
+"check_suff_cond t: " 0.638989366002
+"check_suff_cond p: " 0.522844470664
+"check_suff_cond mean(val_exc_L): " 0.128600964852
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 1943
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5]]"
+"check_suff_cond t: " -8.06616534439
+"check_suff_cond p: " 1.16734967321e-15
+"check_suff_cond mean(val_exc_L): " 0.0756562017499
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 357
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5]]"
+"check_suff_cond t: " -3.82399664777
+"check_suff_cond p: " 0.000154283256604
+"check_suff_cond mean(val_exc_L): " 0.0728291316527
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 41
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_8', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 4
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_2', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_6', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 4
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_14', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 4
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_0', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 1
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_1', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 3
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_11', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 12
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_12', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5], ['src_13', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5
+"shrink pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_9', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_4', 1, 5]]"
+"check_suff_cond t: " 0.366062997485
+"check_suff_cond p: " 0.716243719763
+"check_suff_cond mean(val_exc_L): " 0.146341463415
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " []
+"check_suff_cond t: " -0.967939836038
+"check_suff_cond p: " 0.333075401924
+"check_suff_cond mean(val_exc_L): " 0.0265791666667
+"check_suff_cond mean(val_L): " 0.0271333333333
+
+"expand pie_L: " "[['src_8', 1, 5]]"
+"root: " "['src_8', 1, 5]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5397
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5]]"
+"check_suff_cond t: " 0.331683458132
+"check_suff_cond p: " 0.7401383435
+"check_suff_cond mean(val_exc_L): " 0.127478228646
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 1309
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5]]"
+"check_suff_cond t: " -6.57153582959
+"check_suff_cond p: " 6.93392353053e-11
+"check_suff_cond mean(val_exc_L): " 0.0763941940413
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 285
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5]]"
+"check_suff_cond t: " -3.65286354141
+"check_suff_cond p: " 0.00030751630194
+"check_suff_cond mean(val_exc_L): " 0.0701754385965
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 48
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5], ['src_4', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 8
+"shrink pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 4
+"shrink pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5], ['src_14', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5], ['src_1', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 9
+"shrink pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5], ['src_2', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 3
+"shrink pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5], ['src_13', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5
+"shrink pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5], ['src_0', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 9
+"shrink pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5], ['src_6', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 11
+"shrink pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_8', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_11', 1, 5]]"
+"check_suff_cond t: " -0.0181276462261
+"check_suff_cond p: " 0.985613579963
+"check_suff_cond mean(val_exc_L): " 0.125
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " []
+"check_suff_cond t: " -0.967939836038
+"check_suff_cond p: " 0.333075401924
+"check_suff_cond mean(val_exc_L): " 0.0265791666667
+"check_suff_cond mean(val_L): " 0.0271333333333
+
+"expand pie_L: " "[['src_14', 1, 5]]"
+"root: " "['src_14', 1, 5]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5272
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5]]"
+"check_suff_cond t: " 0.248346704225
+"check_suff_cond p: " 0.803873750145
+"check_suff_cond mean(val_exc_L): " 0.127086494689
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 1433
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5]]"
+"check_suff_cond t: " -7.1703242324
+"check_suff_cond p: " 1.13888075883e-12
+"check_suff_cond mean(val_exc_L): " 0.0746685275645
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 304
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5]]"
+"check_suff_cond t: " -3.87359099786
+"check_suff_cond p: " 0.000130786189038
+"check_suff_cond mean(val_exc_L): " 0.0690789473684
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 50
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5], ['src_6', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 10
+"shrink pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5], ['src_4', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5], ['src_0', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 4
+"shrink pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5], ['src_1', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5
+"shrink pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5], ['src_2', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5], ['src_12', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 4
+"shrink pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5], ['src_11', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 6
+"shrink pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_14', 1, 5], ['src_15', 1, 5], ['src_10', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.126472748275
+"check_suff_cond p: " 0.899873951526
+"check_suff_cond mean(val_exc_L): " 0.12
+"check_suff_cond mean(val_L): " 0.125875
+
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " []
+"check_suff_cond t: " -0.967939836038
+"check_suff_cond p: " 0.333075401924
+"check_suff_cond mean(val_exc_L): " 0.0265791666667
+"check_suff_cond mean(val_L): " 0.0271333333333
+
+"expand pie_L: " "[['src_2', 1, 5]]"
+"root: " "['src_2', 1, 5]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 5250
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_2', 1, 5]]"
+"check_suff_cond t: " 0.433627673717
+"check_suff_cond p: " 0.664572837656
+"check_suff_cond mean(val_exc_L): " 0.128
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_10', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 1287
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_2', 1, 5], ['src_10', 1, 5]]"
+"check_suff_cond t: " -6.69313709861
+"check_suff_cond p: " 3.1356238168e-11
+"check_suff_cond mean(val_exc_L): " 0.0753690753691
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 300
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_2', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5]]"
+"check_suff_cond t: " -4.76181824197
+"check_suff_cond p: " 2.95856391111e-06
+"check_suff_cond mean(val_exc_L): " 0.06
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_0', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 46
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_2', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_0', 1, 5]]"
+"check_suff_cond t: " -1.64631922134
+"check_suff_cond p: " 0.106637297419
+"check_suff_cond mean(val_exc_L): " 0.0652173913043
+"check_suff_cond mean(val_L): " 0.125875
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_10', 1, 5], ['src_15', 1, 5], ['src_0', 1, 5], ['src_13', 1, 5]]"
+"expand len(get_pie_A_not_B_val_L(target, pie_L, None)): " 4
+"shrink pie_L: " "[['src_2', 1, 5], ['src_15', 1, 5], ['src_0', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond target: " trg_0
+"check_suff_cond pie_L: " "[['src_2', 1, 5], ['src_15', 1, 5], ['src_0', 1, 5], ['src_13', 1, 5]]"
+"check_suff_cond t: " -0.836015468055
+"check_suff_cond p: " 0.408969508368
+"check_suff_cond mean(val_exc_L): " 0.0857142857143
+"check_suff_cond mean(val_L): " 0.125875
 

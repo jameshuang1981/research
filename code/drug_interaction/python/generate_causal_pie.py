@@ -73,7 +73,7 @@ def generate_causal_pie():
                 # Get the window of the pieces
                 win_LL = []
                 for j in range(piece_num):
-                    win_start = random.randint(win_range_L[0], win_range_L[1])
+                    win_start = random.randint(win_range_L[0], win_range_L[1] // 2)
                     win_end = random.randint(win_start, win_range_L[1])
                     win_LL.append([win_start, win_end])
 
