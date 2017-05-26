@@ -277,7 +277,7 @@ def check_suff_cond(target, pie_L, spamwriter_log):
     val_L = get_val_L_min_win_len(target, min_win_len)
 
     # Unpaired t test
-    t, p = stats.ttest_ind(val_exc_L, val_L, equal_var=False)
+    t, p = stats.ttest_ind(val_exc_L, val_L, equal_var = False)
 
     # Output log file
     spamwriter_log.writerow(["check_suff_cond t: ", t])

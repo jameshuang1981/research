@@ -13,17 +13,17 @@ python3 generate_setting.py /Users/yuxiaohuang/Documents/github/research/code/dr
 
 
 Here is the command for generating the target setting from terminal 
-python3 generate_setting.py /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt 1 1 0 0.05 'trg'
+python3 generate_setting.py /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt 1 1 0 0.1 'trg'
 
 
 
 Here is the command for generating the causal pie from terminal 
-python3 generate_causal_pie.py /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/source/src_setting_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/causal_pie/causal_pie_0.txt 1 1 5 5 1 5 0.5 1.0
+python3 generate_causal_pie.py /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/source/src_setting_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/causal_pie/causal_pie_0.txt 1 3 1 3 1 5 0.5 1.0
 
 
 
 Here is the command for generating the data from terminal 
-python3 generate_data.py /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/source/src_setting_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/causal_pie/causal_pie_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/data/source/src_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/data/target/trg_0.txt 10000
+python3 generate_data.py /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/source/src_setting_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/setting/target/trg_setting_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/causal_pie/causal_pie_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/data/source/src_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/data/target/trg_0.txt 3600
 
 
 

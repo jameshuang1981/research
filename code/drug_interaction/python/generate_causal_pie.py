@@ -70,11 +70,11 @@ def generate_causal_pie():
                     if not src_L[rand_idx] in var_L:
                         var_L.append(src_L[rand_idx])
 
-                # Get the window of the pieces
+                # Get the window of the pieces, where win_end > win_start
                 win_LL = []
                 for j in range(piece_num):
                     win_start = random.randint(win_range_L[0], win_range_L[1] // 2)
-                    win_end = random.randint(win_start, win_range_L[1])
+                    win_end = random.randint(win_start + 1, win_range_L[1])
                     win_LL.append([win_start, win_end])
 
                 # Add the pieces to the causal pie
@@ -84,8 +84,8 @@ def generate_causal_pie():
                     win_end = win_LL[j][1]
                     causal_pie_LL.append([var, win_start, win_end])
 
-                # Check whether the causal pie is a subset or superset of the existing ones
-                if not check_subset([causal_pie_LL], causal_pie_LLL) and not check_subset(causal_pie_LLL, [causal_pie_LL]):
+                # Check whether the causal pie intersects with the existing ones
+                if not check_intersect(causal_pie_LL, causal_pie_LLL):
                     causal_pie_LLL.append(causal_pie_LL)
                     # Write the target, probability, and the causal pie
                     causal_pie_L = []
@@ -96,18 +96,14 @@ def generate_causal_pie():
                     spamwriter.writerow([target, prob] + causal_pie_L)
 
 
-# Check whether there is a set in i_LLL that is a subset of the sets in j_LLL
-def check_subset(i_LLL, j_LLL):
-    for i_LL in i_LLL:
+# Check whether i_LL and j_LLL intersect, that is, whether there are two pies containing sources with the same name
+def check_intersect(i_LL, j_LLL):
+    for i_L in i_LL:
         for j_LL in j_LLL:
-            # Check whether i_LL is a subset of j_LL
-            # Default is True
-            subset_F = True
-            for i_L in i_LL:
-                if not i_L in j_LL:
-                    subset_F = False
-            if subset_F:
-                return True
+            for j_L in j_LL:
+                # Check whether i_L[0] equals j_L[0], i.e., the name of the source is the same
+                if j_L[0] == i_L[0]:
+                    return True
 
     return False
 
