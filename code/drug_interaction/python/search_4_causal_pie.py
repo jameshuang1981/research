@@ -192,6 +192,10 @@ def search(spamwriter_log, spamwriter_pie):
         # The list of slices in the pie
         pie_L = []
 
+        # The list of list of timepoints where the target can be changed by the pie
+        # Initialization
+        tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
+
         # The first slice added to the pie
         root = None
 
@@ -207,53 +211,45 @@ def search(spamwriter_log, spamwriter_pie):
 
         # The loop continues if there are unvisited nodes
         while len(visited_Dic) < len(slice_LL):
-            # The loop continues if:
-            #     1) the number of target's value changed by the pie is not smaller than sample size cutoff
-            # and 2) the pie is not sufficient
-            while len(get_pie_A_not_B_val_L(target, pie_L, None)) > sample_size_cutoff \
-                    and check_suff_cond(target, pie_L, spamwriter_log) is False:
-                [pie_L, root, min_slice] = expand(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log)
+            # The loop continues if the pie is not sufficient (to produce the effect)
+            while check_suf_con(target, pie_L, tar_con_pie_time_LL, spamwriter_log) is False:
+                [pie_L, tar_con_pie_time_LL, root, min_slice] = expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic, spamwriter_log)
                 # If the pie cannot be expanded anymore
                 if min_slice is None:
                     break
 
-            # Check if the number of target's value changed by the pie is not smaller than sample size cutoff
-            if len(get_pie_A_not_B_val_L(target, pie_L, None)) > sample_size_cutoff:
-                # If the pie is sufficient (to produce the effect)
-                if check_suff_cond(target, pie_L, spamwriter_log) is True:
-                    # Mark each slice in the pie as unvisited (i.e., deleting the key from the dict), except for the root
-                    for index in pie_L:
-                        if index != root:
-                            del visited_Dic[index]
+            # If the pie can be expanded, (i.e. it is sufficient)
+            if min_slice is not None:
+                # Mark each slice in the pie as unvisited (i.e., deleting the key from the dict), except for the root
+                for index in pie_L:
+                    if index != root:
+                        del visited_Dic[index]
 
-                    # Check the necessary condition (to produce the effect) and remove unnecessary slices
-                    pie_L = check_nece_cond(target, pie_L, spamwriter_log)
+                # Check the necessary condition (to produce the effect) and remove unnecessary slices
+                pie_L = check_nec_con(target, pie_L, tar_con_pie_time_LL, spamwriter_log)
 
-                    # Mark each slice in the pie as visited (i.e, adding the key to the dict)
-                    for index in pie_L:
-                        visited_Dic[index] = 1
+                # Mark each slice in the pie as visited (i.e, adding the key to the dict)
+                for index in pie_L:
+                    visited_Dic[index] = 1
 
-                    # Remove the influence of the pie from the data
-                    remove_inf(target, pie_L)
+                # Remove the influence of the pie from the data
+                remove_inf(target, tar_con_pie_time_LL)
 
-                    # Write the pie to spamwriter_pie
-                    spamwriter_pie.writerow(['causal pie of ' + target + ': ', decode(pie_L)])
-                    # Output the pie
-                    print(['causal pie of ' + target + ': ', decode(pie_L)])
-                else:
-                    # Mark each slice in the pie as unvisited (i.e., deleting the key from the dict), except for the root
-                    for index in pie_L:
-                        if index != root:
-                            del visited_Dic[index]
+                # Write the pie to spamwriter_pie
+                spamwriter_pie.writerow(['causal pie of ' + target + ': ', decode(pie_L)])
+                # Output the pie
+                print(['causal pie of ' + target + ': ', decode(pie_L)])
+
                 # Clear
                 pie_L = []
+                tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
                 root = None
             else:
                 # Shrink
-                [pie_L, min_slice] = shrink(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log)
+                [pie_L, tar_con_pie_time_LL, max_slice] = shrink(target, pie_L, root, visited_Dic, removed_Dic, spamwriter_log)
 
                 # If the pie cannot be shrinked anymore
-                if min_slice is None:
+                if max_slice is None:
                     # Mark each slice in the pie as unvisited (i.e., deleting the key from the dict), except for the root
                     for index in pie_L:
                         if index != root:
@@ -261,118 +257,37 @@ def search(spamwriter_log, spamwriter_pie):
 
                     # Clear
                     pie_L = []
+                    tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
                     root = None
 
 
-# Check sufficient condition, i.e., P(target | pie) >> P(target)
-def check_suff_cond(target, pie_L, spamwriter_log):
-    # Output log file
-    spamwriter_log.writerow(["check_suff_cond target: ", target])
-    spamwriter_log.writerow(["check_suff_cond pie_L: ", decode(pie_L)])
-
-    # Get sample with respect to [pie \wedge \neg slice] (i.e. the pie excluding the slice)
-    val_exc_L = get_pie_A_not_B_val_L(target, pie_L, None)
-
-    min_win_len = get_min_win_len(pie_L)
-    val_L = get_val_L_min_win_len(target, min_win_len)
-
-    # Unpaired t test
-    t, p = stats.ttest_ind(val_exc_L, val_L, equal_var = False)
-
-    # Output log file
-    spamwriter_log.writerow(["check_suff_cond t: ", t])
-    spamwriter_log.writerow(["check_suff_cond p: ", p])
-    spamwriter_log.writerow(["check_suff_cond mean(val_exc_L): ", np.mean(val_exc_L)])
-    spamwriter_log.writerow(["check_suff_cond mean(val_L): ", np.mean(val_L)])
-    spamwriter_log.writerow('')
-
-    # If pie does not significantly increase the occurrence of the target
-    if t <= 0 or p >= p_val_cutoff:
-        return False
-
-    # Check each slice that does not belong to the pie
-    for index in range(len(slice_LL)):
-        if index in pie_L:
-            continue
-
-        # Get sample with respect to [pie \wedge \neg slice] (i.e. the pie excluding the slice)
-        val_exc_L = get_pie_A_not_B_val_L(target, pie_L, [index])
-
-        # If the sample size is not larger than the sample size cutoff
-        if len(val_exc_L) <= sample_size_cutoff:
-            continue
-
-        min_win_len = get_min_win_len(pie_L)
-        val_L = get_val_L_min_win_len(target, min_win_len)
-
-        # Unpaired t test
-        t, p = stats.ttest_ind(val_exc_L, val_L, equal_var = False)
-
-        # Output log file
-        spamwriter_log.writerow(["check_suff_cond slice_LL[index]: ", slice_LL[index]])
-        spamwriter_log.writerow(["check_suff_cond t: ", t])
-        spamwriter_log.writerow(["check_suff_cond p: ", p])
-        spamwriter_log.writerow(["check_suff_cond mean(val_exc_L): ", np.mean(val_exc_L)])
-        spamwriter_log.writerow(["check_suff_cond mean(val_L): ", np.mean(val_L)])
-        spamwriter_log.writerow('')
-
-        # If pie \ slice does not significantly increase the occurrence of the target
-        if t <= 0 or p >= p_val_cutoff:
-            return False
-
-    return True
-
-
-# Get the list of value of the target due to pie A but not pie B
-def get_pie_A_not_B_val_L(target, pie_A_L, pie_B_L):
-    # Get the list of timepoints where the target can be changed by pie A
+# Get the list of list of timepoints where the target can be changed by the pie
+def get_tar_con_pie_time_LL(target, pie_L):
     # Initialization
-    pie_A_time_LL = []
-    # If there is no pie A, the list includes all timepoints
-    if pie_A_L is None or len(pie_A_L) == 0:
-        for time in val_Dic[target]:
-            pie_A_time_LL.append([time])
-    # Otherwise, the list only includes timepoints where the target can be changed by pie A
-    else:
-        pie_A_time_LL = get_pie_time_LL(pie_A_L)
+    tar_con_pie_time_LL = []
 
-    # Get the list of timepoints where the target can be changed by pie B
-    pie_B_time_LL = get_pie_time_LL(pie_B_L)
-
-    # Get the list of timepoints where the target can be changed by pie A but not pie B
-    pie_A_not_B_time_LL = get_pie_A_not_B_time_LL(pie_A_time_LL, pie_B_time_LL)
-
-    # Get the list of value of the target due to pie A but not pie B
-    val_L = get_val_L(target, pie_A_not_B_time_LL)
-
-    return val_L
-
-
-# Get the list of timepoints where the target can be changed by the pie
-def get_pie_time_LL(pie_L):
-    # Initialization
-    pie_time_LL = []
-
-    # If the pie is None or empty, return empty list
+    # If the pie is None or empty, return the list of list of timepoints where the target is measured
     if pie_L is None or len(pie_L) == 0:
-        return pie_time_LL
+        for time in val_Dic[target]:
+            tar_con_pie_time_LL.append([time])
+        return tar_con_pie_time_LL
 
     # Get the minimum window length of slices in the pie
     min_win_len = get_min_win_len(pie_L)
 
-    # Get dictionary of start and end
+    # Get the dictionary of start and end
     [start_Dic, end_Dic] = get_start_end_Dic(pie_L)
 
     # Get pie_time_Dic
-    # Key: var
-    # Value: number of times the var occurs
+    # key: var
+    # val: number of times the var occurs
     pie_time_Dic = {}
 
     # Flag, indicating whether we have started recording the timepoints where all the slices in the pie are present
     # Default is False
     recorded_F = False
 
-    # Get pie_time_LL
+    # Get tar_con_pie_time_LL
     for time in time_series_L:
         for index in pie_L:
             if index in start_Dic and time in start_Dic[index]:
@@ -392,14 +307,159 @@ def get_pie_time_LL(pie_L):
             time_L.append(time)
             # If the last timepoint or the length of the intersection equals the minimum window length
             if time == max_time_stamp or len(time_L) == min_win_len:
-                pie_time_LL.append(time_L)
+                tar_con_pie_time_LL.append(time_L)
                 recorded_F = False
         # If some slices are absent and we have been recording time
         elif recorded_F:
-            pie_time_LL.append(time_L)
+            tar_con_pie_time_LL.append(time_L)
             recorded_F = False
 
-    return pie_time_LL
+    return tar_con_pie_time_LL
+
+
+# Get the dictionary of window start and window end
+def get_start_end_Dic(pie_L):
+    # Initialization
+    start_Dic = {}
+    end_Dic = {}
+
+    for index in pie_L:
+        [var, win_start, win_end] = slice_LL[index]
+        # Initialization
+        if not index in start_Dic:
+            start_Dic[index] = {}
+        if not index in end_Dic:
+            end_Dic[index] = {}
+
+        for time in val_Dic[var]:
+            # If var occurs at this time
+            if val_Dic[var][time] == 1:
+                start_time = time + win_start
+                end_time = time + win_end + 1
+                # Update the two dictionaries
+                start_Dic[index][start_time] = 1
+                end_Dic[index][end_time] = 1
+
+    return [start_Dic, end_Dic]
+
+
+# Check sufficient condition, i.e., P(target | pie) >> P(target)
+def check_suf_con(target, pie_L, tar_con_pie_time_LL, spamwriter_log):
+    # Output log file
+    spamwriter_log.writerow(["check_suf_con target: ", target])
+    spamwriter_log.writerow(["check_suf_con pie_L: ", decode(pie_L)])
+
+    # If the pie is None or empty
+    if pie_L is None or len(pie_L) == 0:
+        return False
+
+    # Get the list of target's value that can be changed by the pie
+    tar_con_pie_val_L = get_tar_val_L_time_slot(target, tar_con_pie_time_LL)
+
+    # If not enough sample
+    if len(tar_con_pie_val_L) <= sample_size_cutoff:
+        return False
+
+    # Get the list of target's value relative to the window of the pie
+    tar_val_L = get_tar_val_L_pie_win(target, pie_L)
+
+    # Unpaired t test
+    t, p = stats.ttest_ind(tar_con_pie_val_L, tar_val_L, equal_var = False)
+
+    # Output log file
+    spamwriter_log.writerow(["check_suf_con t: ", t])
+    spamwriter_log.writerow(["check_suf_con p: ", p])
+    spamwriter_log.writerow(["check_suf_con mean(tar_con_pie_val_L): ", np.mean(tar_con_pie_val_L)])
+    spamwriter_log.writerow(["check_suf_con mean(tar_val_L): ", np.mean(tar_val_L)])
+    spamwriter_log.writerow('')
+
+    # If the pie does not significantly increase the occurrence of the target
+    if t <= 0 or p >= p_val_cutoff:
+        return False
+
+    # Check each slice that does not belong to the pie
+    for index in range(len(slice_LL)):
+        if index in pie_L:
+            continue
+
+        # Output log file
+        spamwriter_log.writerow(["check_suf_con slice_LL[index]: ", slice_LL[index]])
+
+        # Get the list of target's value that can be changed by the pie but not the slice
+        tar_con_pie_not_sli_val_L = get_tar_con_pie_not_sli_val_L(target, tar_con_pie_time_LL, index)
+
+        # If not enough sample
+        if len(tar_con_pie_not_sli_val_L) <= sample_size_cutoff:
+            continue
+
+        # Unpaired t test
+        t, p = stats.ttest_ind(tar_con_pie_not_sli_val_L, tar_val_L, equal_var = False)
+
+        # Output log file
+        spamwriter_log.writerow(["check_suf_con t: ", t])
+        spamwriter_log.writerow(["check_suf_con p: ", p])
+        spamwriter_log.writerow(["check_suf_con mean(tar_con_pie_not_sli_val_L): ", np.mean(tar_con_pie_not_sli_val_L)])
+        spamwriter_log.writerow(["check_suf_con mean(tar_val_L): ", np.mean(tar_val_L)])
+        spamwriter_log.writerow('')
+
+        # If pie \ slice does not significantly increase the occurrence of the target
+        if t <= 0 or p >= p_val_cutoff:
+            return False
+
+    return True
+
+
+# Get the actual slices in the pie
+def decode(pie_L):
+    temp_L = []
+
+    # If the pie is None or empty
+    if pie_L is None or len(pie_L) == 0:
+        return temp_L
+
+    for index in pie_L:
+        temp_L.append(slice_LL[index])
+
+    return temp_L
+
+
+# Get the value of target in the time slots
+def get_tar_val_L_time_slot(target, time_LL):
+    # Initialization
+    tar_val_L = []
+
+    if time_LL is None or len(time_LL) == 0:
+        return tar_val_L
+
+    # For each time_L, get the maximum absolute value
+    for time_L in time_LL:
+        # Get temp_L
+        # Initialization
+        temp_L = []
+        for time in time_L:
+            if time in val_Dic[target]:
+                temp_L.append(val_Dic[target][time])
+
+        if len(temp_L) == 0:
+            continue
+
+        # If temp_L does not contain removed value of the target
+        if min(temp_L) != -1:
+            # Add the maximum value in the list (so that if the target occurs in the window, it counts as occurred in the window)
+            tar_val_L.append(max(temp_L))
+
+    return tar_val_L
+
+
+# Get the list of target's value relative to the window of the pie
+def get_tar_val_L_pie_win(target, pie_L):
+    # Get the minimum window length of slices in the pie
+    min_win_len = get_min_win_len(pie_L)
+
+    # Get the list of target's value in window no wider than the minimum length
+    tar_val_L = get_tar_val_L_min_win_len(target, min_win_len)
+
+    return tar_val_L
 
 
 # Get the minimum window length of slices in the pie
@@ -407,7 +467,7 @@ def get_min_win_len(pie_L):
     # Initialization
     min_win_len = None
 
-    # If the pie is empty, return the minimum window length, 1
+    # If the pie is None or empty, return the minimum window length, 1
     if pie_L is None or len(pie_L) == 0:
         return 1
 
@@ -416,16 +476,16 @@ def get_min_win_len(pie_L):
         # Get window start, window end, and the length
         win_start = slice_LL[index][1]
         win_end = slice_LL[index][2]
-        len_intersection = win_end - win_start + 1
+        win_len = win_end - win_start + 1
         # Update the minimum length
-        if min_win_len is None or min_win_len > len_intersection:
-            min_win_len = len_intersection
+        if min_win_len is None or min_win_len > win_len:
+            min_win_len = win_len
 
     return min_win_len
 
 
-# Get the list of value in windows no wider than the minimum length
-def get_val_L_min_win_len(target, min_win_len):
+# Get the list of target's value in window no wider than the minimum length
+def get_tar_val_L_min_win_len(target, min_win_len):
     # Initialization
     # val_L is the return value (i.e. the list of value)
     val_L = []
@@ -456,88 +516,49 @@ def get_val_L_min_win_len(target, min_win_len):
     return val_L
 
 
-# Get the dictionary of window start and window end
-def get_start_end_Dic(pie_L):
-    # Initialization
-    start_Dic = {}
-    end_Dic = {}
+# Get the list of target's value that can be changed by the pie but not the slice
+def get_tar_con_pie_not_sli_val_L(target, tar_con_pie_time_LL, index):
+    # Get the list of target's value that can be changed by the slice
+    tar_con_sli_time_LL = get_tar_con_pie_time_LL(target, [index])
 
-    for index in pie_L:
-        [var, win_start, win_end] = slice_LL[index]
-        # Initialization
-        if not index in start_Dic:
-            start_Dic[index] = {}
-        if not index in end_Dic:
-            end_Dic[index] = {}
+    # Get the list of list of timepoints where the target can be changed by the pie but not the slice
+    tar_con_pie_not_sli_time_LL = get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
 
-        for time in val_Dic[var]:
-            # If var occurs at this time
-            if val_Dic[var][time] == 1:
-                start_time = time + win_start
-                end_time = time + win_end + 1
-                # Update the two dictionaries
-                start_Dic[index][start_time] = 1
-                end_Dic[index][end_time] = 1
+    # Get the list of target's value that can be changed by the pie but not the slice
+    tar_con_pie_not_sli_val_L = get_tar_val_L_time_slot(target, tar_con_pie_not_sli_time_LL)
 
-    return [start_Dic, end_Dic]
+    return tar_con_pie_not_sli_val_L
 
 
-# Get the timepoints when pie A is present whereas pie B is absent
-def get_pie_A_not_B_time_LL(pie_A_time_LL, pie_B_time_LL):
-    if pie_B_time_LL is None or len(pie_B_time_LL) == 0:
-        return pie_A_time_LL
+# Get the list of list of timepoints where the target can be changed by the pie but not the slice
+def get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL):
+    if tar_con_sli_time_LL is None or len(tar_con_sli_time_LL) == 0:
+        return tar_con_pie_time_LL
 
-    # Get time_Dic
-    pie_B_time_Dic = {}
-    for pie_B_time_L in pie_B_time_LL:
-        for time in pie_B_time_L:
-            pie_B_time_Dic[time] = 1
+    # Get tar_con_sli_time_Dic
+    tar_con_sli_time_Dic = {}
+    for tar_con_sli_time_L in tar_con_sli_time_LL:
+        for time in tar_con_sli_time_L:
+            tar_con_sli_time_Dic[time] = 1
 
     # Initialization
-    pie_A_not_B_time_LL = []
-    for pie_A_time_L in pie_A_time_LL:
-        pie_A_not_B_time_L = []
-        for time in pie_A_time_L:
-            if not time in pie_B_time_Dic:
-                pie_A_not_B_time_L.append(time)
-        pie_A_not_B_time_LL.append(pie_A_not_B_time_L)
+    tar_con_pie_not_sli_time_LL = []
+    for tar_con_pie_time_L in tar_con_pie_time_LL:
+        tar_con_pie_not_sli_time_L = []
+        for time in tar_con_pie_time_L:
+            if not time in tar_con_sli_time_Dic:
+                tar_con_pie_not_sli_time_L.append(time)
+        if len(tar_con_pie_not_sli_time_L) > 0:
+            tar_con_pie_not_sli_time_LL.append(tar_con_pie_not_sli_time_L)
 
-    return pie_A_not_B_time_LL
-
-
-# Get the value of target in the time slots
-def get_val_L(target, time_LL):
-    # Initialization
-    val_L = []
-
-    if time_LL is None or len(time_LL) == 0:
-        return val_L
-
-    # For each time_L, get the maximum absolute value
-    for time_L in time_LL:
-        # Get temp_L
-        # Initialization
-        temp_L = []
-        for time in time_L:
-            if time in val_Dic[target]:
-                temp_L.append(val_Dic[target][time])
-
-        if len(temp_L) == 0:
-            continue
-
-        # If temp_L does not contain removed value of the target
-        if min(temp_L) != -1:
-            # Add the maximum value in the list (so that if the target occurs in the window, it counts as occurred in the window)
-            val_L.append(max(temp_L))
-
-    return val_L
+    return tar_con_pie_not_sli_time_LL
 
 
-# Expand the pie by adding the slice that yields the maximum cooccurrence with the pie
-def expand(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
-    # This is the slice that yields the minimum probability of the target when the slice is absent
+# Expand the pie by adding the slice that yields the minimum probalbity of the target that can be changed by the pie but not the slice
+def expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic, spamwriter_log):
+    # This is the slice that yields the minimum probability of the target that can be changed by the pie but not the slice
     min_slice = None
-    # This is the probability of the target when the slice is absent
+    # This is the probability of the target that can be changed by the pie but not the slice
     min_pro = None
 
     # X axis, Y axis and labels of X axis
@@ -549,24 +570,29 @@ def expand(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
     for index in range(len(slice_LL)):
         # If the slice has not been visited or removed yet
         if not index in visited_Dic and (root is None or root not in removed_Dic or index not in removed_Dic[root]):
-            # Get the list of target's value not changed by the current slice
-            pie_A_not_B_val_L = get_pie_A_not_B_val_L(target, pie_L, [index])
-            # Get the probalbity of the target when the current slice is absent
-            pro_pie_A_not_B = np.mean(pie_A_not_B_val_L)
+            # Get the list of target's value that can be changed by the pie but not the slice
+            tar_con_pie_not_sli_val_L = get_tar_con_pie_not_sli_val_L(target, tar_con_pie_time_LL, index)
+
+            # If not enough sample
+            if len(tar_con_pie_not_sli_val_L) <= sample_size_cutoff:
+                continue
+
+            # Get the probalbity of the target that can be changed by the pie but not the slice
+            pro_tar_con_pie_not_sli = np.mean(tar_con_pie_not_sli_val_L)
 
             # Update min_slice and min_pro
-            if min_pro is None or min_pro > pro_pie_A_not_B:
+            if min_pro is None or min_pro > pro_tar_con_pie_not_sli:
                 min_slice = index
-                min_pro = pro_pie_A_not_B
+                min_pro = pro_tar_con_pie_not_sli
 
             # Update X axis, Y axis and labels of X axis
             X.append(index)
-            Y.append(pro_pie_A_not_B)
+            Y.append(pro_tar_con_pie_not_sli)
             X_lab.append(slice_LL[index][0][4:])
 
     # If the pie cannot be expanded anymore
     if min_slice is None:
-        return [pie_L, root, min_slice]
+        return [pie_L, tar_con_pie_time_LL, root, min_slice]
 
     # Draw the figure
     plt.plot(X, Y, 'ro')
@@ -577,6 +603,9 @@ def expand(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
     plt.savefig(figure + 'fig ' + str(fig_num) + ' expand ' + str(decode(pie_L)))
     fig_num += 1
     plt.close()
+
+    # Update tar_con_pie_time_LL
+    tar_con_pie_time_LL = get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, min_slice)
 
     # Add min_slice to the pie
     pie_L.append(min_slice)
@@ -594,18 +623,112 @@ def expand(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
     # Update visited_Dic, now min_slice has been visited
     visited_Dic[min_slice] = 1
 
-    # Write len(cooccur_time_L) to spamwriter_log
-    spamwriter_log.writerow(['expand len(get_pie_A_not_B_val_L(target, pie_L, None))' + ': ', len(get_pie_A_not_B_val_L(target, pie_L, None))])
-
-    return [pie_L, root, min_slice]
+    return [pie_L, tar_con_pie_time_LL, root, min_slice]
 
 
-# Shrink the pie by removing the slice that yields the maximum probability of the target when the slice is absent
-def shrink(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
-    # This is the slice that yields the maximum probability of the target when the slice is absent
+# Get the list of list of timepoints where the target can be changed by the pie and the slice
+def get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, index):
+    # Initialization
+    tar_con_pie_sli_time_LL = []
+
+    # If the pie is None or empty
+    if pie_L is None or len(pie_L) == 0:
+        # Get the list of list of timepoints where the target can be changed by the slice
+        tar_con_pie_sli_time_LL = get_tar_con_pie_time_LL(target, [index])
+    else:
+        # Get the list of list of timepoints where the target can be changed by the slice
+        tar_con_sli_time_LL = get_tar_con_pie_time_LL(target, [index])
+
+        # Get sli_time_Dic
+        # key: var
+        # Val: time
+        sli_time_Dic = {}
+        for tar_con_sli_time_L in tar_con_sli_time_LL:
+            for time in tar_con_sli_time_L:
+                sli_time_Dic[time] = 1
+
+        # Get tar_con_pie_sli_time_LL
+        for tar_con_pie_time_L in tar_con_pie_time_LL:
+            tar_con_pie_sli_time_L = []
+            for time in tar_con_pie_time_L:
+                if time in sli_time_Dic:
+                    tar_con_pie_sli_time_L.append(time)
+            if len(tar_con_pie_sli_time_L) > 0:
+                tar_con_pie_sli_time_LL.append(tar_con_pie_sli_time_L)
+
+    return tar_con_pie_sli_time_LL
+
+
+# Check the necessary condition and exclude the slices that are not in the causal pie
+def check_nec_con(target, pie_L, tar_con_pie_time_LL, spamwriter_log):
+    # Output log file
+    spamwriter_log.writerow(["check_nec_con target: ", target])
+    spamwriter_log.writerow(["check_nec_con pie_L: ", decode(pie_L)])
+
+    # Get the list of target's value relative to the window of the pie
+    tar_val_L = get_tar_val_L_pie_win(target, pie_L)
+
+    # Backup pie_L
+    backup_pie_L = [] + pie_L
+
+    # Check each slice
+    for index in backup_pie_L:
+        # Get pie \ slice
+        temp_L = [] + pie_L
+        temp_L.remove(index)
+
+        # Get the list of target's value that can be changed by temp_L (i.e., pie \ slice) but not the slice
+        tar_con_pie_not_sli_val_L = get_tar_con_pie_not_sli_val_L(target, tar_con_pie_time_LL, index)
+
+        # If not enough sample
+        if len(tar_con_pie_not_sli_val_L) <= sample_size_cutoff:
+            continue
+
+        # Unpaired t test
+        t, p = stats.ttest_ind(tar_con_pie_not_sli_val_L, tar_val_L, equal_var = False)
+
+        # Output log file
+        spamwriter_log.writerow(["check_nec_con slice_LL[index]: ", slice_LL[index]])
+        spamwriter_log.writerow(["check_nec_con t: ", t])
+        spamwriter_log.writerow(["check_nec_con p: ", p])
+        spamwriter_log.writerow(["check_nec_con mean(tar_con_pie_not_sli_val_L): ", np.mean(tar_con_pie_not_sli_val_L)])
+        spamwriter_log.writerow(["check_nec_con mean(tar_val_L): ", np.mean(tar_val_L)])
+        spamwriter_log.writerow('')
+
+        # If pie \ slice still significantly increases the occurrence of the target
+        if t > 0 and p < p_val_cutoff:
+            # Remove the slice (since it is not necessary)
+            pie_L.remove(index)
+
+            # Update tar_con_pie_time_LL
+            tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
+
+            # Update tar_val_L
+            tar_val_L = get_tar_val_L_pie_win(target, pie_L)
+
+    return pie_L
+
+
+# Remove the influence of the pie from the data
+def remove_inf(target, tar_con_pie_time_LL):
+    # Remove the influence of the pie from the data
+    for tar_con_pie_time_L in tar_con_pie_time_LL:
+        for time in tar_con_pie_time_L:
+            # If the target was changed by the pie at the current time
+            if time in val_Dic[target] and val_Dic[target][time] == 1:
+                val_Dic[target][time] = -1
+
+
+# Shrink the pie by removing the slice that yields the maximum probability of the target that can be changed by the remaining pie but not the slice
+def shrink(target, pie_L, root, visited_Dic, removed_Dic, spamwriter_log):
+    # This is the slice that yields the maximum probability of the target that can be changed by the remaining pie but not the slice
     max_slice = None
-    # This is the probability of the target when the slice is absent
+    # This is the list of slice that yields not enough sample
+    max_slice_con_L = []
+    # This is the probability of the target that can be changed by the remaining pie but not the slice
     max_pro = None
+    # This is the list of list of timepoints where the target can be changed by the remaining pie but not the slice
+    max_tar_con_pie_time_LL = []
 
     # X axis, Y axis and labels of X axis
     X = []
@@ -622,24 +745,34 @@ def shrink(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
         temp_L = [] + pie_L
         temp_L.remove(index)
 
-        # Get the list of target's value not changed by slice_LL[index]
-        pie_A_not_B_val_L = get_pie_A_not_B_val_L(target, temp_L, [index])
+        # Get the list of list of timepoints where the target can be changed by temp_L (i.e., pie \ slice)
+        tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, temp_L)
+
+        # Get the list of target's value that can be changed by temp_L (i.e., pie \ slice) but not the slice
+        tar_con_pie_not_sli_val_L = get_tar_con_pie_not_sli_val_L(target, tar_con_pie_time_LL, index)
+
+        # If not enough sample
+        if len(tar_con_pie_not_sli_val_L) <= sample_size_cutoff:
+            max_slice_con_L.append(index)
+            continue
+
         # Get the probalbity of the target when the slice is absent
-        pro_pie_A_not_B = np.mean(pie_A_not_B_val_L)
+        pro_tar_con_pie_not_sli = np.mean(tar_con_pie_not_sli_val_L)
 
         # Update max_slice and max_pro
-        if max_pro is None or max_pro < pro_pie_A_not_B:
+        if max_pro is None or max_pro < pro_tar_con_pie_not_sli:
             max_slice = index
-            max_pro = pro_pie_A_not_B
+            max_pro = pro_tar_con_pie_not_sli
+            max_tar_con_pie_time_LL = tar_con_pie_time_LL
 
         # Update X axis, Y axis and labels of X axis
         X.append(index)
-        Y.append(pro_pie_A_not_B)
+        Y.append(pro_tar_con_pie_not_sli)
         X_lab.append(slice_LL[index][0][4:])
 
     # If the pie cannot be shrinked anymore
-    if max_slice is None:
-        return [pie_L, max_slice]
+    if max_slice is None and len(max_slice_con_L) == 0:
+        return [pie_L, max_tar_con_pie_time_LL, max_slice]
 
     # Draw the figure
     plt.plot(X, Y, 'ro')
@@ -647,6 +780,57 @@ def shrink(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
     plt.xlabel('Slice')
     plt.ylabel('Probability')
     global fig_num
+    plt.savefig(figure + 'fig ' + str(fig_num) + ' shrink ' + str(decode(pie_L)))
+    fig_num += 1
+    plt.close()
+
+    # Clear X axis, Y axis and labels of X axis
+    X = []
+    Y = []
+    X_lab = []
+
+    # Update max_slice_con_L
+    if max_slice is not None:
+        max_slice_con_L.append(max_slice)
+
+    # Clear max_slice and max_pro
+    max_slice = None
+    max_pro = None
+
+    # Get the list of list of timepoints where the target can be changed by the root
+    tar_con_root_time_LL = get_tar_con_pie_time_LL(target, [root])
+
+    # For each slice in max_slice_con_L
+    for index in max_slice_con_L:
+        # Get the list of target's value that cannot be changed by the slice
+        tar_con_root_not_sli_val_L = get_tar_con_pie_not_sli_val_L(target, tar_con_root_time_LL, index)
+
+        # If not enough sample
+        if len(tar_con_root_not_sli_val_L) <= sample_size_cutoff:
+            continue
+
+        # Get the probalbity of the target that cannot be changed by the slice
+        pro_tar_con_root_not_sli = np.mean(tar_con_root_not_sli_val_L)
+
+        # Update max_slice and max_pro
+        if max_pro is None or max_pro < pro_tar_con_root_not_sli:
+            max_slice = index
+            max_pro = pro_tar_con_root_not_sli
+
+        # Update X axis, Y axis and labels of X axis
+        X.append(index)
+        Y.append(pro_tar_con_root_not_sli)
+        X_lab.append(slice_LL[index][0][4:])
+
+    # If the pie cannot be shrinked anymore
+    if max_slice is None:
+        return [pie_L, max_tar_con_pie_time_LL, max_slice]
+
+    # Draw the figure
+    plt.plot(X, Y, 'ro')
+    plt.xticks(X, X_lab)
+    plt.xlabel('Slice')
+    plt.ylabel('Probability')
     plt.savefig(figure + 'fig ' + str(fig_num) + ' shrink ' + str(decode(pie_L)))
     fig_num += 1
     plt.close()
@@ -667,74 +851,10 @@ def shrink(target, root, pie_L, visited_Dic, removed_Dic, spamwriter_log):
     if not max_slice in removed_Dic[root]:
         removed_Dic[root][max_slice] = 1
 
-    return [pie_L, max_slice]
+    # Update max_tar_con_pie_time_LL
+    max_tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
 
-
-# Check the necessary condition and exclude the slices that are not in the causal pie
-def check_nece_cond(target, pie_L, spamwriter_log):
-    # Backup pie_L
-    backup_pie_L = [] + pie_L
-
-    # Output log file
-    spamwriter_log.writerow(["check_nece_cond target: ", target])
-    spamwriter_log.writerow(["check_nece_cond pie_L: ", decode(pie_L)])
-
-    # Check each slice
-    for index in backup_pie_L:
-        # Get pie \ slice
-        temp_L = [] + pie_L
-        temp_L.remove(index)
-
-        # Get sample with respect to [pie \ slice \wedge \neg slice] (i.e. the pie \ slice excluding the slice)
-        val_exc_L = get_pie_A_not_B_val_L(target, temp_L, [index])
-
-        # If the sample size is not larger than the sample size cutoff
-        if len(val_exc_L) <= sample_size_cutoff:
-            continue
-
-        min_win_len = get_min_win_len(pie_L)
-        val_L = get_val_L_min_win_len(target, min_win_len)
-
-        # Unpaired t test
-        t, p = stats.ttest_ind(val_exc_L, val_L, equal_var = False)
-
-        # Output log file
-        spamwriter_log.writerow(["check_nece_cond slice_LL[index]: ", slice_LL[index]])
-        spamwriter_log.writerow(["check_nece_cond t: ", t])
-        spamwriter_log.writerow(["check_nece_cond p: ", p])
-        spamwriter_log.writerow(["check_nece_cond mean(val_trg_L): ", np.mean(val_L)])
-        spamwriter_log.writerow(["check_nece_cond mean(val_exc_L): ", np.mean(val_exc_L)])
-        spamwriter_log.writerow('')
-
-        # If pie \ slice still significantly increases the occurrence of the target
-        if t > 0 and p < p_val_cutoff:
-            # Remove the slice (since it is not necessary)
-            pie_L.remove(index)
-
-    return pie_L
-
-
-# Remove the influence of the pie from the data
-def remove_inf(target, pie_L):
-    # Get the list of timepoints where the target can be changed by the pie
-    pie_time_LL = get_pie_time_LL(pie_L)
-
-    # Remove the influence of the pie from the data
-    for pie_time_L in pie_time_LL:
-        for time in pie_time_L:
-            # If the target was changed by the pie and the current time
-            if time in val_Dic[target] and val_Dic[target][time] == 1:
-                val_Dic[target][time] = -1
-
-
-# Get the actual slices in the pie
-def decode(pie_L):
-    temp_L = []
-    if pie_L:
-        for index in pie_L:
-            temp_L.append(slice_LL[index])
-
-    return temp_L
+    return [pie_L, max_tar_con_pie_time_LL, max_slice]
 
 
 # Main function

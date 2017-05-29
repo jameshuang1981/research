@@ -28,7 +28,7 @@ python3 generate_data.py /Users/yuxiaohuang/Documents/github/research/code/drug_
 
 
 Here is the command for running the code from terminal 
-python3 search_4_causal_pie.py /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/data/source/src_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/data/target/trg_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/result/pie.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/log/log.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/figure/ 0 0.01 30 1 5
+python3 search_4_causal_pie.py /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/data/source/src_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/data/target/trg_0.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/result/pie.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/log/log.txt /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/simulated_data/figure/ 0 0.05 30 1 5
 
 
 
