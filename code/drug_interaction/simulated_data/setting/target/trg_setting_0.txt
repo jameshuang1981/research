@@ -1,2 +1,0 @@
-var,probability
-trg_0,0.09802102596708465

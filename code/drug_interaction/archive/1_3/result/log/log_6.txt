@@ -1,0 +1,1670 @@
+"search tar_0: " tar_0
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_13', 1, 5]]"
+"root: " "['src_13', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_13', 1, 5]]"
+"check_suf_con t: " 9.12239056952
+"check_suf_con p: " 1.19283294533e-19
+"check_suf_con mean(tar_con_pie_val_L): " 0.376536312849
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_0', 1, 5]"
+"check_suf_con t: " 3.97233099149
+"check_suf_con p: " 7.26027139058e-05
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.324063344921
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_1', 1, 5]"
+"check_suf_con t: " 5.35667705538
+"check_suf_con p: " 9.02207963452e-08
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.338201383551
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_2', 1, 5]"
+"check_suf_con t: " 4.11454695727
+"check_suf_con p: " 3.96961319784e-05
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.325671990651
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_3', 1, 5]"
+"check_suf_con t: " 4.65781618528
+"check_suf_con p: " 3.31426068327e-06
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.331023864511
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_4', 1, 5]"
+"check_suf_con t: " 4.32306512757
+"check_suf_con p: " 1.58134537004e-05
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.327566320646
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_5', 1, 5]"
+"check_suf_con t: " 5.58099720932
+"check_suf_con p: " 2.57438998651e-08
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.34068058778
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_6', 1, 5]"
+"check_suf_con t: " 5.01972148215
+"check_suf_con p: " 5.4300158156e-07
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.334608030593
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_7', 1, 5]"
+"check_suf_con t: " 6.24968877401
+"check_suf_con p: " 4.60520856727e-10
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.347360367253
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_8', 1, 5]"
+"check_suf_con t: " 4.23370730671
+"check_suf_con p: " 2.35781205582e-05
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.326759474091
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_9', 1, 5]"
+"check_suf_con t: " -5.82237935304
+"check_suf_con p: " 6.29538448392e-09
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.231427460132
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"expand pie_L: " "[['src_13', 1, 5], ['src_9', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_13', 1, 5], ['src_9', 1, 5]]"
+"check_suf_con t: " 13.4022820966
+"check_suf_con p: " 9.68078864996e-38
+"check_suf_con mean(tar_con_pie_val_L): " 0.514573991031
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_0', 1, 5]"
+"check_suf_con t: " 10.6352672741
+"check_suf_con p: " 6.7465799682e-25
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.478371501272
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_1', 1, 5]"
+"check_suf_con t: " 11.8331585431
+"check_suf_con p: " 4.19775005397e-30
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.49692496925
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_2', 1, 5]"
+"check_suf_con t: " 11.2161416843
+"check_suf_con p: " 2.72992079906e-27
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.491525423729
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_3', 1, 5]"
+"check_suf_con t: " 11.0432865419
+"check_suf_con p: " 1.17540493761e-26
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.48275862069
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_4', 1, 5]"
+"check_suf_con t: " 11.4447079781
+"check_suf_con p: " 2.31949171585e-28
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.491271820449
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_5', 1, 5]"
+"check_suf_con t: " 11.5549908289
+"check_suf_con p: " 7.60076652189e-29
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.493150684932
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_6', 1, 5]"
+"check_suf_con t: " 11.2957048117
+"check_suf_con p: " 9.19804242906e-28
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.48602673147
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_7', 1, 5]"
+"check_suf_con t: " 11.8816140276
+"check_suf_con p: " 2.24042166499e-30
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.49520383693
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_8', 1, 5]"
+"check_suf_con t: " 11.0213636306
+"check_suf_con p: " 1.80761886421e-26
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.487646293888
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_10', 1, 5]"
+"check_suf_con t: " 10.7580885075
+"check_suf_con p: " 2.25068593895e-25
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.482490272374
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_11', 1, 5]"
+"check_suf_con t: " 10.9553901089
+"check_suf_con p: " 2.86399301629e-26
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.48198757764
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_12', 1, 5]"
+"check_suf_con t: " 12.1894271024
+"check_suf_con p: " 1.0527983491e-31
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.503703703704
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_14', 1, 5]"
+"check_suf_con t: " 11.3111261359
+"check_suf_con p: " 8.57326730397e-28
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.488228004957
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_15', 1, 5]"
+"check_suf_con t: " 11.6674451928
+"check_suf_con p: " 2.34593233898e-29
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.494437577256
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_16', 1, 5]"
+"check_suf_con t: " 11.2618045775
+"check_suf_con p: " 1.34963063419e-27
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.486486486486
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_suf_con slice_LL[index]: " "['src_17', 1, 5]"
+"check_suf_con t: " 10.0128394679
+"check_suf_con p: " 2.25836929893e-22
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.46830530401
+"check_suf_con mean(tar_val_L): " 0.284583333333
+
+"check_nec_con target: " tar_0
+"check_nec_con pie_L: " "[['src_13', 1, 5], ['src_9', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_6', 1, 5]]"
+"root: " "['src_6', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_6', 1, 5]]"
+"check_suf_con t: " 6.68298131816
+"check_suf_con p: " 2.76727443742e-11
+"check_suf_con mean(tar_con_pie_val_L): " 0.332484076433
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_0', 1, 5]"
+"check_suf_con t: " 3.12458564748
+"check_suf_con p: " 0.0017976137386
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.295103661226
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_1', 1, 5]"
+"check_suf_con t: " 4.12328093771
+"check_suf_con p: " 3.83554048355e-05
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.305483028721
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_2', 1, 5]"
+"check_suf_con t: " 2.57959661242
+"check_suf_con p: " 0.00993874779623
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.28936921041
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_3', 1, 5]"
+"check_suf_con t: " 3.01261292088
+"check_suf_con p: " 0.00261170376339
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.293884733832
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_4', 1, 5]"
+"check_suf_con t: " -3.24675319001
+"check_suf_con p: " 0.00117943245952
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.231940818103
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"expand pie_L: " "[['src_6', 1, 5], ['src_4', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_6', 1, 5], ['src_4', 1, 5]]"
+"check_suf_con t: " 8.28795508803
+"check_suf_con p: " 6.05926854433e-16
+"check_suf_con mean(tar_con_pie_val_L): " 0.428125
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_0', 1, 5]"
+"check_suf_con t: " 7.61867339949
+"check_suf_con p: " 9.78698485809e-14
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.422608695652
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_1', 1, 5]"
+"check_suf_con t: " 7.32856750842
+"check_suf_con p: " 7.35362248783e-13
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.415944540728
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_2', 1, 5]"
+"check_suf_con t: " 6.90911789517
+"check_suf_con p: " 1.27002483156e-11
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.409747292419
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_3', 1, 5]"
+"check_suf_con t: " 8.0349441583
+"check_suf_con p: " 4.76737092498e-15
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.431034482759
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_5', 1, 5]"
+"check_suf_con t: " 6.54345297247
+"check_suf_con p: " 1.25235042437e-10
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.397610921502
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_7', 1, 5]"
+"check_suf_con t: " 7.34700942841
+"check_suf_con p: " 6.15824953879e-13
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.412935323383
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_8', 1, 5]"
+"check_suf_con t: " 6.34179768993
+"check_suf_con p: " 4.5784899848e-10
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.398165137615
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_9', 1, 5]"
+"check_suf_con t: " 7.32856750842
+"check_suf_con p: " 7.35362248783e-13
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.415944540728
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_10', 1, 5]"
+"check_suf_con t: " 7.17475813151
+"check_suf_con p: " 2.15408334381e-12
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.414590747331
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_11', 1, 5]"
+"check_suf_con t: " 6.69934217314
+"check_suf_con p: " 4.69444568469e-11
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.401372212693
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_12', 1, 5]"
+"check_suf_con t: " 6.59060535888
+"check_suf_con p: " 9.53170257937e-11
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.400702987698
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_13', 1, 5]"
+"check_suf_con t: " 7.3998010591
+"check_suf_con p: " 4.31555890099e-13
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.414715719064
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_14', 1, 5]"
+"check_suf_con t: " 7.09180839745
+"check_suf_con p: " 3.6330118941e-12
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.410344827586
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_15', 1, 5]"
+"check_suf_con t: " 7.24978523292
+"check_suf_con p: " 1.25942723194e-12
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.414211438475
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_16', 1, 5]"
+"check_suf_con t: " 7.51137881917
+"check_suf_con p: " 2.06329136199e-13
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.419689119171
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_suf_con slice_LL[index]: " "['src_17', 1, 5]"
+"check_suf_con t: " 6.42599935125
+"check_suf_con p: " 2.70554766782e-10
+"check_suf_con mean(tar_con_pie_not_sli_val_L): " 0.398916967509
+"check_suf_con mean(tar_val_L): " 0.262984690228
+
+"check_nec_con target: " tar_0
+"check_nec_con pie_L: " "[['src_6', 1, 5], ['src_4', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_3', 1, 5]]"
+"root: " "['src_3', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5]]"
+"check_suf_con t: " 1.38799911223
+"check_suf_con p: " 0.165227019097
+"check_suf_con mean(tar_con_pie_val_L): " 0.262968874701
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5]]"
+"check_suf_con t: " -6.86366414433
+"check_suf_con p: " 1.17418969919e-11
+"check_suf_con mean(tar_con_pie_val_L): " 0.159811985899
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -3.5417764988
+"check_suf_con p: " 0.000501203141149
+"check_suf_con mean(tar_con_pie_val_L): " 0.153846153846
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -0.312988940134
+"check_suf_con p: " 0.756444598713
+"check_suf_con mean(tar_con_pie_val_L): " 0.225806451613
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_8', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -0.312988940134
+"check_suf_con p: " 0.756444598713
+"check_suf_con mean(tar_con_pie_val_L): " 0.225806451613
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -3.49311750982
+"check_suf_con p: " 0.000595969564897
+"check_suf_con mean(tar_con_pie_val_L): " 0.154696132597
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5]]"
+"check_suf_con t: " -1.63490270558
+"check_suf_con p: " 0.110262567294
+"check_suf_con mean(tar_con_pie_val_L): " 0.153846153846
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5], ['src_17', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5]]"
+"check_suf_con t: " -1.63490270558
+"check_suf_con p: " 0.110262567294
+"check_suf_con mean(tar_con_pie_val_L): " 0.153846153846
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5], ['src_2', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5]]"
+"check_suf_con t: " -1.63490270558
+"check_suf_con p: " 0.110262567294
+"check_suf_con mean(tar_con_pie_val_L): " 0.153846153846
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_16', 1, 5], ['src_7', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -3.49311750982
+"check_suf_con p: " 0.000595969564897
+"check_suf_con mean(tar_con_pie_val_L): " 0.154696132597
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_10', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con t: " -2.95597013986
+"check_suf_con p: " 0.00352203325584
+"check_suf_con mean(tar_con_pie_val_L): " 0.166666666667
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -2.95597013986
+"check_suf_con p: " 0.00352203325584
+"check_suf_con mean(tar_con_pie_val_L): " 0.166666666667
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con t: " -1.2094201309
+"check_suf_con p: " 0.234790407774
+"check_suf_con mean(tar_con_pie_val_L): " 0.171428571429
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5], ['src_15', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5], ['src_15', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con t: " -1.2094201309
+"check_suf_con p: " 0.234790407774
+"check_suf_con mean(tar_con_pie_val_L): " 0.171428571429
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5], ['src_11', 1, 5]]"
+"shrink pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con t: " -1.2094201309
+"check_suf_con p: " 0.234790407774
+"check_suf_con mean(tar_con_pie_val_L): " 0.171428571429
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -2.95597013986
+"check_suf_con p: " 0.00352203325584
+"check_suf_con mean(tar_con_pie_val_L): " 0.166666666667
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -6.84948187328
+"check_suf_con p: " 1.33246282645e-11
+"check_suf_con mean(tar_con_pie_val_L): " 0.158220024722
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_3', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_3', 1, 5]]"
+"check_suf_con t: " 1.38799911223
+"check_suf_con p: " 0.165227019097
+"check_suf_con mean(tar_con_pie_val_L): " 0.262968874701
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_16', 1, 5]]"
+"root: " "['src_16', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5]]"
+"check_suf_con t: " 1.33559286721
+"check_suf_con p: " 0.18178285005
+"check_suf_con mean(tar_con_pie_val_L): " 0.263041556145
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -6.03802614578
+"check_suf_con p: " 2.26259097855e-09
+"check_suf_con mean(tar_con_pie_val_L): " 0.166666666667
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -3.81820081703
+"check_suf_con p: " 0.000179270836373
+"check_suf_con mean(tar_con_pie_val_L): " 0.150259067358
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -1.62138936145
+"check_suf_con p: " 0.112181518119
+"check_suf_con mean(tar_con_pie_val_L): " 0.159090909091
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -1.62138936145
+"check_suf_con p: " 0.112181518119
+"check_suf_con mean(tar_con_pie_val_L): " 0.159090909091
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_11', 1, 5]]"
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -1.62138936145
+"check_suf_con p: " 0.112181518119
+"check_suf_con mean(tar_con_pie_val_L): " 0.159090909091
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_8', 1, 5]]"
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -1.62138936145
+"check_suf_con p: " 0.112181518119
+"check_suf_con mean(tar_con_pie_val_L): " 0.159090909091
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_10', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_10', 1, 5]]"
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -1.62138936145
+"check_suf_con p: " 0.112181518119
+"check_suf_con mean(tar_con_pie_val_L): " 0.159090909091
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_7', 1, 5]]"
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -1.62138936145
+"check_suf_con p: " 0.112181518119
+"check_suf_con mean(tar_con_pie_val_L): " 0.159090909091
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_15', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_15', 1, 5]]"
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_15', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_15', 1, 5]]"
+"check_suf_con t: " -2.97202830607
+"check_suf_con p: " 0.00564543224898
+"check_suf_con mean(tar_con_pie_val_L): " 0.09375
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -3.81820081703
+"check_suf_con p: " 0.000179270836373
+"check_suf_con mean(tar_con_pie_val_L): " 0.150259067358
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con t: " -2.1213448042
+"check_suf_con p: " 0.0405945370098
+"check_suf_con mean(tar_con_pie_val_L): " 0.131578947368
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5], ['src_12', 1, 5]]"
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con t: " -2.1213448042
+"check_suf_con p: " 0.0405945370098
+"check_suf_con mean(tar_con_pie_val_L): " 0.131578947368
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5], ['src_2', 1, 5]]"
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con t: " -2.1213448042
+"check_suf_con p: " 0.0405945370098
+"check_suf_con mean(tar_con_pie_val_L): " 0.131578947368
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -3.81820081703
+"check_suf_con p: " 0.000179270836373
+"check_suf_con mean(tar_con_pie_val_L): " 0.150259067358
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -6.0167281487
+"check_suf_con p: " 2.5762833223e-09
+"check_suf_con mean(tar_con_pie_val_L): " 0.166666666667
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_16', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_16', 1, 5]]"
+"check_suf_con t: " 1.33559286721
+"check_suf_con p: " 0.18178285005
+"check_suf_con mean(tar_con_pie_val_L): " 0.263041556145
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_15', 1, 5]]"
+"root: " "['src_15', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5]]"
+"check_suf_con t: " -0.056695962611
+"check_suf_con p: " 0.954790700291
+"check_suf_con mean(tar_con_pie_val_L): " 0.249190938511
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -6.39122638373
+"check_suf_con p: " 2.50977242945e-10
+"check_suf_con mean(tar_con_pie_val_L): " 0.165308498254
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -3.78759851587
+"check_suf_con p: " 0.000191566159037
+"check_suf_con mean(tar_con_pie_val_L): " 0.15811965812
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5]]"
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_10', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_10', 1, 5]]"
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_14', 1, 5]]"
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_8', 1, 5]]"
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -0.868407947369
+"check_suf_con p: " 0.38936957902
+"check_suf_con mean(tar_con_pie_val_L): " 0.2
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -3.78759851587
+"check_suf_con p: " 0.000191566159037
+"check_suf_con mean(tar_con_pie_val_L): " 0.15811965812
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -6.37047002215
+"check_suf_con p: " 2.86076810816e-10
+"check_suf_con mean(tar_con_pie_val_L): " 0.165501165501
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_15', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_15', 1, 5]]"
+"check_suf_con t: " -0.056695962611
+"check_suf_con p: " 0.954790700291
+"check_suf_con mean(tar_con_pie_val_L): " 0.249190938511
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_14', 1, 5]]"
+"root: " "['src_14', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5]]"
+"check_suf_con t: " -0.109320643743
+"check_suf_con p: " 0.912954498251
+"check_suf_con mean(tar_con_pie_val_L): " 0.248698438126
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -7.29026548875
+"check_suf_con p: " 6.057955883e-13
+"check_suf_con mean(tar_con_pie_val_L): " 0.15670800451
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con t: " -5.84300283418
+"check_suf_con p: " 2.0270992526e-08
+"check_suf_con mean(tar_con_pie_val_L): " 0.113989637306
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con t: " -2.85570168769
+"check_suf_con p: " 0.00696962215148
+"check_suf_con mean(tar_con_pie_val_L): " 0.105263157895
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5], ['src_11', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5], ['src_11', 1, 5], ['src_7', 1, 5]]"
+"shrink pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con t: " -2.82699587739
+"check_suf_con p: " 0.00824881375971
+"check_suf_con mean(tar_con_pie_val_L): " 0.0967741935484
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con t: " -4.03834182047
+"check_suf_con p: " 9.00968641623e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.129770992366
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con t: " -4.03834182047
+"check_suf_con p: " 9.00968641623e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.129770992366
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5], ['src_0', 1, 5]]"
+"shrink pie_L: " "[['src_14', 1, 5], ['src_7', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_7', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -4.41018610779
+"check_suf_con p: " 2.16674594771e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.12
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_7', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_7', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"shrink pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -2.69988472681
+"check_suf_con p: " 0.00774368569568
+"check_suf_con mean(tar_con_pie_val_L): " 0.165517241379
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -1.42279385605
+"check_suf_con p: " 0.163342650751
+"check_suf_con mean(tar_con_pie_val_L): " 0.162162162162
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5], ['src_10', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5], ['src_10', 1, 5]]"
+"shrink pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -1.42279385605
+"check_suf_con p: " 0.163342650751
+"check_suf_con mean(tar_con_pie_val_L): " 0.162162162162
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5]]"
+"shrink pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -1.42279385605
+"check_suf_con p: " 0.163342650751
+"check_suf_con mean(tar_con_pie_val_L): " 0.162162162162
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_0', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -2.69988472681
+"check_suf_con p: " 0.00774368569568
+"check_suf_con mean(tar_con_pie_val_L): " 0.165517241379
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_14', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -5.93963447088
+"check_suf_con p: " 4.53763205854e-09
+"check_suf_con mean(tar_con_pie_val_L): " 0.159016393443
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_14', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_14', 1, 5]]"
+"check_suf_con t: " -0.109320643743
+"check_suf_con p: " 0.912954498251
+"check_suf_con mean(tar_con_pie_val_L): " 0.248698438126
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_10', 1, 5]]"
+"root: " "['src_10', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5]]"
+"check_suf_con t: " -0.162903165747
+"check_suf_con p: " 0.870601648271
+"check_suf_con mean(tar_con_pie_val_L): " 0.248337028825
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -8.49903695933
+"check_suf_con p: " 4.91924775101e-17
+"check_suf_con mean(tar_con_pie_val_L): " 0.152450090744
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con t: " -3.37257068246
+"check_suf_con p: " 0.000889452861946
+"check_suf_con mean(tar_con_pie_val_L): " 0.160804020101
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -1.81757446124
+"check_suf_con p: " 0.0757278201488
+"check_suf_con mean(tar_con_pie_val_L): " 0.152173913043
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5]]"
+"shrink pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -0.869942269968
+"check_suf_con p: " 0.389486971199
+"check_suf_con mean(tar_con_pie_val_L): " 0.19512195122
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"shrink pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -1.29064205103
+"check_suf_con p: " 0.202272770559
+"check_suf_con mean(tar_con_pie_val_L): " 0.181818181818
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -1.29064205103
+"check_suf_con p: " 0.202272770559
+"check_suf_con mean(tar_con_pie_val_L): " 0.181818181818
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5], ['src_0', 1, 5]]"
+"shrink pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -1.29064205103
+"check_suf_con p: " 0.202272770559
+"check_suf_con mean(tar_con_pie_val_L): " 0.181818181818
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5], ['src_7', 1, 5]]"
+"shrink pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -1.29064205103
+"check_suf_con p: " 0.202272770559
+"check_suf_con mean(tar_con_pie_val_L): " 0.181818181818
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5], ['src_12', 1, 5]]"
+"shrink pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -1.29064205103
+"check_suf_con p: " 0.202272770559
+"check_suf_con mean(tar_con_pie_val_L): " 0.181818181818
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_8', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -3.81787158404
+"check_suf_con p: " 0.000174522129388
+"check_suf_con mean(tar_con_pie_val_L): " 0.154205607477
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_10', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5], ['src_5', 1, 5]]"
+"check_suf_con t: " -6.40090285138
+"check_suf_con p: " 2.49590109415e-10
+"check_suf_con mean(tar_con_pie_val_L): " 0.161458333333
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_10', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_10', 1, 5]]"
+"check_suf_con t: " -0.162903165747
+"check_suf_con p: " 0.870601648271
+"check_suf_con mean(tar_con_pie_val_L): " 0.248337028825
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_5', 1, 5]]"
+"root: " "['src_5', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5]]"
+"check_suf_con t: " -0.049665746126
+"check_suf_con p: " 0.960391906388
+"check_suf_con mean(tar_con_pie_val_L): " 0.249244060475
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -7.04473700883
+"check_suf_con p: " 3.54087821104e-12
+"check_suf_con mean(tar_con_pie_val_L): " 0.156479217604
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -4.03874764345
+"check_suf_con p: " 7.52284066339e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.147783251232
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con t: " -0.416689768433
+"check_suf_con p: " 0.679762506859
+"check_suf_con mean(tar_con_pie_val_L): " 0.21875
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5], ['src_7', 1, 5]]"
+"shrink pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con t: " -0.416689768433
+"check_suf_con p: " 0.679762506859
+"check_suf_con mean(tar_con_pie_val_L): " 0.21875
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"shrink pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con t: " -0.416689768433
+"check_suf_con p: " 0.679762506859
+"check_suf_con mean(tar_con_pie_val_L): " 0.21875
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -4.03874764345
+"check_suf_con p: " 7.52284066339e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.147783251232
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -3.30249492517
+"check_suf_con p: " 0.00169094321083
+"check_suf_con mean(tar_con_pie_val_L): " 0.109090909091
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_17', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_17', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_17', 1, 5]]"
+"check_suf_con t: " -3.30249492517
+"check_suf_con p: " 0.00169094321083
+"check_suf_con mean(tar_con_pie_val_L): " 0.109090909091
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_17', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_17', 1, 5], ['src_8', 1, 5]]"
+"shrink pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_17', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_2', 1, 5], ['src_17', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -2.59465320036
+"check_suf_con p: " 0.012182304668
+"check_suf_con mean(tar_con_pie_val_L): " 0.12962962963
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_5', 1, 5], ['src_17', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_17', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -5.50780553058
+"check_suf_con p: " 9.52937384812e-08
+"check_suf_con mean(tar_con_pie_val_L): " 0.125560538117
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_5', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -7.56293983503
+"check_suf_con p: " 9.42340721917e-14
+"check_suf_con mean(tar_con_pie_val_L): " 0.149874055416
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_5', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_5', 1, 5]]"
+"check_suf_con t: " -0.049665746126
+"check_suf_con p: " 0.960391906388
+"check_suf_con mean(tar_con_pie_val_L): " 0.249244060475
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_17', 1, 5]]"
+"root: " "['src_17', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5]]"
+"check_suf_con t: " -0.54324843044
+"check_suf_con p: " 0.586983257939
+"check_suf_con mean(tar_con_pie_val_L): " 0.245167229211
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -8.73537717161
+"check_suf_con p: " 6.32174172228e-18
+"check_suf_con mean(tar_con_pie_val_L): " 0.153138075314
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -7.43335288361
+"check_suf_con p: " 7.63136475273e-13
+"check_suf_con mean(tar_con_pie_val_L): " 0.116417910448
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -3.92969108573
+"check_suf_con p: " 0.000244139284905
+"check_suf_con mean(tar_con_pie_val_L): " 0.0925925925926
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5], ['src_0', 1, 5]]"
+"shrink pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_1', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_1', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -2.85570168769
+"check_suf_con p: " 0.00696962215148
+"check_suf_con mean(tar_con_pie_val_L): " 0.105263157895
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_1', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_1', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5]]"
+"shrink pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5]]"
+"check_suf_con t: " -1.52899340459
+"check_suf_con p: " 0.134707353464
+"check_suf_con mean(tar_con_pie_val_L): " 0.157894736842
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_7', 1, 5], ['src_12', 1, 5]]"
+"shrink pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con t: " -1.70698703244
+"check_suf_con p: " 0.0930223936059
+"check_suf_con mean(tar_con_pie_val_L): " 0.166666666667
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5], ['src_11', 1, 5]]"
+"shrink pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con t: " -1.70698703244
+"check_suf_con p: " 0.0930223936059
+"check_suf_con mean(tar_con_pie_val_L): " 0.166666666667
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -6.92437637571
+"check_suf_con p: " 2.58403152589e-11
+"check_suf_con mean(tar_con_pie_val_L): " 0.115789473684
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -8.78785200753
+"check_suf_con p: " 4.04541925899e-18
+"check_suf_con mean(tar_con_pie_val_L): " 0.152754590985
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_17', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_17', 1, 5]]"
+"check_suf_con t: " -0.54324843044
+"check_suf_con p: " 0.586983257939
+"check_suf_con mean(tar_con_pie_val_L): " 0.245167229211
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_7', 1, 5]]"
+"root: " "['src_7', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5]]"
+"check_suf_con t: " -0.0219798050563
+"check_suf_con p: " 0.982465745497
+"check_suf_con mean(tar_con_pie_val_L): " 0.249498997996
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_2', 1, 5]]"
+"check_suf_con t: " -5.98823184017
+"check_suf_con p: " 3.19462630938e-09
+"check_suf_con mean(tar_con_pie_val_L): " 0.163352272727
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con t: " -5.47296878135
+"check_suf_con p: " 1.76909843311e-07
+"check_suf_con mean(tar_con_pie_val_L): " 0.108108108108
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_2', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"shrink pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con t: " -4.16567434843
+"check_suf_con p: " 6.39589489744e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.116504854369
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con t: " -4.16567434843
+"check_suf_con p: " 6.39589489744e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.116504854369
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5], ['src_0', 1, 5]]"
+"shrink pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con t: " -4.16567434843
+"check_suf_con p: " 6.39589489744e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.116504854369
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5], ['src_8', 1, 5]]"
+"shrink pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con t: " -4.16567434843
+"check_suf_con p: " 6.39589489744e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.116504854369
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con t: " -6.6510843477
+"check_suf_con p: " 6.86020099303e-11
+"check_suf_con mean(tar_con_pie_val_L): " 0.143418467583
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_7', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_7', 1, 5]]"
+"check_suf_con t: " -0.0219798050563
+"check_suf_con p: " 0.982465745497
+"check_suf_con mean(tar_con_pie_val_L): " 0.249498997996
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_2', 1, 5]]"
+"root: " "['src_2', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5]]"
+"check_suf_con t: " -0.824989121146
+"check_suf_con p: " 0.40941620002
+"check_suf_con mean(tar_con_pie_val_L): " 0.242887091944
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -10.5650800223
+"check_suf_con p: " 3.25793691752e-25
+"check_suf_con mean(tar_con_pie_val_L): " 0.136480686695
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -7.62577059926
+"check_suf_con p: " 3.3239633483e-13
+"check_suf_con mean(tar_con_pie_val_L): " 0.105454545455
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -2.85570168769
+"check_suf_con p: " 0.00696962215148
+"check_suf_con mean(tar_con_pie_val_L): " 0.105263157895
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_11', 1, 5]]"
+"shrink pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -2.85570168769
+"check_suf_con p: " 0.00696962215148
+"check_suf_con mean(tar_con_pie_val_L): " 0.105263157895
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_12', 1, 5]]"
+"shrink pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -2.85570168769
+"check_suf_con p: " 0.00696962215148
+"check_suf_con mean(tar_con_pie_val_L): " 0.105263157895
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_8', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -7.58034090902
+"check_suf_con p: " 4.50185389825e-13
+"check_suf_con mean(tar_con_pie_val_L): " 0.105839416058
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -9.77924925513
+"check_suf_con p: " 7.46859249292e-22
+"check_suf_con mean(tar_con_pie_val_L): " 0.139336492891
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_2', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_2', 1, 5]]"
+"check_suf_con t: " -0.824989121146
+"check_suf_con p: " 0.40941620002
+"check_suf_con mean(tar_con_pie_val_L): " 0.242887091944
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_12', 1, 5]]"
+"root: " "['src_12', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5]]"
+"check_suf_con t: " 0.174286997044
+"check_suf_con p: " 0.861649544549
+"check_suf_con mean(tar_con_pie_val_L): " 0.251340996169
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -9.20141256678
+"check_suf_con p: " 1.90317644236e-19
+"check_suf_con mean(tar_con_pie_val_L): " 0.136522753792
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5]]"
+"check_suf_con t: " -5.90868685512
+"check_suf_con p: " 1.99084129115e-08
+"check_suf_con mean(tar_con_pie_val_L): " 0.103225806452
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -2.72950138179
+"check_suf_con p: " 0.00971494172905
+"check_suf_con mean(tar_con_pie_val_L): " 0.108108108108
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_11', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5]]"
+"shrink pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -6.37036394182
+"check_suf_con p: " 2.29992264501e-09
+"check_suf_con mean(tar_con_pie_val_L): " 0.0921985815603
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -9.17945829113
+"check_suf_con p: " 2.30404335794e-19
+"check_suf_con mean(tar_con_pie_val_L): " 0.136682242991
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_12', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_12', 1, 5]]"
+"check_suf_con t: " 0.174286997044
+"check_suf_con p: " 0.861649544549
+"check_suf_con mean(tar_con_pie_val_L): " 0.251340996169
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_11', 1, 5]]"
+"root: " "['src_11', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_11', 1, 5]]"
+"check_suf_con t: " -0.71792726999
+"check_suf_con p: " 0.472860057564
+"check_suf_con mean(tar_con_pie_val_L): " 0.242592592593
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -7.98226755797
+"check_suf_con p: " 4.7615806919e-15
+"check_suf_con mean(tar_con_pie_val_L): " 0.141456582633
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -3.74463107693
+"check_suf_con p: " 0.000258924550338
+"check_suf_con mean(tar_con_pie_val_L): " 0.13986013986
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -4.1153481918
+"check_suf_con p: " 0.000272378980022
+"check_suf_con mean(tar_con_pie_val_L): " 0.0645161290323
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -3.80170939663
+"check_suf_con p: " 0.000209642023154
+"check_suf_con mean(tar_con_pie_val_L): " 0.138888888889
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_11', 1, 5], ['src_0', 1, 5]]"
+"check_suf_con t: " -8.05456312348
+"check_suf_con p: " 2.74037389183e-15
+"check_suf_con mean(tar_con_pie_val_L): " 0.140864714086
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_11', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_11', 1, 5]]"
+"check_suf_con t: " -0.71792726999
+"check_suf_con p: " 0.472860057564
+"check_suf_con mean(tar_con_pie_val_L): " 0.242592592593
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_0', 1, 5]]"
+"root: " "['src_0', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_0', 1, 5]]"
+"check_suf_con t: " -0.858103467704
+"check_suf_con p: " 0.390883224323
+"check_suf_con mean(tar_con_pie_val_L): " 0.242227536727
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_0', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_0', 1, 5], ['src_8', 1, 5]]"
+"check_suf_con t: " -9.62159589003
+"check_suf_con p: " 3.30678661767e-21
+"check_suf_con mean(tar_con_pie_val_L): " 0.139805825243
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_0', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_0', 1, 5], ['src_8', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -4.19336208895
+"check_suf_con p: " 4.15072872123e-05
+"check_suf_con mean(tar_con_pie_val_L): " 0.142105263158
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_0', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -6.83133533918
+"check_suf_con p: " 1.60996708614e-11
+"check_suf_con mean(tar_con_pie_val_L): " 0.154794520548
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_0', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_0', 1, 5]]"
+"check_suf_con t: " -0.858103467704
+"check_suf_con p: " 0.390883224323
+"check_suf_con mean(tar_con_pie_val_L): " 0.242227536727
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_8', 1, 5]]"
+"root: " "['src_8', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_8', 1, 5]]"
+"check_suf_con t: " -0.613150748545
+"check_suf_con p: " 0.539805388528
+"check_suf_con mean(tar_con_pie_val_L): " 0.244555071562
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"expand pie_L: " "[['src_8', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_8', 1, 5], ['src_1', 1, 5]]"
+"check_suf_con t: " -9.04757935597
+"check_suf_con p: " 7.20058416692e-19
+"check_suf_con mean(tar_con_pie_val_L): " 0.137647058824
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"shrink pie_L: " "[['src_8', 1, 5]]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_8', 1, 5]]"
+"check_suf_con t: " -0.613150748545
+"check_suf_con p: " 0.539805388528
+"check_suf_con mean(tar_con_pie_val_L): " 0.244555071562
+"check_suf_con mean(tar_val_L): " 0.249726895346
+
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " []
+"expand pie_L: " "[['src_1', 1, 5]]"
+"root: " "['src_1', 1, 5]"
+"check_suf_con target: " tar_0
+"check_suf_con pie_L: " "[['src_1', 1, 5]]"
+"check_suf_con t: " -1.96406877906
+"check_suf_con p: " 0.0496021569799
+"check_suf_con mean(tar_con_pie_val_L): " 0.231519090171
+"check_suf_con mean(tar_val_L): " 0.249726895346
+

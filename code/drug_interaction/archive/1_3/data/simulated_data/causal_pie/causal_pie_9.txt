@@ -1,0 +1,3 @@
+target,probability,causal pie
+tar_0,0.6912525990878269,src_8,1,3
+tar_0,0.961266047848318,src_4,2,4,src_0,2,5,src_3,2,5

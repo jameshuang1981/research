@@ -1,0 +1,65 @@
+dataset_0
+tp: 3
+fp: 1
+fn: 1
+
+
+dataset_1
+tp: 4
+fp: 0
+fn: 1
+
+
+dataset_2
+tp: 4
+fp: 0
+fn: 1
+
+
+dataset_3
+tp: 0
+fp: 0
+fn: 2
+
+
+dataset_4
+tp: 2
+fp: 0
+fn: 0
+
+
+dataset_5
+tp: 2
+fp: 0
+fn: 2
+
+
+dataset_6
+tp: 4
+fp: 0
+fn: 1
+
+
+dataset_7
+tp: 3
+fp: 0
+fn: 1
+
+
+dataset_8
+tp: 4
+fp: 0
+fn: 1
+
+
+dataset_9
+tp: 2
+fp: 0
+fn: 1
+
+
+tp_all: 28
+fp_all: 1
+fn_all: 11
+precision: 0.9655172413793104
+recall: 0.717948717948718

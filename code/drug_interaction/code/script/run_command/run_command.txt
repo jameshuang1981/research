@@ -1,0 +1,1 @@
+(time /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/code/script/command/command.txt) 2> /Users/yuxiaohuang/Documents/github/research/code/drug_interaction/result/time.txt
