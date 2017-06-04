@@ -67,10 +67,6 @@ pie_Dic = {}
 
 sample_size_cutoff = 30
 
-spamwriter_log = None
-
-spamwriter_pie = None
-
 fig_num = 0
 
 
@@ -185,7 +181,7 @@ def get_time_series():
 
 
 # Search for the causal pies
-def search(spamwriter_log, spamwriter_pie):
+def search():
     for target in trg_Dic:
         # Write target to spamwriter_log
         spamwriter_log.writerow(['search ' + target + ': ', target])
@@ -213,8 +209,8 @@ def search(spamwriter_log, spamwriter_pie):
         # The loop continues if there are unvisited nodes
         while len(visited_Dic) < len(slice_LL):
             # The loop continues if the pie is not sufficient (to produce the effect)
-            while check_suf_con(target, pie_L, tar_con_pie_time_LL, spamwriter_log) is False:
-                [pie_L, tar_con_pie_time_LL, root, min_slice] = expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic, spamwriter_log)
+            while check_suf_con(target, pie_L, tar_con_pie_time_LL) is False:
+                [pie_L, tar_con_pie_time_LL, root, min_slice] = expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic)
                 # If the pie cannot be expanded anymore
                 if min_slice is None:
                     break
@@ -227,7 +223,7 @@ def search(spamwriter_log, spamwriter_pie):
                         del visited_Dic[index]
 
                 # Check the necessary condition (to produce the effect) and remove unnecessary slices
-                pie_L = check_nec_con(target, pie_L, spamwriter_log)
+                pie_L = check_nec_con(target, pie_L)
 
                 # Mark each slice in the pie as visited (i.e, adding the key to the dict)
                 for index in pie_L:
@@ -247,7 +243,7 @@ def search(spamwriter_log, spamwriter_pie):
                 root = None
             else:
                 # Shrink
-                [pie_L, tar_con_pie_time_LL, max_slice] = shrink(target, pie_L, root, visited_Dic, removed_Dic, spamwriter_log)
+                [pie_L, tar_con_pie_time_LL, max_slice] = shrink(target, pie_L, root, visited_Dic, removed_Dic)
 
                 # If the pie cannot be shrinked anymore
                 if max_slice is None:
@@ -345,7 +341,7 @@ def get_start_end_Dic(pie_L):
 
 
 # Check sufficient condition, i.e., P(target | pie) >> P(target)
-def check_suf_con(target, pie_L, tar_con_pie_time_LL, spamwriter_log):
+def check_suf_con(target, pie_L, tar_con_pie_time_LL):
     # Output log file
     spamwriter_log.writerow(["check_suf_con target: ", target])
     spamwriter_log.writerow(["check_suf_con pie_L: ", decode(pie_L)])
@@ -597,7 +593,7 @@ def get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL):
 
 
 # Expand the pie by adding the slice that yields the minimum probalbity of the target that can be changed by the pie but not the slice
-def expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic, spamwriter_log):
+def expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic):
     # This is the slice that yields the minimum probability of the target that can be changed by the pie but not the slice
     min_slice = None
     # This is the probability of the target that can be changed by the pie but not the slice
@@ -702,7 +698,7 @@ def get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, index):
 
 
 # Check the necessary condition and exclude the slices that are not in the causal pie
-def check_nec_con(target, pie_L, spamwriter_log):
+def check_nec_con(target, pie_L):
     # Output log file
     spamwriter_log.writerow(["check_nec_con target: ", target])
     spamwriter_log.writerow(["check_nec_con pie_L: ", decode(pie_L)])
@@ -768,7 +764,7 @@ def remove_inf(target, tar_con_pie_time_LL):
 
 
 # Shrink the pie by removing the slice that yields the maximum probability of the target that can be changed by the remaining pie but not the slice
-def shrink(target, pie_L, root, visited_Dic, removed_Dic, spamwriter_log):
+def shrink(target, pie_L, root, visited_Dic, removed_Dic):
     # This is the slice that yields the maximum probability of the target that can be changed by the remaining pie but not the slice
     max_slice = None
     # This is the list of slice that yields not enough sample
@@ -929,4 +925,4 @@ if __name__=="__main__":
             # Write the causal pie file
             spamwriter_pie = csv.writer(f, delimiter = ' ')
             # Search for the causal pies
-            search(spamwriter_log, spamwriter_pie)
+            search()
