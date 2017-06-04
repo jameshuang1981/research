@@ -416,7 +416,29 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL):
 
         # If pie \ slice does not significantly increase the occurrence of the target
         if t <= 0 or p >= p_val_cutoff:
-            return False
+            # Get the list of timepoints where the target can be changed by the pie and the slice
+            tar_con_pie_sli_time_LL = get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, index)
+
+            # Get the list of target's value that can be changed by the pie and the slice
+            tar_con_pie_sli_val_L = get_tar_val_L_time_slot(target, tar_con_pie_sli_time_LL)
+
+            # If not enough sample
+            if len(tar_con_pie_sli_val_L) <= sample_size_cutoff:
+                continue
+
+            # Unpaired t test
+            t, p = stats.ttest_ind(tar_con_pie_sli_val_L, tar_con_pie_not_sli_val_L, equal_var=False)
+
+            # Output log file
+            spamwriter_log.writerow(["check_suf_con t: ", t])
+            spamwriter_log.writerow(["check_suf_con p: ", p])
+            spamwriter_log.writerow(["check_suf_con mean(tar_con_pie_sli_val_L): ", np.mean(tar_con_pie_sli_val_L)])
+            spamwriter_log.writerow(["check_suf_con mean(tar_con_pie_not_sli_val_L): ", np.mean(tar_con_pie_not_sli_val_L)])
+            spamwriter_log.writerow('')
+
+            # If pie \wedge slice significantly increases the occurrence of the target
+            if t > 0 and p < p_val_cutoff:
+                return False
 
     return True
 
