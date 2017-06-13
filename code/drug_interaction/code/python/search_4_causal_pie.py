@@ -101,9 +101,6 @@ max_time_stamp = 0
 # The minimum size of the samples
 sample_size_cutoff = 30
 
-# The number of the figures
-fig_num = 0
-
 
 # Initialization
 # @param        src_data_file           source data file, which includes variables that can be the causes, the data are of the following form
@@ -827,16 +824,6 @@ def expand(target, pie_L, tar_con_pie_time_LL, root):
     if min_slice is None:
         return [pie_L, tar_con_pie_time_LL, root, min_slice]
 
-    # Draw the figure
-    plt.plot(X, Y, 'ro')
-    plt.xticks(X, X_lab)
-    plt.xlabel('Slice')
-    plt.ylabel('Probability')
-    global fig_num
-    plt.savefig(fig_dir + 'fig ' + str(fig_num) + ' expand ' + str(decode(pie_L)))
-    fig_num += 1
-    plt.close()
-
     # Update tar_con_pie_time_LL
     tar_con_pie_time_LL = get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, min_slice)
 
@@ -1041,16 +1028,6 @@ def shrink(target, pie_L):
     # If the pie cannot be shrinked anymore
     if max_slice is None:
         return [pie_L, max_tar_con_pie_time_LL, max_slice]
-
-    # Draw the figure
-    plt.plot(X, Y, 'ro')
-    plt.xticks(X, X_lab)
-    plt.xlabel('Slice')
-    plt.ylabel('Probability')
-    global fig_num
-    plt.savefig(fig_dir + 'fig ' + str(fig_num) + ' shrink ' + str(decode(pie_L)))
-    fig_num += 1
-    plt.close()
 
     # Remove max_slice from the pie
     pie_L.remove(max_slice)
