@@ -1,5 +1,3 @@
-
-
 # Please cite the following paper when using the code
 
 
@@ -22,9 +20,15 @@ import math
 # _LL_Dic : indicates the data structure is a dictionary, where the value is a list of list
 
 
-# Define global variables
+# Global variables
 # The list of time windows, where each window, win, is a list, [win_start, win_end]
 win_LL = []
+
+# The list of timepoints
+time_series_L = []
+
+# The list of slices
+slice_LL = []
 
 # The dictionary of sources
 # key: var
@@ -41,12 +45,6 @@ tar_Dic = {}
 # val: 1
 time_series_Dic = {}
 
-# The list of timepoints
-time_series_L = []
-
-# The maximum time stamp
-max_time_stamp = 0
-
 # The dictionary of value
 # key: var->time
 # val: value of var at the time
@@ -57,25 +55,54 @@ val_Dic = {}
 # val: the vars occur at the time
 var_Dic = {}
 
-# The list of slices
-slice_LL = []
+# The dictionary of P(target)
+# key: target
+# val: P(target)
+pro_Dic = {}
+
+# The dictionary of 1 - (target)
+# key: target
+# val: 1 - P(target)
+not_pro_Dic = {}
+
+# The dictionary of #(target), that is the number of timepoints where the target is measured
+# key: target
+# val: #(target)
+num_Dic = {}
+
+# The dictionary of #(target = 1), that is the number of timepoints where the target is 1
+# key: target
+# val: #(target = 1)
+num_1_Dic = {}
+
+# The dictionary records the removed slice
+# key: slice
+# val: 1
+removed_Dic = {}
+
+# The dictionary records the replaced slice relative to the root
+# key: slice
+# val: 1
+replaced_Dic = {}
+
+# The dictionary records the list of pies for which the slice was conditioned to check the sufficiency condition
+# key: slice
+# val: list of pies
+conditioned_Dic = {}
 
 # The dictionary of pies
 # key: target
 # val: list of pies
 pie_Dic = {}
 
+# The maximum time stamp
+max_time_stamp = 0
+
+# The minimum size of the samples
 sample_size_cutoff = 30
 
+# The number of the figures
 fig_num = 0
-
-pro_Dic = {}
-
-not_pro_Dic = {}
-
-num_Dic = {}
-
-num_1_Dic = {}
 
 
 # Initialization
@@ -123,7 +150,7 @@ def initialization(src_data_file, tar_data_file):
 #                                  False, if source data
 def load_data(data_file, src_F):
     with open(data_file, 'r') as f:
-        spamreader = list(csv.reader(f, delimiter = ','))
+        spamreader = list(csv.reader(f, delimiter=','))
 
         # Get data_type_Dic, val_Dic, src_Dic and tar_Dic
         # From the second line to the last (since the first line is the header)
@@ -221,83 +248,93 @@ def search():
         # The first slice added to the pie
         root = None
 
-        # The dictionary records the visited slice
+        # The dictionary records the removed slice
         # key: slice
         # val: 1
-        visited_Dic = {}
-
-        # The dictionary records the removed slice relative to the root
-        # key: root->slice
-        # val: 1
+        global removed_Dic
         removed_Dic = {}
 
-        # The dictionary records the list of pies for which the slice was used to check the sufficiency condition
+        # The dictionary records the replaced slice
+        # key: slice
+        # val: 1
+        global replaced_Dic
+        replaced_Dic = {}
+
+        # The dictionary records the list of pies for which the slice was conditioned to check the sufficiency condition
         # key: slice
         # val: list of pies
-        check_suf_con_Dic = {}
+        global conditioned_Dic
+        conditioned_Dic = {}
 
         # The loop continues if there are unvisited nodes
-        while len(visited_Dic) < len(slice_LL):
+        while len(removed_Dic) < len(slice_LL):
             # Flag eno_sam_F, indicating whether there is enough sample
             # Flag suf_F, indicating whether the pie is sufficient
-            pie_L, tar_con_pie_time_LL, eno_sam_F, suf_F = check_suf_con(target, pie_L, tar_con_pie_time_LL, visited_Dic, check_suf_con_Dic)
+            pie_L, tar_con_pie_time_LL, eno_sam_F, suf_F = check_suf_con(target, pie_L, tar_con_pie_time_LL)
 
             # If there is enough sample
             if eno_sam_F is True:
                 # The loop continues if the pie is not sufficient (to produce the effect)
                 while suf_F is False:
-                    [pie_L, tar_con_pie_time_LL, root, min_slice] = expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic)
+                    [pie_L, tar_con_pie_time_LL, root, min_slice] = expand(target, pie_L, tar_con_pie_time_LL, root)
                     # If the pie cannot be expanded anymore
                     if min_slice is None:
                         break
                     # Flag eno_sam_F, indicating whether there is enough sample
                     # Flag suf_F, indicating whether the pie is sufficient
-                    pie_L, tar_con_pie_time_LL, eno_sam_F, suf_F = check_suf_con(target, pie_L, tar_con_pie_time_LL, visited_Dic, check_suf_con_Dic)
+                    pie_L, tar_con_pie_time_LL, eno_sam_F, suf_F = check_suf_con(target, pie_L, tar_con_pie_time_LL)
 
             # If the pie is sufficient
             if suf_F is True:
                 # Check the necessary condition (to produce the effect) and remove unnecessary slices
                 # Flag removed_F, indicating whether there are removed necessary slices
-                pie_L, removed_F = check_nec_con(target, pie_L, root, visited_Dic, removed_Dic)
+                pie_L, removed_F = check_nec_con(target, pie_L)
 
                 # If all the slices in the pie are necessary
                 if removed_F is False:
-                    # Mark each slice in the pie as visited (i.e, adding the key to the dict)
-                    for index in pie_L:
-                        visited_Dic[index] = 1
+                    # Check whether the pie has been found
+                    if not target in pie_Dic or not is_in(pie_L, pie_Dic[target]):
+                        # Update removed_Dic
+                        # Mark each slice in the pie as removed (i.e, adding the key to the dict)
+                        for index in pie_L:
+                            removed_Dic[index] = 1
 
-                    # Remove the influence of the pie from the data
-                    remove_inf(target, tar_con_pie_time_LL)
+                        # Remove the influence of the pie from the data
+                        remove_inf(target, tar_con_pie_time_LL)
 
-                    # Write the pie to spamwriter_pie
-                    spamwriter_pie.writerow(['causal pie of ' + target + ': ', decode(pie_L)])
-                    f_pie.flush()
-                    # Output the pie
-                    print(['causal pie of ' + target + ': ', decode(pie_L)])
+                        # Write the pie to spamwriter_pie
+                        spamwriter_pie.writerow(['causal pie of ' + target + ': ', decode(pie_L)])
+                        f_pie.flush()
+                        # Output the pie
+                        print(['causal pie of ' + target + ': ', decode(pie_L)])
+
+                    # Mark the root as removed (i.e, adding the key to the dict)
+                    removed_Dic[root] = 1
 
                     # Clear
                     pie_L = []
                     tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
                     root = None
-                    removed_Dic = {}
+                    replaced_Dic = {}
                 else:
                     # Update
                     tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
 
             else:
                 # Shrink
-                [pie_L, tar_con_pie_time_LL, max_slice] = shrink(target, pie_L, root, visited_Dic, removed_Dic)
+                [pie_L, tar_con_pie_time_LL, max_slice] = shrink(target, pie_L)
 
                 # If the pie cannot be shrinked anymore
                 if max_slice is None:
-                    # Update visited_Dic
-                    visited_Dic[root] = 1
+                    # Update removed_Dic
+                    # Mark the root as removed (i.e, adding the key to the dict)
+                    removed_Dic[root] = 1
 
                     # Clear
                     pie_L = []
                     tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
                     root = None
-                    removed_Dic = {}
+                    replaced_Dic = {}
 
 
 # Get the list of list of timepoints where the target can be changed by the pie
@@ -386,7 +423,7 @@ def get_start_end_Dic(pie_L):
 
 
 # Check sufficient condition, i.e., P(target | pie) >> P(target)
-def check_suf_con(target, pie_L, tar_con_pie_time_LL, visited_Dic, check_suf_con_Dic):
+def check_suf_con(target, pie_L, tar_con_pie_time_LL):
     # Output log file
     spamwriter_log.writerow(["check_suf_con target: ", target])
     spamwriter_log.writerow(["check_suf_con pie_L: ", decode(pie_L)])
@@ -442,18 +479,22 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, visited_Dic, check_suf_con
     f_log.flush()
 
     # If the pie does not significantly increase the occurrence of the target
-    if p_val >= p_val_cutoff:
+    if p_val >= p_val_cutoff_suf:
         return [pie_L, tar_con_pie_time_LL, eno_sam_F, suf_F]
 
-    # Check each slice that has not been used for checking the sufficiency for the curren pie
-    for index in range(len(slice_LL)):
-        if index in check_suf_con_Dic and is_in(pie_L, check_suf_con_Dic[index]) is True:
-            continue
+    # The sum of vote of the slices, 0 by default
+    vote_sum = 0
 
-        # Update check_suf_Dic
-        if not index in check_suf_con_Dic:
-            check_suf_con_Dic[index] = []
-        check_suf_con_Dic[index].append(list(pie_L))
+    # Check each slice that has not been used for checking the sufficiency for the current pie
+    for index in range(len(slice_LL)):
+        # Get pie_vote_F_L
+        pie_vote_F_L = get_pie_vote_F_L(pie_L, index)
+        if pie_vote_F_L is not None:
+            # Get the vote of the slice
+            vote_F =  pie_vote_F_L[1]
+            # Update vote_sum
+            vote_sum += vote_F
+            continue
 
         # Output log file
         spamwriter_log.writerow(["check_suf_con slice_LL[index]: ", slice_LL[index]])
@@ -466,14 +507,24 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, visited_Dic, check_suf_con
         tar_con_pie_not_sli_time_LL = get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
 
         # Get P(target | pie \ slice)
-        pro_tar_con_pie_not_sli, num_tar_con_pie_not_sli, num_tar_1_con_pie_not_sli = get_pro_num_tar_con_pie(target, tar_con_pie_not_sli_time_LL)
+        pro_tar_con_pie_not_sli, num_tar_con_pie_not_sli, num_tar_1_con_pie_not_sli = get_pro_num_tar_con_pie(target,
+                                                                                                              tar_con_pie_not_sli_time_LL)
         spamwriter_log.writerow(["check_suf_con pro_tar_con_pie_not_sli: ", pro_tar_con_pie_not_sli])
         spamwriter_log.writerow(["check_suf_con num_tar_con_pie_not_sli: ", num_tar_con_pie_not_sli])
         spamwriter_log.writerow(["check_suf_con num_tar_1_con_pie_not_sli: ", num_tar_1_con_pie_not_sli])
         f_log.flush()
 
+        # Initialize conditioned_Dic
+        if not index in conditioned_Dic:
+            conditioned_Dic[index] = []
+
+        # Initialize the vote of the slice, 0 by default
+        vote_F = 0
+
         # If P(target | pie) is None
         if pro_tar_con_pie_not_sli is None:
+            # Update conditioned_Dic
+            conditioned_Dic[index].append([list(pie_L), vote_F])
             continue
 
         # Get numerator
@@ -487,6 +538,8 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, visited_Dic, check_suf_con
 
         # If denominator is zero
         if denominator == 0:
+            # Update conditioned_Dic
+            conditioned_Dic[index].append([list(pie_L), vote_F])
             continue
 
         # Get z value
@@ -500,33 +553,72 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, visited_Dic, check_suf_con
         spamwriter_log.writerow('')
         f_log.flush()
 
-        # If the pie does not significantly increase the occurrence of the target
-        if p_val >= p_val_cutoff:
+        # If the pie \ slice does not significantly increase the occurrence of the target
+        if p_val >= p_val_cutoff_suf:
+            # Update the vote of the slice
+            vote_F = -1
+
+            # Update the sum of vote of the slices
+            vote_sum += vote_F
+
+            # Update conditioned_Dic
+            conditioned_Dic[index].append([list(pie_L), vote_F])
+
             # Update tar_con_pie_time_LL
             tar_con_pie_time_LL = get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, index)
 
             # Add index to the pie
             pie_L.append(index)
 
-            # Update visited_Dic, now index has been visited
-            visited_Dic[index] = 1
-
             return [pie_L, tar_con_pie_time_LL, eno_sam_F, suf_F]
+        else:
+            # Update the vote of the slice
+            vote_F = 1
 
-    # Update suf_F, since the pie is sufficient
-    suf_F = True
+            # Update the sum of vote of the slices
+            vote_sum += vote_F
+
+            # Update conditioned_Dic
+            conditioned_Dic[index].append([list(pie_L), vote_F])
+
+    # Output log file
+    spamwriter_log.writerow(["check_suf_con vote_sum: ", vote_sum])
+    spamwriter_log.writerow('')
+    f_log.flush()
+
+    # Update suf_F
+    # If more than half of the slices vote for the pie being sufficient
+    if vote_sum > 0:
+        suf_F = True
+    else:
+        suf_F = False
 
     return [pie_L, tar_con_pie_time_LL, eno_sam_F, suf_F]
 
 
+# Get pie_vote_F_L
+def get_pie_vote_F_L(pie_L, index):
+    if not index in conditioned_Dic:
+        return None
+    else:
+        pie_vote_F_LL = conditioned_Dic[index]
+        for pie_vote_F_L in pie_vote_F_LL:
+            if pie_equal(pie_L, pie_vote_F_L[0]):
+                return pie_vote_F_L
+
+    return None
+
+# Check whether pie_LL is in pie_LL
 def is_in(pie_L, pie_LL):
     for i in range(len(pie_LL)):
+        # If the two pies are the same
         if pie_equal(pie_L, pie_LL[i]) is True:
             return True
 
     return False
 
 
+# Check whether the two pies are the same
 def pie_equal(pie_i_L, pie_j_L):
     for index in pie_i_L:
         if not index in pie_j_L:
@@ -589,7 +681,6 @@ def get_pro_num_tar_con_pie(target, time_LL):
     if denominator != 0:
         numerator = num_tar_con_pie - num_tar_1_con_pie
         pro_tar_con_pie = 1 - numerator / denominator
-        pro_tar_con_pie = abs(pro_tar_con_pie)
 
     return [pro_tar_con_pie, num_tar_con_pie, num_tar_1_con_pie]
 
@@ -683,7 +774,7 @@ def get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL):
 
 
 # Expand the pie by adding the slice that yields the minimum probalbity of the target that can be changed by the pie but not the slice
-def expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic):
+def expand(target, pie_L, tar_con_pie_time_LL, root):
     # This is the slice that yields the minimum probability of the target
     min_slice = None
     # This is the minimum probability
@@ -696,9 +787,12 @@ def expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic):
 
     # For each slice in slice_LL
     for index in range(len(slice_LL)):
-        # If the slice has not been visited or removed yet
-        # if not index in visited_Dic and (root is None or root not in removed_Dic or index not in removed_Dic[root]):
-        if not index in visited_Dic and (root is None or root not in removed_Dic or index not in removed_Dic[root]):
+        # If the slice has not been included,
+        # or removed,
+        # or replaced yet
+        if (not index in pie_L
+            and not index in removed_Dic
+            and not index in replaced_Dic):
 
             spamwriter_log.writerow(["expand slice_LL[index]: ", slice_LL[index]])
             f_log.flush()
@@ -762,9 +856,6 @@ def expand(target, pie_L, tar_con_pie_time_LL, root, visited_Dic, removed_Dic):
         spamwriter_log.writerow(['root' + ': ', slice_LL[root]])
         f_log.flush()
 
-    # Update visited_Dic, now min_slice has been visited
-    visited_Dic[min_slice] = 1
-
     return [pie_L, tar_con_pie_time_LL, root, min_slice]
 
 
@@ -802,7 +893,7 @@ def get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, index):
 
 
 # Check the necessary condition and exclude the slices that are not in the causal pie
-def check_nec_con(target, pie_L, root, visited_Dic, removed_Dic):
+def check_nec_con(target, pie_L):
     # Output log file
     spamwriter_log.writerow(["check_nec_con target: ", target])
     spamwriter_log.writerow(["check_nec_con pie_L: ", decode(pie_L)])
@@ -837,10 +928,6 @@ def check_nec_con(target, pie_L, root, visited_Dic, removed_Dic):
         spamwriter_log.writerow(["check_nec_con num_tar_1_con_pie_not_sli: ", num_tar_1_con_pie_not_sli])
         f_log.flush()
 
-        # If P(target | pie) is None or not enough sample
-        #if pro_tar_con_pie_not_sli is None or num_tar_con_pie_not_sli <= sample_size_cutoff:
-            #continue
-
         if pro_tar_con_pie_not_sli is None:
             continue
 
@@ -871,19 +958,13 @@ def check_nec_con(target, pie_L, root, visited_Dic, removed_Dic):
         spamwriter_log.writerow('')
         f_log.flush()
 
-        # If pie \ slice still significantly increase the occurrence of the target
-        if p_val < p_val_cutoff:
+        # If P(target | pie \ slice) < P(target)
+        if p_val < p_val_cutoff_nec:
             # Remove the slice (since it is not necessary)
             pie_L.remove(index)
 
-            # Update visited_Dic
-            del visited_Dic[index]
-
-            # Update removed_Dic
-            if not root in removed_Dic:
-                removed_Dic[root] = {}
-            if not index in removed_Dic[root]:
-                removed_Dic[root][index] = 1
+            # Update replaced_Dic
+            replaced_Dic[index] = 1
 
     return [pie_L, len(pie_L) != len(backup_pie_L)]
 
@@ -899,7 +980,7 @@ def remove_inf(target, tar_con_pie_time_LL):
 
 
 # Shrink the pie by removing the slice that yields the maximum probability of the target that can be changed by the remaining pie but not the slice
-def shrink(target, pie_L, root, visited_Dic, removed_Dic):
+def shrink(target, pie_L):
     # This is the slice that yields the maximum probability of the target
     max_slice = None
     # This is the maximum probability
@@ -980,20 +1061,14 @@ def shrink(target, pie_L, root, visited_Dic, removed_Dic):
     # Output the pie
     print(['shrink pie_L: ', decode(pie_L)])
 
-    # Update visited_Dic, now max_slice has not been visited
-    del visited_Dic[max_slice]
-
-    # Update removed_Dic
-    if not root in removed_Dic:
-        removed_Dic[root] = {}
-    if not max_slice in removed_Dic[root]:
-        removed_Dic[root][max_slice] = 1
+    # Update replaced_Dic
+    replaced_Dic[max_slice] = 1
 
     return [pie_L, max_tar_con_pie_time_LL, max_slice]
 
 
 # Main function
-if __name__=="__main__":
+if __name__ == "__main__":
     # get parameters from command line
     # please see details of the parameters in the readme file
     src_data_file = sys.argv[1]
@@ -1002,18 +1077,19 @@ if __name__=="__main__":
     log_file = sys.argv[4]
     fig_dir = sys.argv[5]
     pie_size_cutoff = int(sys.argv[6])
-    p_val_cutoff = float(sys.argv[7])
-    sample_size_cutoff = int(sys.argv[8])
-    lag_L = sys.argv[9:]
+    p_val_cutoff_suf = float(sys.argv[7])
+    p_val_cutoff_nec = float(sys.argv[8])
+    sample_size_cutoff = int(sys.argv[9])
+    lag_L = sys.argv[10:]
 
     # Initialization
     initialization(src_data_file, tar_data_file)
 
     with open(log_file, 'w') as f_log:
         # Write the log file
-        spamwriter_log = csv.writer(f_log, delimiter = ' ')
+        spamwriter_log = csv.writer(f_log, delimiter=' ')
         with open(pie_file, 'w') as f_pie:
             # Write the causal pie file
-            spamwriter_pie = csv.writer(f_pie, delimiter = ' ')
+            spamwriter_pie = csv.writer(f_pie, delimiter=' ')
             # Search for the causal pies
             search()
