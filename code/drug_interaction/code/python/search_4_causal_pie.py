@@ -490,6 +490,10 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL):
         sample_size_cutoff_met_F = True
         return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
+    # If P(target | pie) < 0
+    if pro_tar_con_pie < 0:
+        return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
+
     # Behrens-Welch test (unpaired t test)
     mean1 = pro_tar_con_pie
     std1 = math.sqrt(mean1 * (1 - mean1))
@@ -502,7 +506,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL):
     t_val, p_val = stats.ttest_ind_from_stats(mean1, std1, nobs1, mean2, std2, nobs2)
 
     # Output log file
-    spamwriter_log.writerow(["check_suf_con z_val: ", t_val])
+    spamwriter_log.writerow(["check_suf_con p_val: ", t_val])
     spamwriter_log.writerow(["check_suf_con p_val: ", p_val])
     spamwriter_log.writerow('')
     f_log.flush()
@@ -559,6 +563,16 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL):
             conditioned_Dic[index].append([list(pie_L), vote_F])
 
             continue
+
+        # If P(target | pie \ slice) < 0
+        if pro_tar_con_pie_not_sli < 0:
+            # The slice can vote for insufficiency
+            vote_F = -1
+
+            # Update conditioned_Dic
+            conditioned_Dic[index].append([list(pie_L), vote_F])
+
+            return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
         # Behrens-Welch test (unpaired t test)
         mean1 = pro_tar_con_pie_not_sli
