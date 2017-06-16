@@ -102,6 +102,9 @@ max_time_stamp = 0
 # The minimum size of the samples
 sample_size_cutoff = 30
 
+# The number of pies visited
+check_suf_con_cou = 0
+
 
 # Initialization
 # @param        src_data_file           source data file, which includes variables that can be the causes, the data are of the following form
@@ -259,6 +262,11 @@ def ids(target):
             # If pie_size_cutoff has been met
             if pie_size_cutoff_met_tem_F is True:
                 pie_size_cutoff_met_F = True
+
+        # Write the number of check_suf_con to spamwriter_log
+        spamwriter_log.writerow(['check_suf_con_cou: ', check_suf_con_cou])
+        spamwriter_log.writerow()
+        f_pie.flush()
 
         if pie_size_cutoff_met_F is False:
             break
@@ -471,6 +479,10 @@ def get_start_end_Dic(pie_L):
 
 # Check sufficient condition, i.e., P(target | pie) >> P(target)
 def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_not_sli):
+    # Update check_suf_con_cou
+    global check_suf_con_cou
+    check_suf_con_cou += 1
+
     # Output log file
     spamwriter_log.writerow(["check_suf_con target: ", target])
     spamwriter_log.writerow(["check_suf_con pie_L: ", decode(pie_L)])
