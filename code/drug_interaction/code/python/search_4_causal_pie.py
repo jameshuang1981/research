@@ -490,30 +490,35 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL):
         sample_size_cutoff_met_F = True
         return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
-    # If P(target | pie) < 0
-    if pro_tar_con_pie < 0:
+    # Get numerator
+    pro_tar = pro_Dic[target]
+    numerator = pro_tar_con_pie - pro_tar
+    spamwriter_log.writerow(["check_suf_con numerator: ", numerator])
+    f_log.flush()
+
+    # Get denominator
+    num_tar = num_Dic[target]
+    num_tar_1 = num_1_Dic[target]
+    pro = (num_tar_1_con_pie + num_tar_1) / (num_tar_con_pie + num_tar)
+    denominator = math.sqrt(pro * (1 - pro) * (1 / num_tar_con_pie + 1 / num_tar))
+
+    # If denominator is zero
+    if denominator == 0:
         return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
-    # Behrens-Welch test (unpaired t test)
-    mean1 = pro_tar_con_pie
-    std1 = math.sqrt(mean1 * (1 - mean1))
-    nobs1 = num_tar_con_pie
-
-    mean2 = pro_Dic[target]
-    std2 = math.sqrt(mean2 * (1 - mean2))
-    nobs2 = num_Dic[target]
-
-    t_val, p_val = stats.ttest_ind_from_stats(mean1, std1, nobs1, mean2, std2, nobs2)
+    # Get z value
+    z_val = numerator / denominator
+    # Get p value
+    p_val = stats.norm.sf(z_val)
 
     # Output log file
-    spamwriter_log.writerow(["check_suf_con p_val: ", t_val])
+    spamwriter_log.writerow(["check_suf_con z_val: ", z_val])
     spamwriter_log.writerow(["check_suf_con p_val: ", p_val])
     spamwriter_log.writerow('')
     f_log.flush()
 
-    if (t_val is None or p_val is None
-        # If the pie does not significantly increase the occurrence of the target
-        or t_val < 0 or p_val / 2 >= p_val_cutoff_suf):
+    # If the pie does not significantly increase the occurrence of the target
+    if p_val >= p_val_cutoff_suf:
         return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
     # Check the sufficiency conditioned on pie \ slice
@@ -564,32 +569,38 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL):
 
             continue
 
-        # If P(target | pie \ slice) < 0
-        if pro_tar_con_pie_not_sli < 0:
-            # The slice can vote for insufficiency
-            vote_F = -1
+        # Get numerator
+        numerator = pro_tar_con_pie_not_sli - pro_tar
+        spamwriter_log.writerow(["check_suf_con numerator: ", numerator])
+        f_log.flush()
+
+        # Get denominator
+        pro = (num_tar_1_con_pie_not_sli + num_tar_1) / (num_tar_con_pie_not_sli + num_tar)
+        denominator = math.sqrt(pro * (1 - pro) * (1 / num_tar_con_pie_not_sli + 1 / num_tar))
+
+        # If denominator is zero
+        if denominator == 0:
+            # The slice cannot vote for insufficiency
+            vote_F = 0
 
             # Update conditioned_Dic
             conditioned_Dic[index].append([list(pie_L), vote_F])
 
-            return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
+            continue
 
-        # Behrens-Welch test (unpaired t test)
-        mean1 = pro_tar_con_pie_not_sli
-        std1 = math.sqrt(mean1 * (1 - mean1))
-        nobs1 = num_tar_con_pie_not_sli
-
-        t_val, p_val = stats.ttest_ind_from_stats(mean1, std1, nobs1, mean2, std2, nobs2)
+        # Get z value
+        z_val = numerator / denominator
+        # Get p value
+        p_val = stats.norm.sf(z_val)
 
         # Output log file
-        spamwriter_log.writerow(["check_suf_con z_val: ", t_val])
+        spamwriter_log.writerow(["check_suf_con z_val: ", z_val])
         spamwriter_log.writerow(["check_suf_con p_val: ", p_val])
         spamwriter_log.writerow('')
         f_log.flush()
 
-        if (t_val is None or p_val is None
-            # If the pie \ slice still significantly increases the occurrence of the target
-            or t_val > 0 and p_val / 2 < p_val_cutoff_suf):
+        # If the pie \ slice still significantly increases the occurrence of the target
+        if p_val < p_val_cutoff_suf:
             # The slice cannot vote for insufficiency
             vote_F = 0
 
@@ -597,7 +608,6 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL):
             conditioned_Dic[index].append([list(pie_L), vote_F])
         # If the pie \ slice does not significantly increase the occurrence of the target
         else:
-            # Update the vote of the slice, which votes that the pie is not sufficient
             vote_F = -1
 
             # Update conditioned_Dic
