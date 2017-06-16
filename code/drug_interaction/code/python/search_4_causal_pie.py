@@ -656,16 +656,6 @@ def is_a_sli(index, pie_LL):
     return False
 
 
-# Check whether pie_LL is in pie_LL
-def is_a_pie(pie_L, pie_LL):
-    for i in range(len(pie_LL)):
-        # If the two pies are the same
-        if pie_equal(pie_L, pie_LL[i]) is True:
-            return True
-
-    return False
-
-
 # Check whether the two pies are the same
 def pie_equal(pie_i_L, pie_j_L):
     for index in pie_i_L:
@@ -757,34 +747,6 @@ def get_pro_num_tar_con_pie(target, time_LL):
     return [pro_tar_con_pie, num_tar_con_pie, num_tar_1_con_pie]
 
 
-# Get the value of target in the time slots
-def get_tar_val_L_time_slot(target, time_LL):
-    # Initialization
-    tar_val_L = []
-
-    if time_LL is None or len(time_LL) == 0:
-        return tar_val_L
-
-    # For each time_L, get the maximum value
-    for time_L in time_LL:
-        # Get temp_L
-        # Initialization
-        temp_L = []
-        for time in time_L:
-            if time in val_Dic[target]:
-                temp_L.append(val_Dic[target][time])
-
-        if len(temp_L) == 0:
-            continue
-
-        # If temp_L does not contain removed value of the target
-        if min(temp_L) != -1:
-            # Add the maximum value in the list (so that if the target occurs in the window, it counts as occurred in the window)
-            tar_val_L.append(max(temp_L))
-
-    return tar_val_L
-
-
 # Get the minimum window length of slices in the pie
 def get_min_win_len(pie_L):
     # Initialization
@@ -805,20 +767,6 @@ def get_min_win_len(pie_L):
             min_win_len = win_len
 
     return min_win_len
-
-
-# Get the list of target's value that can be changed by the pie but not the slice
-def get_tar_con_pie_not_sli_val_L(target, tar_con_pie_time_LL, index):
-    # Get the list of target's value that can be changed by the slice
-    tar_con_sli_time_LL = get_tar_con_pie_time_LL(target, [index])
-
-    # Get the list of list of timepoints where the target can be changed by the pie but not the slice
-    tar_con_pie_not_sli_time_LL = get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
-
-    # Get the list of target's value that can be changed by the pie but not the slice
-    tar_con_pie_not_sli_val_L = get_tar_val_L_time_slot(target, tar_con_pie_not_sli_time_LL)
-
-    return tar_con_pie_not_sli_val_L
 
 
 # Get the list of list of timepoints where the target can be changed by the pie but not the slice
