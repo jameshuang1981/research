@@ -342,11 +342,19 @@ def dls(target, pie_size_cutoff):
             # Add the pie to pie_Dic
             pie_Dic[target].append(pie_L)
 
-            # Update found_Dic
-            # Mark each slice in the pie and the duplicated ones as removed (i.e, adding the key to the dict)
-            for index in range(len(slice_LL)):
-                if duplicate(pie_L, index):
+            # Search for one pie
+            if sea_typ == 1:
+                # Update found_Dic
+                # Mark all the slices in slice_LL as removed (i.e, adding the key to the dict)
+                for index in range(len(slice_LL)):
                     found_Dic[index] = 1
+            # Search for all the pies
+            else:
+                # Update found_Dic
+                # Mark each slice in the pie and the duplicated ones as removed (i.e, adding the key to the dict)
+                for index in range(len(slice_LL)):
+                    if duplicate(pie_L, index):
+                        found_Dic[index] = 1
 
             # Remove the influence of the pie from the data
             remove_inf(target, tar_con_pie_time_LL)
@@ -1003,7 +1011,8 @@ if __name__ == "__main__":
     pie_size_cutoff = int(sys.argv[6])
     p_val_cutoff_suf = float(sys.argv[7])
     sample_size_cutoff = int(sys.argv[8])
-    lag_L = sys.argv[9:]
+    sea_typ = int(sys.argv[9])
+    lag_L = sys.argv[10:]
 
     # Initialization
     initialization(src_data_file, tar_data_file)
