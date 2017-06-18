@@ -224,7 +224,9 @@ def get_tar_statistics():
     for target in tar_Dic:
         val_L = []
         for time in val_Dic[target]:
-            val_L.append(val_Dic[target][time])
+            # Remove the influence of the pie from the data
+            if val_Dic[target][time] != -1:
+                val_L.append(val_Dic[target][time])
 
         pro_Dic[target] = np.mean(val_L)
         not_pro_Dic[target] = 1 - pro_Dic[target]
@@ -300,13 +302,16 @@ def dls(target, pie_size_cutoff):
 
     while True:
         # Check the sufficient condition (to produce the target)
+        # Flag sample_size_cutoff_met_F, indicating whether there is enough sample
         # Flag suf_F, indicating whether the pie is sufficient
-        suf_F = check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie)
+        sample_size_cutoff_met_F, suf_F = check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie)
 
         # The loop continues if
         #     1) the size of the pie is smaller than pie_size_cutoff,
-        # and 2) the pie is not sufficient
+        # and 2) there is enough sample,
+        # and 3) the pie is not sufficient
         while (get_num_of_uni_nam(pie_L) < pie_size_cutoff
+               and sample_size_cutoff_met_F is False
                and suf_F is False):
             # The size of the pie before expanding
             pie_size_bef_exp = len(pie_L)
@@ -324,15 +329,19 @@ def dls(target, pie_size_cutoff):
                 root = pie_L[0]
 
             # Check the sufficient condition
+            # Flag sample_size_cutoff_met_F, indicating whether there is enough sample
             # Flag suf_F, indicating whether the pie is sufficient
-            suf_F = check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie)
+            sample_size_cutoff_met_F, suf_F = check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie)
 
         # If pie_size_cutoff has been met, update pie_size_cutoff_met_F
         if get_num_of_uni_nam(pie_L) >= pie_size_cutoff:
             pie_size_cutoff_met_F = True
 
-        # If the pie is sufficient
-        if suf_F is True:
+        # If enough sample and the pie is sufficient
+        if sample_size_cutoff_met_F is False and suf_F is True:
+            # The size of the pie before checking the necessary condition (to produce the target)
+            pie_size_bef_check_nec_con = len(pie_L)
+
             # Check the necessary condition and remove unnecessary slices
             pie_L = check_nec_con(target, pie_L)
 
@@ -359,6 +368,9 @@ def dls(target, pie_size_cutoff):
 
             # Remove the influence of the pie from the data
             remove_inf(target, tar_con_pie_time_LL)
+
+            # Update the statistics (pro_Dic, not_pro_Dic, num_Dic, and num_1_Dic) of the targets
+            get_tar_statistics()
 
             # Write the pie to spamwriter_pie
             spamwriter_pie.writerow(['causal pie of ' + target + ': ', decode(pie_L)])
@@ -481,12 +493,14 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
     spamwriter_log.writerow(["check_suf_con pie_L: ", decode(pie_L)])
     f_log.flush()
 
+    # Flag, indicating whether there is enough sample, False by default
+    sample_size_cutoff_met_F = False
     # Flag, indicating whether the pie is sufficient, False by default
     suf_F = False
 
     # If the pie is None or empty
     if pie_L is None or len(pie_L) == 0:
-        return suf_F
+        return [sample_size_cutoff_met_F, suf_F]
 
     # Get P(target | pie)
     pro_tar_con_pie, num_tar_con_pie, num_tar_1_con_pie = get_pro_num_tar_con_pie(target, tar_con_pie_time_LL)
@@ -495,9 +509,14 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
     spamwriter_log.writerow(["check_suf_con num_tar_1_con_pie: ", num_tar_1_con_pie])
     f_log.flush()
 
+    # If not enough sample
+    if num_tar_con_pie <= sample_size_cutoff:
+        # Update sample_size_cutoff_met_F, since there is no enough sample
+        sample_size_cutoff_met_F = True
+
     # If P(target | pie) is None
     if pro_tar_con_pie is None:
-        return suf_F
+        return [sample_size_cutoff_met_F, suf_F]
 
     # Get numerator
     pro_tar = pro_Dic[target]
@@ -513,7 +532,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
 
     # If denominator is zero
     if denominator == 0:
-        return suf_F
+        return [sample_size_cutoff_met_F, suf_F]
 
     # Get z value
     z_val = numerator / denominator
@@ -528,7 +547,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
 
     # If the pie does not significantly increase the occurrence of the target
     if p_val >= p_val_cutoff_pie:
-        return suf_F
+        return [sample_size_cutoff_met_F, suf_F]
 
     # Check the sufficiency conditioned on pie \ slice
     for index in range(len(slice_LL)):
@@ -544,7 +563,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
             # Get the vote of the slice
             vote_F =  pie_vote_F_L[1]
             if vote_F is not None and vote_F >= p_val_cutoff_pie_not_sli:
-                return suf_F
+                return [sample_size_cutoff_met_F, suf_F]
 
         # Output log file
         spamwriter_log.writerow(["check_suf_con slice_LL[index]: ", slice_LL[index]])
@@ -616,12 +635,12 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
 
         # If the pie \ slice does not significantly increase the occurrence of the target
         if p_val >= p_val_cutoff_pie_not_sli:
-            return suf_F
+            return [sample_size_cutoff_met_F, suf_F]
 
     # Update suf_F
     suf_F = True
 
-    return suf_F
+    return [sample_size_cutoff_met_F, suf_F]
 
 
 # Get pie_vote_F_L
@@ -893,8 +912,9 @@ def check_nec_con(target, pie_L):
         temp_L, tar_con_temp_time_LL = shrink(target, temp_L)
 
         # Check the sufficient condition (to produce the target)
+        # Flag sample_size_cutoff_met_F, indicating whether there is enough sample
         # Flag suf_F, indicating whether the pie is sufficient
-        suf_F = check_suf_con(target, temp_L, tar_con_temp_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_not_sli)
+        sample_size_cutoff_met_F, suf_F = check_suf_con(target, temp_L, tar_con_temp_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_not_sli)
 
         # If the pie \ slice still significantly increases the occurrence of the target
         if suf_F is True:
