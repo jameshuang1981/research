@@ -964,9 +964,6 @@ def check_nec_con(target, pie_L):
     spamwriter_log.writerow(["check_nec_con pie_L: ", decode(pie_L)])
     f_log.flush()
 
-    # Remove the slices that are supersets of the others
-    #pie_L = remove_sup_set(pie_L)
-
     while True:
         # Clear Replaced_Dic
         global Replaced_Dic
@@ -1025,9 +1022,6 @@ def remove_inf(target, tar_con_pie_time_LL):
 
 # Shrink the pie by removing the slice that yields the maximum probability of the target that can be changed by the remaining pie but not the slice
 def shrink(target, pie_L):
-    # Remove the slices that are supersets of the others
-    #pie_L = remove_sup_set(pie_L)
-
     # This is the slice that yields the maximum probability of the target
     max_slice = None
     # This is the maximum probability
@@ -1098,37 +1092,6 @@ def shrink(target, pie_L):
     return [pie_L, max_tar_con_pie_time_LL]
 
 
-# Remove the slices that are supersets of the others
-def remove_sup_set(pie_L):
-    while True:
-        # Get the index of the superset
-        sup_set_idx = get_sup_set_idx(pie_L)
-
-        # If there is no superset
-        if sup_set_idx is None:
-            break
-        else:
-            # Remove the superset from the pie
-            pie_L.remove(sup_set_idx)
-
-    return pie_L
-
-
-# Get the index of the superset
-def get_sup_set_idx(pie_L):
-    # The index of the superset, None by default
-    sup_set_idx = None
-
-    for idx_sup in pie_L:
-        # If idx_sup is a superset of some slice in the pie
-        if is_sup_set(idx_sup, pie_L) is True:
-            # Update sup_set_idx
-            sup_set_idx = idx_sup
-            return sup_set_idx
-
-    return sup_set_idx
-
-
 # Check if idx_sup is a superset of some slice in the pie
 def is_sup_set(idx_sup, pie_L):
     var_sup, win_start_sup, win_end_sup = slice_LL[idx_sup]
@@ -1167,17 +1130,18 @@ def get_pie_int_L(pie_L):
         for index in pie_L:
             var_ind, win_start_ind, win_end_ind = slice_LL[index]
 
-            # Get the upperbound of win_start
-            if win_start is None:
-                win_start = win_start_ind
-            else:
-                win_start = max(win_start, win_start_ind)
+            if var_ind == var:
+                # Get the upperbound of win_start
+                if win_start is None:
+                    win_start = win_start_ind
+                else:
+                    win_start = max(win_start, win_start_ind)
 
-            # Get the lowerbound of win_end
-            if win_end is None:
-                win_end = win_end_ind
-            else:
-                win_end = min(win_end, win_end_ind)
+                # Get the lowerbound of win_end
+                if win_end is None:
+                    win_end = win_end_ind
+                else:
+                    win_end = min(win_end, win_end_ind)
 
         int_win_Dic[var] = [win_start, win_end]
 
