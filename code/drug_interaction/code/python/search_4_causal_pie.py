@@ -6,11 +6,8 @@
 from __future__ import division
 from scipy import stats
 import sys
-import os
 import csv
 import numpy as np
-import matplotlib.pyplot as plt
-import random
 import math
 
 # Notations
@@ -59,42 +56,42 @@ var_Dic = {}
 # The dictionary of P(target)
 # key: target
 # val: P(target)
-pro_Dic = {}
+pro_tar_Dic = {}
 
 # The dictionary of 1 - P(target)
 # key: target
 # val: 1 - P(target)
-not_pro_Dic = {}
+not_pro_tar_Dic = {}
 
 # The dictionary of #(target), that is the number of timepoints where the target is measured
 # key: target
 # val: #(target)
-num_Dic = {}
+num_tar_Dic = {}
 
 # The dictionary of #(target = 1), that is the number of timepoints where the target is 1
 # key: target
 # val: #(target = 1)
-num_1_Dic = {}
+num_tar_1_Dic = {}
 
 # The dictionary of P(target | not slice)
 # key: target->slice
 # val: P(target | not slice)
-pro_not_sli_Dic = {}
+pro_tar_con_not_sli_Dic = {}
 
 # The dictionary of 1 - P(target | not slice)
 # key: target->slice
 # val: 1 - P(target | not slice)
-not_pro_not_slic_Dic = {}
+not_pro_tar_con_not_slic_Dic = {}
 
 # The dictionary of #(target and not slice), that is the number of timepoints where the target is measured but cannot be changed by the slice
 # key: target->slice
 # val: #(target and not slice)
-num_not_sli_Dic = {}
+num_tar_con_not_sli_Dic = {}
 
 # The dictionary of #(target = 1 and not slice), that is the number of timepoints where the target is 1 but cannot be changed by the slice
 # key: target->slice
 # val: #(target = 1 and not slice)
-num_1_not_sli_Dic = {}
+num_tar_1_con_not_sli_Dic = {}
 
 # The dictionary of the list of list of timepoints where the target can be changed by the slice
 # key: target->slice
@@ -156,7 +153,7 @@ def initialization(src_data_file, tar_data_file):
     # Get time series
     get_time_series()
 
-    # Get the statistics (pro_Dic, not_pro_Dic, num_Dic, and num_1_Dic) of the targets
+    # Get the statistics (pro_tar_Dic, not_pro_tar_Dic, num_tar_Dic, and num_tar_1_Dic) of the targets
     get_tar_statistics()
 
     # Get max time stamp
@@ -244,7 +241,7 @@ def get_time_series():
     time_series_L.sort()
 
 
-# Get the statistics (pro_Dic, not_pro_Dic, num_Dic, and num_1_Dic) of the targets
+# Get the statistics (pro_tar_Dic, not_pro_tar_Dic, num_tar_Dic, and num_tar_1_Dic) of the targets
 def get_tar_statistics():
     for target in tar_Dic:
         val_L = []
@@ -254,16 +251,16 @@ def get_tar_statistics():
                 val_L.append(val_Dic[target][time])
 
         # Update
-        pro_Dic[target] = np.mean(val_L)
-        not_pro_Dic[target] = 1 - pro_Dic[target]
-        num_Dic[target] = len(val_L)
-        num_1_Dic[target] = sum(val_L)
+        pro_tar_Dic[target] = np.mean(val_L)
+        not_pro_tar_Dic[target] = 1 - pro_tar_Dic[target]
+        num_tar_Dic[target] = len(val_L)
+        num_tar_1_Dic[target] = sum(val_L)
 
         # Initialization
-        pro_not_sli_Dic[target] = {}
-        not_pro_not_slic_Dic[target] = {}
-        num_not_sli_Dic[target] = {}
-        num_1_not_sli_Dic[target] = {}
+        pro_tar_con_not_sli_Dic[target] = {}
+        not_pro_tar_con_not_slic_Dic[target] = {}
+        num_tar_con_not_sli_Dic[target] = {}
+        num_tar_1_con_not_sli_Dic[target] = {}
         tar_con_sli_time_LL_Dic[target] = {}
 
         tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, [])
@@ -276,25 +273,25 @@ def get_tar_statistics():
             tar_con_sli_time_LL_Dic[target][index] = tar_con_sli_time_LL
 
             # Get the list of list of timepoints where the target can be changed by the pie but not the slice
-            tar_con_pie_not_sli_time_LL = get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
+            tar_con_pie_min_sli_and_not_sli_time_LL = get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
 
             val_L = []
-            for [time] in tar_con_pie_not_sli_time_LL:
+            for [time] in tar_con_pie_min_sli_and_not_sli_time_LL:
                 # Remove the influence of the pie from the data
                 if val_Dic[target][time] != -1:
                     val_L.append(val_Dic[target][time])
 
             # Update
-            pro_not_sli_Dic[target][index] = np.mean(val_L)
-            not_pro_not_slic_Dic[target][index] = 1 - pro_not_sli_Dic[target][index]
-            num_not_sli_Dic[target][index] = len(val_L)
-            num_1_not_sli_Dic[target][index] = sum(val_L)
+            pro_tar_con_not_sli_Dic[target][index] = np.mean(val_L)
+            not_pro_tar_con_not_slic_Dic[target][index] = 1 - pro_tar_con_not_sli_Dic[target][index]
+            num_tar_con_not_sli_Dic[target][index] = len(val_L)
+            num_tar_1_con_not_sli_Dic[target][index] = sum(val_L)
 
 
 # Search for the causal pies
 def search():
     for target in tar_Dic:
-        # Write target to spamwriter_log
+        # Write target to log file
         spamwriter_log.writerow(['search ' + target + ': ', target])
         f_log.flush()
 
@@ -322,10 +319,9 @@ def ids(target):
             if pie_size_cutoff_met_tem_F is True:
                 pie_size_cutoff_met_F = True
 
-        # Write the number of check_suf_con to spamwriter_log
+        # Write the number of check_suf_con to log file
         spamwriter_log.writerow(['check_suf_con_cou: ', check_suf_con_cou])
-        spamwriter_log.writerow()
-        f_pie.flush()
+        f_log.flush()
 
         if pie_size_cutoff_met_F is False:
             break
@@ -409,24 +405,16 @@ def dls(target, pie_size_cutoff):
             # Add the pie to pie_Dic
             pie_Dic[target].append(pie_int_L)
 
-            # Search for one pie
-            if sea_typ == 1:
-                # Update found_Dic
-                # Mark all the slices in slice_LL as removed (i.e, adding the key to the dict)
-                for index in range(len(slice_LL)):
+            # Update found_Dic
+            # Mark each slice in the pie and the duplicated ones as removed (i.e, adding the key to the dict)
+            for index in range(len(slice_LL)):
+                if duplicate(pie_L, index):
                     found_Dic[index] = 1
-            # Search for all the pies
-            else:
-                # Update found_Dic
-                # Mark each slice in the pie and the duplicated ones as removed (i.e, adding the key to the dict)
-                for index in range(len(slice_LL)):
-                    if duplicate(pie_L, index):
-                        found_Dic[index] = 1
 
             # Remove the influence of the pie from the data
             remove_inf(target, tar_con_pie_time_LL)
 
-            # Update the statistics (pro_Dic, not_pro_Dic, num_Dic, and num_1_Dic) of the targets
+            # Update the statistics (pro_tar_Dic, not_pro_tar_Dic, num_tar_Dic, and num_tar_1_Dic) of the targets
             get_tar_statistics()
 
             # Write the pie to spamwriter_pie
@@ -438,16 +426,15 @@ def dls(target, pie_size_cutoff):
 
             break
         else:
-            # The size of the pie before shrinking
-            pie_size_bef_shr = len(pie_L)
-
             # Shrink the pie
             [pie_L, tar_con_pie_time_LL] = shrink(target, pie_L)
 
             # If the pie cannot be shrinked anymore
-            if len(pie_L) == pie_size_bef_shr:
-                # Mark the root as found (i.e, adding the key to the dict)
-                found_Dic[root] = 1
+            if len(pie_L) == 0:
+                # Update found_Dic
+                # Mark all the slices in slice_LL as removed (i.e, adding the key to the dict)
+                for index in range(len(slice_LL)):
+                    found_Dic[index] = 1
 
                 break
 
@@ -540,7 +527,7 @@ def get_start_end_Dic(pie_L):
 
 
 # Check sufficient condition, i.e., P(target | pie) >> P(target)
-def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_not_sli):
+def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_min_sli_and_not_sli):
     # Update check_suf_con_cou
     global check_suf_con_cou
     check_suf_con_cou += 1
@@ -576,14 +563,14 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         return [sample_size_cutoff_met_F, suf_F]
 
     # Get numerator
-    pro_tar = pro_Dic[target]
+    pro_tar = pro_tar_Dic[target]
     numerator = pro_tar_con_pie - pro_tar
     spamwriter_log.writerow(["check_suf_con numerator: ", numerator])
     f_log.flush()
 
     # Get denominator
-    num_tar = num_Dic[target]
-    num_tar_1 = num_1_Dic[target]
+    num_tar = num_tar_Dic[target]
+    num_tar_1 = num_tar_1_Dic[target]
     pro = (num_tar_1_con_pie + num_tar_1) / (num_tar_con_pie + num_tar)
     denominator = math.sqrt(pro * (1 - pro) * (1 / num_tar_con_pie + 1 / num_tar))
 
@@ -619,7 +606,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         if pie_vote_F_L is not None:
             # Get the vote of the slice
             vote_F =  pie_vote_F_L[1]
-            if vote_F is not None and vote_F >= p_val_cutoff_pie_not_sli:
+            if vote_F is not None and vote_F >= p_val_cutoff_pie_min_sli_and_not_sli:
                 return [sample_size_cutoff_met_F, suf_F]
 
         # Output log file
@@ -630,22 +617,22 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         tar_con_sli_time_LL = tar_con_sli_time_LL_Dic[target][index]
 
         # Get the list of list of timepoints where the target can be changed by the pie but not the slice
-        tar_con_pie_not_sli_time_LL = get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
+        tar_con_pie_min_sli_and_not_sli_time_LL = get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
 
-        # Get P(target | pie \ slice)
-        pro_tar_con_pie_not_sli, num_tar_con_pie_not_sli, num_tar_1_con_pie_not_sli = get_pro_num_tar_con_pie(target,
-                                                                                                              tar_con_pie_not_sli_time_LL)
-        spamwriter_log.writerow(["check_suf_con pro_tar_con_pie_not_sli: ", pro_tar_con_pie_not_sli])
-        spamwriter_log.writerow(["check_suf_con num_tar_con_pie_not_sli: ", num_tar_con_pie_not_sli])
-        spamwriter_log.writerow(["check_suf_con num_tar_1_con_pie_not_sli: ", num_tar_1_con_pie_not_sli])
+        # Get P(target | pie \ slice and not slice)
+        pro_tar_con_pie_min_sli_and_not_sli, num_tar_con_pie_min_sli_and_not_sli, num_tar_1_con_pie_min_sli_and_not_sli = get_pro_num_tar_con_pie(target,
+                                                                                                              tar_con_pie_min_sli_and_not_sli_time_LL)
+        spamwriter_log.writerow(["check_suf_con pro_tar_con_pie_min_sli_and_not_sli: ", pro_tar_con_pie_min_sli_and_not_sli])
+        spamwriter_log.writerow(["check_suf_con num_tar_con_pie_min_sli_and_not_sli: ", num_tar_con_pie_min_sli_and_not_sli])
+        spamwriter_log.writerow(["check_suf_con num_tar_1_con_pie_min_sli_and_not_sli: ", num_tar_1_con_pie_min_sli_and_not_sli])
         f_log.flush()
 
         # Initialize conditioned_Dic
         if not index in conditioned_Dic:
             conditioned_Dic[index] = []
 
-        # If P(target | pie) is None
-        if pro_tar_con_pie_not_sli is None:
+        # If P(target | pie \ slice and not slice) is None
+        if pro_tar_con_pie_min_sli_and_not_sli is None:
             # The slice cannot vote
             vote_F = None
 
@@ -655,16 +642,16 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
             continue
 
         # Get numerator
-        pro_tar_not_sli = pro_not_sli_Dic[target][index]
-        numerator = pro_tar_con_pie_not_sli - pro_tar_not_sli
+        pro_tar_not_sli = pro_tar_con_not_sli_Dic[target][index]
+        numerator = pro_tar_con_pie_min_sli_and_not_sli - pro_tar_not_sli
         spamwriter_log.writerow(["check_suf_con numerator: ", numerator])
         f_log.flush()
 
         # Get denominator
-        num_tar_not_sli = num_not_sli_Dic[target][index]
-        num_tar_1_not_sli = num_1_not_sli_Dic[target][index]
-        pro = (num_tar_1_con_pie_not_sli + num_tar_1_not_sli) / (num_tar_con_pie_not_sli + num_tar_not_sli)
-        denominator = math.sqrt(pro * (1 - pro) * (1 / num_tar_con_pie_not_sli + 1 / num_tar_not_sli))
+        num_tar_not_sli = num_tar_con_not_sli_Dic[target][index]
+        num_tar_1_not_sli = num_tar_1_con_not_sli_Dic[target][index]
+        pro = (num_tar_1_con_pie_min_sli_and_not_sli + num_tar_1_not_sli) / (num_tar_con_pie_min_sli_and_not_sli + num_tar_not_sli)
+        denominator = math.sqrt(pro * (1 - pro) * (1 / num_tar_con_pie_min_sli_and_not_sli + 1 / num_tar_not_sli))
 
         # If denominator is zero
         if denominator == 0:
@@ -694,7 +681,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         conditioned_Dic[index].append([list(pie_L), vote_F])
 
         # If the pie \ slice does not significantly increase the occurrence of the target
-        if p_val >= p_val_cutoff_pie_not_sli:
+        if p_val >= p_val_cutoff_pie_min_sli_and_not_sli:
             return [sample_size_cutoff_met_F, suf_F]
 
     # Update suf_F
@@ -808,7 +795,7 @@ def get_pro_num_tar_con_pie(target, time_LL):
             # Update num_tar_con_pie, num_tar_1_con_pie, and denominator
             num_tar_con_pie += 1
             num_tar_1_con_pie += max(temp_L)
-            denominator += math.pow(not_pro_Dic[target], len(temp_L))
+            denominator += math.pow(not_pro_tar_Dic[target], len(temp_L))
 
     if denominator != 0:
         numerator = num_tar_con_pie - num_tar_1_con_pie
@@ -840,7 +827,7 @@ def get_min_win_len(pie_L):
 
 
 # Get the list of list of timepoints where the target can be changed by the pie but not the slice
-def get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL):
+def get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL):
     if tar_con_sli_time_LL is None or len(tar_con_sli_time_LL) == 0:
         return tar_con_pie_time_LL
 
@@ -851,24 +838,24 @@ def get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL):
             tar_con_sli_time_Dic[time] = 1
 
     # Initialization
-    tar_con_pie_not_sli_time_LL = []
+    tar_con_pie_min_sli_and_not_sli_time_LL = []
     for tar_con_pie_time_L in tar_con_pie_time_LL:
-        tar_con_pie_not_sli_time_L = []
+        tar_con_pie_min_sli_and_not_sli_time_L = []
         for time in tar_con_pie_time_L:
             if not time in tar_con_sli_time_Dic:
-                tar_con_pie_not_sli_time_L.append(time)
-        if len(tar_con_pie_not_sli_time_L) > 0:
-            tar_con_pie_not_sli_time_LL.append(tar_con_pie_not_sli_time_L)
+                tar_con_pie_min_sli_and_not_sli_time_L.append(time)
+        if len(tar_con_pie_min_sli_and_not_sli_time_L) > 0:
+            tar_con_pie_min_sli_and_not_sli_time_LL.append(tar_con_pie_min_sli_and_not_sli_time_L)
 
-    return tar_con_pie_not_sli_time_LL
+    return tar_con_pie_min_sli_and_not_sli_time_LL
 
 
-# Expand the pie by adding the slice that yields the minimum probalbity of the target that can be changed by the pie but not the slice
+# Expand the pie by adding the slice that yields the minimum of P(target | pie and not slice) - P(target | not slice)
 def expand(target, pie_L, tar_con_pie_time_LL):
-    # This is the slice that yields the minimum probability of the target
+    # This is the slice that yields the minimum difference
     min_slice = None
-    # This is the minimum probability
-    min_pro = None
+    # This is the minimum difference
+    min_dif = None
 
     # For each slice in slice_LL
     for index in range(len(slice_LL)):
@@ -886,24 +873,67 @@ def expand(target, pie_L, tar_con_pie_time_LL):
             tar_con_sli_time_LL = tar_con_sli_time_LL_Dic[target][index]
 
             # Get the list of list of timepoints where the target can be changed by the pie but not the slice
-            tar_con_pie_not_sli_time_LL = get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
+            tar_con_pie_and_not_sli_time_LL = get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL,
+                                                                                                  tar_con_sli_time_LL)
+            # Get P(target | pie and not slice)
+            pro_tar_con_pie_and_not_sli, num_tar_con_pie_and_not_sli, num_tar_1_con_pie_and_not_sli = get_pro_num_tar_con_pie(
+                target, tar_con_pie_and_not_sli_time_LL)
 
-            # Get P(target | pie \ slice)
-            pro_tar_con_pie_not_sli, num_tar_con_pie_not_sli, num_tar_1_con_pie_not_sli = get_pro_num_tar_con_pie(
-                target, tar_con_pie_not_sli_time_LL)
-            spamwriter_log.writerow(["expand pro_tar_con_pie_not_sli: ", pro_tar_con_pie_not_sli])
-            spamwriter_log.writerow(["expand num_tar_con_pie_not_sli: ", num_tar_con_pie_not_sli])
-            spamwriter_log.writerow(["expand num_tar_1_con_pie_not_sli: ", num_tar_1_con_pie_not_sli])
+            # Write log file
+            spamwriter_log.writerow(
+                ["expand pro_tar_con_pie_and_not_sli: ", pro_tar_con_pie_and_not_sli])
+            spamwriter_log.writerow(
+                ["expand num_tar_con_pie_and_not_sli: ", num_tar_con_pie_and_not_sli])
+            spamwriter_log.writerow(
+                ["expand num_tar_1_con_pie_and_not_sli: ", num_tar_1_con_pie_and_not_sli])
             f_log.flush()
 
-            # If P(target | pie) is None or not enough sample
-            if pro_tar_con_pie_not_sli is None or num_tar_con_pie_not_sli <= sample_size_cutoff:
+            # If P(target | pie and not slice) is None or P(target | not slice) is None or not enough sample
+            #if pro_tar_con_pie_and_not_sli is None or pro_tar_con_not_sli is None or num_tar_con_pie_and_not_sli <= sample_size_cutoff:
+                #continue
+
+            # If P(target | pie and not slice) is None or not enough sample
+            if pro_tar_con_pie_and_not_sli is None or num_tar_con_pie_and_not_sli <= sample_size_cutoff:
                 continue
 
-            # Update min_slice and min_pro
-            if min_pro is None or min_pro > pro_tar_con_pie_not_sli:
+            # Get numerator
+            # Get P(target | not slice)
+            pro_tar_con_not_sli = pro_tar_con_not_sli_Dic[target][index]
+            numerator = pro_tar_con_pie_and_not_sli - pro_tar_con_not_sli
+            spamwriter_log.writerow(["check_suf_con numerator: ", numerator])
+            f_log.flush()
+
+            # Get denominator
+            num_tar_con_not_sli = num_tar_con_not_sli_Dic[target][index]
+            num_tar_1_con_not_sli = num_tar_1_con_not_sli_Dic[target][index]
+            pro = (num_tar_1_con_pie_and_not_sli + num_tar_1_con_not_sli) / (num_tar_con_pie_and_not_sli + num_tar_con_not_sli)
+            denominator = math.sqrt(pro * (1 - pro) * (1 / num_tar_con_pie_and_not_sli + 1 / num_tar_con_not_sli))
+
+            # If denominator is zero
+            if denominator == 0:
+                continue
+
+            # Get z value
+            z_val = numerator / denominator
+            # Get p value
+            p_val = stats.norm.sf(z_val)
+
+            # Output log file
+            spamwriter_log.writerow(["expand z_val: ", z_val])
+            spamwriter_log.writerow(["expand p_val: ", p_val])
+            spamwriter_log.writerow('')
+            f_log.flush()
+
+            # # Get pro_tar_con_pie_and_not_sli - pro_tar_con_not_sli
+            # dif = pro_tar_con_pie_and_not_sli - pro_tar_con_not_sli
+            #
+            # # Update min_slice and min_dif
+            # if min_dif is None or min_dif > dif:
+            #     min_slice = index
+            #     min_dif = dif
+            if min_dif is None or min_dif > z_val:
                 min_slice = index
-                min_pro = pro_tar_con_pie_not_sli
+                min_dif = z_val
 
     # If the pie cannot be expanded anymore
     if min_slice is None:
@@ -914,7 +944,7 @@ def expand(target, pie_L, tar_con_pie_time_LL):
 
     # Add min_slice to the pie
     pie_L.append(min_slice)
-    # Write pie_L to spamwriter_log
+    # Write pie_L to log file
     spamwriter_log.writerow(['expand pie_L' + ': ', decode(pie_L)])
     f_log.flush()
 
@@ -992,7 +1022,7 @@ def check_nec_con(target, pie_L):
             # Check the sufficient condition (to produce the target)
             # Flag sample_size_cutoff_met_F, indicating whether there is enough sample
             # Flag suf_F, indicating whether the pie is sufficient
-            sample_size_cutoff_met_F, suf_F = check_suf_con(target, temp_L, tar_con_temp_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_not_sli)
+            sample_size_cutoff_met_F, suf_F = check_suf_con(target, temp_L, tar_con_temp_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_min_sli_and_not_sli)
 
             # If the pie \ slice still significantly increases the occurrence of the target
             if suf_F is True:
@@ -1020,25 +1050,23 @@ def remove_inf(target, tar_con_pie_time_LL):
                 val_Dic[target][time] = -1
 
 
-# Shrink the pie by removing the slice that yields the maximum probability of the target that can be changed by the remaining pie but not the slice
+# Shrink the pie by removing the slice that yields,
+#    1) the maximum of P(target | pie \ slice and not slice) - P(target | not slice)
+# or 2) the maximum of P(target | pie \ slice)
 def shrink(target, pie_L):
-    # This is the slice that yields the maximum probability of the target
-    max_slice = None
-    # This is the maximum probability
-    max_pro = None
-    # This is the list of list of timepoints where the target can be changed by the remaining pie but not the slice
-    max_tar_con_pie_time_LL = []
-
     # If the pie is None or empty
     if pie_L is None or len(pie_L) == 0:
-        return [pie_L, max_tar_con_pie_time_LL]
+        return [pie_L, []]
+
+    # This is the slice that yields the maximum difference
+    max_slice = None
+    # This is the maximum difference
+    max_dif = None
+    # This is the list of list of timepoints where the target can be changed by the remaining pie but not max_slice
+    max_tar_con_pie_time_LL = []
 
     # For each slice in the pie
     for index in pie_L:
-        # If the slice has been replaced and put back when checking the necessity
-        if index in replaced_Dic:
-            continue
-
         spamwriter_log.writerow(["shrink slice_LL[index]: ", slice_LL[index]])
         f_log.flush()
 
@@ -1053,33 +1081,100 @@ def shrink(target, pie_L):
         tar_con_sli_time_LL = tar_con_sli_time_LL_Dic[target][index]
 
         # Get the list of list of timepoints where the target can be changed by the pie but not the slice
-        tar_con_pie_not_sli_time_LL = get_tar_con_pie_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
+        tar_con_pie_min_sli_and_not_sli_time_LL = get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
+
+        # Get P(target | pie \ slice and not slice)
+        pro_tar_con_pie_min_sli_and_not_sli, num_tar_con_pie_min_sli_and_not_sli, num_tar_1_con_pie_min_sli_and_not_sli = get_pro_num_tar_con_pie(
+            target, tar_con_pie_min_sli_and_not_sli_time_LL)
+        # Get P(target | not slice)
+        pro_tar_con_not_sli = pro_tar_con_not_sli_Dic[target][index]
+
+        # Write log file
+        spamwriter_log.writerow(["shrink pro_tar_con_pie_min_sli_and_not_sli: ", pro_tar_con_pie_min_sli_and_not_sli])
+        spamwriter_log.writerow(["shrink num_tar_con_pie_min_sli_and_not_sli: ", num_tar_con_pie_min_sli_and_not_sli])
+        spamwriter_log.writerow(["shrink num_tar_1_con_pie_min_sli_and_not_sli: ", num_tar_1_con_pie_min_sli_and_not_sli])
+        spamwriter_log.writerow(["shrink pro_tar_con_not_sli: ", pro_tar_con_not_sli])
+        f_log.flush()
+
+        # If P(target | pie \ slice and not slice) is None or P(target | not slice) is None
+        if pro_tar_con_pie_min_sli_and_not_sli is None or pro_tar_con_not_sli is None:
+            max_slice = None
+            break
+
+        # Get pro_tar_con_pie_min_sli_and_not_sli - pro_tar_con_not_sli
+        dif = pro_tar_con_pie_min_sli_and_not_sli - pro_tar_con_not_sli
+
+        # Update max_slice and max_dif
+        if max_dif is None or max_dif < dif:
+            max_slice = index
+            max_dif = dif
+            max_tar_con_pie_time_LL = tar_con_pie_time_LL
+
+    # If neither P(target | pie \ slice and not slice) nor P(target | not slice) is None for any slice
+    if max_slice is not None:
+        # Remove max_slice from the pie
+        pie_L.remove(max_slice)
+
+        # Write pie_L to log file
+        spamwriter_log.writerow(['shrink pie_L' + ': ', decode(pie_L)])
+        f_log.flush()
+
+        # Output the pie
+        print(['shrink pie_L: ', decode(pie_L)])
+
+        # Update replaced_Dic
+        replaced_Dic[max_slice] = 1
+
+        return [pie_L, max_tar_con_pie_time_LL]
+
+    # This is the slice that yields the maximum probability
+    max_slice = None
+    # This is the maximum probability
+    max_pro = None
+    # This is the list of list of timepoints where the target can be changed by the remaining pie but not max_slice
+    max_tar_con_pie_time_LL = []
+
+    # For each slice in the pie
+    for index in pie_L:
+        spamwriter_log.writerow(["shrink slice_LL[index]: ", slice_LL[index]])
+        f_log.flush()
+
+        # Get pie \ slice
+        temp_L = list(pie_L)
+        temp_L.remove(index)
+
+        # Get the list of list of timepoints where the target can be changed by temp_L (i.e., pie \ slice)
+        tar_con_pie_not_sli_time_LL = get_tar_con_pie_time_LL(target, temp_L)
 
         # Get P(target | pie \ slice)
         pro_tar_con_pie_not_sli, num_tar_con_pie_not_sli, num_tar_1_con_pie_not_sli = get_pro_num_tar_con_pie(
             target, tar_con_pie_not_sli_time_LL)
+
+        # Write log file
         spamwriter_log.writerow(["shrink pro_tar_con_pie_not_sli: ", pro_tar_con_pie_not_sli])
         spamwriter_log.writerow(["shrink num_tar_con_pie_not_sli: ", num_tar_con_pie_not_sli])
         spamwriter_log.writerow(["shrink num_tar_1_con_pie_not_sli: ", num_tar_1_con_pie_not_sli])
         f_log.flush()
 
-        # If P(target | pie) is None
+        # If P(target | pie \ slice) is None
         if pro_tar_con_pie_not_sli is None:
-            continue
+            max_slice = None
+            break
 
         # Update max_slice and max_pro
         if max_pro is None or max_pro < pro_tar_con_pie_not_sli:
             max_slice = index
             max_pro = pro_tar_con_pie_not_sli
-            max_tar_con_pie_time_LL = tar_con_pie_time_LL
+            max_tar_con_pie_time_LL = tar_con_pie_not_sli_time_LL
 
-    # If the pie cannot be shrinked anymore
+    # If P(target | pie \ slice) is None for some slice
     if max_slice is None:
-        return [pie_L, max_tar_con_pie_time_LL]
+        # Use the last slice in the pie (which was added the most recently) as max_slice
+        max_slice = pie_L[len(pie_L) - 1]
 
     # Remove max_slice from the pie
     pie_L.remove(max_slice)
-    # Write pie_L to spamwriter_log
+    # Write pie_L to log file
     spamwriter_log.writerow(['shrink pie_L' + ': ', decode(pie_L)])
     f_log.flush()
 
@@ -1166,10 +1261,9 @@ if __name__ == "__main__":
     fig_dir = sys.argv[5]
     pie_size_cutoff = int(sys.argv[6])
     p_val_cutoff_pie = float(sys.argv[7])
-    p_val_cutoff_pie_not_sli = float(sys.argv[8])
+    p_val_cutoff_pie_min_sli_and_not_sli = float(sys.argv[8])
     sample_size_cutoff = int(sys.argv[9])
-    sea_typ = int(sys.argv[10])
-    lag_L = sys.argv[11:]
+    lag_L = sys.argv[10:]
 
     # Initialization
     initialization(src_data_file, tar_data_file)
