@@ -321,6 +321,7 @@ def ids(target):
 
         # Write the number of check_suf_con to log file
         spamwriter_log.writerow(['check_suf_con_cou: ', check_suf_con_cou])
+        spamwriter_log.writerow('')
         f_log.flush()
 
         if pie_size_cutoff_met_F is False:
@@ -850,12 +851,12 @@ def get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL
     return tar_con_pie_min_sli_and_not_sli_time_LL
 
 
-# Expand the pie by adding the slice that yields the minimum of P(target | pie and not slice) - P(target | not slice)
+# Expand the pie by adding the slice that yields the minimum z value of P(target | pie and not slice) - P(target | not slice)
 def expand(target, pie_L, tar_con_pie_time_LL):
-    # This is the slice that yields the minimum difference
+    # This is the slice that yields the minimum z value
     min_slice = None
-    # This is the minimum difference
-    min_dif = None
+    # This is the minimum z value
+    min_z_val = None
 
     # For each slice in slice_LL
     for index in range(len(slice_LL)):
@@ -878,6 +879,8 @@ def expand(target, pie_L, tar_con_pie_time_LL):
             # Get P(target | pie and not slice)
             pro_tar_con_pie_and_not_sli, num_tar_con_pie_and_not_sli, num_tar_1_con_pie_and_not_sli = get_pro_num_tar_con_pie(
                 target, tar_con_pie_and_not_sli_time_LL)
+            # Get P(target | not slice)
+            pro_tar_con_not_sli = pro_tar_con_not_sli_Dic[target][index]
 
             # Write log file
             spamwriter_log.writerow(
@@ -886,19 +889,20 @@ def expand(target, pie_L, tar_con_pie_time_LL):
                 ["expand num_tar_con_pie_and_not_sli: ", num_tar_con_pie_and_not_sli])
             spamwriter_log.writerow(
                 ["expand num_tar_1_con_pie_and_not_sli: ", num_tar_1_con_pie_and_not_sli])
+            spamwriter_log.writerow(
+                ["expand pro_tar_con_not_sli: ", pro_tar_con_not_sli])
             f_log.flush()
 
-            # If P(target | pie and not slice) is None or P(target | not slice) is None or not enough sample
-            #if pro_tar_con_pie_and_not_sli is None or pro_tar_con_not_sli is None or num_tar_con_pie_and_not_sli <= sample_size_cutoff:
-                #continue
-
-            # If P(target | pie and not slice) is None or not enough sample
-            if pro_tar_con_pie_and_not_sli is None or num_tar_con_pie_and_not_sli <= sample_size_cutoff:
+            # If:
+            #    1) P(target | pie and not slice) is None,
+            # or 2) P(target | pie and not slice) is None,
+            # or 3) not enough sample
+            if (pro_tar_con_pie_and_not_sli is None
+                or pro_tar_con_not_sli is None
+                or num_tar_con_pie_and_not_sli <= sample_size_cutoff):
                 continue
 
             # Get numerator
-            # Get P(target | not slice)
-            pro_tar_con_not_sli = pro_tar_con_not_sli_Dic[target][index]
             numerator = pro_tar_con_pie_and_not_sli - pro_tar_con_not_sli
             spamwriter_log.writerow(["check_suf_con numerator: ", numerator])
             f_log.flush()
@@ -915,25 +919,15 @@ def expand(target, pie_L, tar_con_pie_time_LL):
 
             # Get z value
             z_val = numerator / denominator
-            # Get p value
-            p_val = stats.norm.sf(z_val)
 
             # Output log file
             spamwriter_log.writerow(["expand z_val: ", z_val])
-            spamwriter_log.writerow(["expand p_val: ", p_val])
             spamwriter_log.writerow('')
             f_log.flush()
 
-            # # Get pro_tar_con_pie_and_not_sli - pro_tar_con_not_sli
-            # dif = pro_tar_con_pie_and_not_sli - pro_tar_con_not_sli
-            #
-            # # Update min_slice and min_dif
-            # if min_dif is None or min_dif > dif:
-            #     min_slice = index
-            #     min_dif = dif
-            if min_dif is None or min_dif > z_val:
+            if min_z_val is None or min_z_val > z_val:
                 min_slice = index
-                min_dif = z_val
+                min_z_val = z_val
 
     # If the pie cannot be expanded anymore
     if min_slice is None:
@@ -1051,17 +1045,17 @@ def remove_inf(target, tar_con_pie_time_LL):
 
 
 # Shrink the pie by removing the slice that yields,
-#    1) the maximum of P(target | pie \ slice and not slice) - P(target | not slice)
-# or 2) the maximum of P(target | pie \ slice)
+#    1) the maximum z value of P(target | pie \ slice and not slice) - P(target | not slice)
+# or 2) the maximum P(target | pie \ slice)
 def shrink(target, pie_L):
     # If the pie is None or empty
     if pie_L is None or len(pie_L) == 0:
         return [pie_L, []]
 
-    # This is the slice that yields the maximum difference
+    # This is the slice that yields the maximum z value
     max_slice = None
-    # This is the maximum difference
-    max_dif = None
+    # This is the maximum z value
+    max_z_val = None
     # This is the list of list of timepoints where the target can be changed by the remaining pie but not max_slice
     max_tar_con_pie_time_LL = []
 
@@ -1101,13 +1095,35 @@ def shrink(target, pie_L):
             max_slice = None
             break
 
-        # Get pro_tar_con_pie_min_sli_and_not_sli - pro_tar_con_not_sli
-        dif = pro_tar_con_pie_min_sli_and_not_sli - pro_tar_con_not_sli
+        # Get numerator
+        numerator = pro_tar_con_pie_min_sli_and_not_sli - pro_tar_con_not_sli
+        spamwriter_log.writerow(["shrink numerator: ", numerator])
+        f_log.flush()
 
-        # Update max_slice and max_dif
-        if max_dif is None or max_dif < dif:
+        # Get denominator
+        num_tar_con_not_sli = num_tar_con_not_sli_Dic[target][index]
+        num_tar_1_con_not_sli = num_tar_1_con_not_sli_Dic[target][index]
+        pro = (num_tar_1_con_pie_min_sli_and_not_sli + num_tar_1_con_not_sli) / (
+            num_tar_con_pie_min_sli_and_not_sli + num_tar_con_not_sli)
+        denominator = math.sqrt(pro * (1 - pro) * (1 / num_tar_con_pie_min_sli_and_not_sli + 1 / num_tar_con_not_sli))
+
+        # If denominator is zero
+        if denominator == 0:
+            max_slice = None
+            break
+
+        # Get z value
+        z_val = numerator / denominator
+
+        # Output log file
+        spamwriter_log.writerow(["shrink z_val: ", z_val])
+        spamwriter_log.writerow('')
+        f_log.flush()
+
+        # Update max_slice and max_z_val
+        if max_z_val is None or max_z_val < z_val:
             max_slice = index
-            max_dif = dif
+            max_z_val = z_val
             max_tar_con_pie_time_LL = tar_con_pie_time_LL
 
     # If neither P(target | pie \ slice and not slice) nor P(target | not slice) is None for any slice
