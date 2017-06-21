@@ -989,9 +989,9 @@ def check_nec_con(target, pie_L):
     f_log.flush()
 
     while True:
-        # Clear Replaced_Dic
-        global Replaced_Dic
-        Replaced_Dic = {}
+        # Clear replaced_Dic
+        global replaced_Dic
+        replaced_Dic = {}
 
         # Flag, indicating the existence of unnecessary slice, False by default
         unc_F = False
@@ -1007,12 +1007,6 @@ def check_nec_con(target, pie_L):
             if len(temp_L) != len(pie_L) - 1:
                 break
 
-            # Get the slice removed by shrink
-            [index] = list(set(pie_L) - set(temp_L))
-
-            # Update replaced_Dic
-            replaced_Dic[index] = 1
-
             # Check the sufficient condition (to produce the target)
             # Flag sample_size_cutoff_met_F, indicating whether there is enough sample
             # Flag suf_F, indicating whether the pie is sufficient
@@ -1027,7 +1021,7 @@ def check_nec_con(target, pie_L):
         # If there is unnecessary slice
         if unc_F is True:
             # Remove the slice (since it is not necessary)
-            pie_L.remove(index)
+            pie_L = list(temp_L)
         else:
             break
 
@@ -1061,6 +1055,10 @@ def shrink(target, pie_L):
 
     # For each slice in the pie
     for index in pie_L:
+        # If the slice has been replaced and put back when checking the necessity
+        if index in replaced_Dic:
+            continue
+
         spamwriter_log.writerow(["shrink slice_LL[index]: ", slice_LL[index]])
         f_log.flush()
 
@@ -1152,6 +1150,10 @@ def shrink(target, pie_L):
 
     # For each slice in the pie
     for index in pie_L:
+        # If the slice has been replaced and put back when checking the necessity
+        if index in replaced_Dic:
+            continue
+
         spamwriter_log.writerow(["shrink slice_LL[index]: ", slice_LL[index]])
         f_log.flush()
 
