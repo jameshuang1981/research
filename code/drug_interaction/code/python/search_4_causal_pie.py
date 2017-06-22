@@ -105,7 +105,7 @@ found_Dic = {}
 
 # The dictionary records the replaced slice relative to the root
 # key: slice
-# val: 1
+# val: list of pies
 replaced_Dic = {}
 
 # The dictionary records the list of pies for which the slice was conditioned to check the sufficiency condition
@@ -691,6 +691,20 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
     return [sample_size_cutoff_met_F, suf_F]
 
 
+# Find pie_L in pie_LL
+def find(pie_L, replaced_Dic, index):
+    if not index in replaced_Dic:
+        return False
+
+    pie_LL = replaced_Dic[index]
+
+    for i in range(len(pie_LL)):
+        if pie_equal(pie_L, pie_LL[i]):
+            return True
+
+    return False
+
+
 # Get pie_vote_F_L
 def get_pie_vote_F_L(pie_L, index):
     if not index in conditioned_Dic:
@@ -702,16 +716,6 @@ def get_pie_vote_F_L(pie_L, index):
                 return pie_vote_F_L
 
     return None
-
-
-# Check whether index is a slice
-def is_a_sli(index, pie_LL):
-    for i in range(len(pie_LL)):
-        # If the slice is in the pie
-        if index in pie_LL[i]:
-            return True
-
-    return False
 
 
 # Check whether the two pies are the same
@@ -865,7 +869,7 @@ def expand(target, pie_L, tar_con_pie_time_LL):
         # or replaced yet
         if (not index in pie_L
             and not index in found_Dic
-            and not index in replaced_Dic):
+            and find(pie_L, replaced_Dic, index) is False):
 
             spamwriter_log.writerow(["expand slice_LL[index]: ", slice_LL[index]])
             f_log.flush()
@@ -1056,7 +1060,7 @@ def shrink(target, pie_L):
     # For each slice in the pie
     for index in pie_L:
         # If the slice has been replaced and put back when checking the necessity
-        if index in replaced_Dic:
+        if find(pie_L, replaced_Dic, index) is True:
             continue
 
         spamwriter_log.writerow(["shrink slice_LL[index]: ", slice_LL[index]])
@@ -1126,6 +1130,11 @@ def shrink(target, pie_L):
 
     # If neither P(target | pie \ slice and not slice) nor P(target | not slice) is None for any slice
     if max_slice is not None:
+        # Update replaced_Dic
+        if not max_slice in replaced_Dic:
+            replaced_Dic[max_slice] = []
+        replaced_Dic[max_slice].append(pie_L)
+
         # Remove max_slice from the pie
         pie_L.remove(max_slice)
 
@@ -1135,9 +1144,6 @@ def shrink(target, pie_L):
 
         # Output the pie
         print(['shrink pie_L: ', decode(pie_L)])
-
-        # Update replaced_Dic
-        replaced_Dic[max_slice] = 1
 
         return [pie_L, max_tar_con_pie_time_LL]
 
@@ -1151,7 +1157,7 @@ def shrink(target, pie_L):
     # For each slice in the pie
     for index in pie_L:
         # If the slice has been replaced and put back when checking the necessity
-        if index in replaced_Dic:
+        if find(pie_L, replaced_Dic, index) is True:
             continue
 
         spamwriter_log.writerow(["shrink slice_LL[index]: ", slice_LL[index]])
@@ -1190,6 +1196,11 @@ def shrink(target, pie_L):
         # Use the last slice in the pie (which was added the most recently) as max_slice
         max_slice = pie_L[len(pie_L) - 1]
 
+    # Update replaced_Dic
+    if not max_slice in replaced_Dic:
+        replaced_Dic[max_slice] = []
+    replaced_Dic[max_slice].append(pie_L)
+
     # Remove max_slice from the pie
     pie_L.remove(max_slice)
     # Write pie_L to log file
@@ -1198,9 +1209,6 @@ def shrink(target, pie_L):
 
     # Output the pie
     print(['shrink pie_L: ', decode(pie_L)])
-
-    # Update replaced_Dic
-    replaced_Dic[max_slice] = 1
 
     return [pie_L, max_tar_con_pie_time_LL]
 
