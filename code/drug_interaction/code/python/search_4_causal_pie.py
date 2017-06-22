@@ -417,7 +417,7 @@ def dls(target, pie_size_cutoff):
             # Update found_Dic
             # Mark each slice in the pie and the duplicated ones as removed (i.e, adding the key to the dict)
             for index in range(len(slice_LL)):
-                if duplicate(pie_L, index):
+                if duplicate(pie_L, index) is True:
                     found_Dic[index] = 1
 
             # Remove the influence of the pie from the data
@@ -691,18 +691,20 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
 
         # If the pie \ slice does not significantly increase the occurrence of the target
         if p_val >= p_val_cutoff_pie_min_sli_and_not_sli:
-            # Add the slice to the pie
-            pie_L.append(index)
+            # If the slice is duplicate
+            if not index in found_Dic and duplicate(pie_L, index) is True:
+                # Add the slice to the pie
+                pie_L.append(index)
 
-            # Update tar_con_pie_time_LL
-            tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
+                # Update tar_con_pie_time_LL
+                tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
 
-            # Write the pie to the log file
-            spamwriter_log.writerow(["add pie_L: ", decode(pie_L)])
-            f_log.flush()
+                # Write the pie to the log file
+                spamwriter_log.writerow(["add pie_L: ", decode(pie_L)])
+                f_log.flush()
 
-            # Print the pie
-            print(["add pie_L: ", decode(pie_L)])
+                # Print the pie
+                print(["add pie_L: ", decode(pie_L)])
 
             return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
