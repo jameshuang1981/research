@@ -241,7 +241,7 @@ def get_time_series():
     time_series_L.sort()
 
 
-# Get the statistics (pro_tar_Dic, not_pro_tar_Dic, num_tar_Dic, and num_tar_1_Dic) of the targets
+# Get the statistics of the target
 def get_tar_statistics():
     for target in tar_Dic:
         val_L = []
@@ -266,26 +266,35 @@ def get_tar_statistics():
         tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, [])
 
         for index in range(len(slice_LL)):
-            # Get the list of list of timepoints where the target can be changed by the slice
-            tar_con_sli_time_LL = get_tar_con_pie_time_LL(target, [index])
+            get_tar_con_sli_statistics(target, index, tar_con_pie_time_LL)
 
-            # Update
-            tar_con_sli_time_LL_Dic[target][index] = tar_con_sli_time_LL
 
-            # Get the list of list of timepoints where the target can be changed by the pie but not the slice
-            tar_con_pie_min_sli_and_not_sli_time_LL = get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
+# Get the statistics of the target conditioned on the slice
+def get_tar_con_sli_statistics(target, index, tar_con_pie_time_LL):
+    # Get the list of list of timepoints where the target can be changed by the slice
+    tar_con_sli_time_LL = get_tar_con_pie_time_LL(target, [index])
 
-            val_L = []
-            for [time] in tar_con_pie_min_sli_and_not_sli_time_LL:
-                # Remove the influence of the pie from the data
-                if val_Dic[target][time] != -1:
-                    val_L.append(val_Dic[target][time])
+    # Update
+    tar_con_sli_time_LL_Dic[target][index] = tar_con_sli_time_LL
 
-            # Update
-            pro_tar_con_not_sli_Dic[target][index] = np.mean(val_L)
-            not_pro_tar_con_not_slic_Dic[target][index] = 1 - pro_tar_con_not_sli_Dic[target][index]
-            num_tar_con_not_sli_Dic[target][index] = len(val_L)
-            num_tar_1_con_not_sli_Dic[target][index] = sum(val_L)
+    # If tar_con_pie_time_LL is None
+    if tar_con_pie_time_LL is None:
+        tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, [])
+
+    # Get the list of list of timepoints where the target can be changed by the pie but not the slice
+    tar_con_pie_min_sli_and_not_sli_time_LL = get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL)
+
+    val_L = []
+    for [time] in tar_con_pie_min_sli_and_not_sli_time_LL:
+        # Remove the influence of the pie from the data
+        if val_Dic[target][time] != -1:
+            val_L.append(val_Dic[target][time])
+
+    # Update
+    pro_tar_con_not_sli_Dic[target][index] = np.mean(val_L)
+    not_pro_tar_con_not_slic_Dic[target][index] = 1 - pro_tar_con_not_sli_Dic[target][index]
+    num_tar_con_not_sli_Dic[target][index] = len(val_L)
+    num_tar_1_con_not_sli_Dic[target][index] = sum(val_L)
 
 
 # Search for the causal pies
@@ -485,7 +494,8 @@ def get_tar_con_pie_time_LL(target, pie_L):
                 else:
                     pie_time_Dic[index] = 1
             if index in end_Dic and time in end_Dic[index]:
-                pie_time_Dic[index] -= 1
+                if index in pie_time_Dic:
+                    pie_time_Dic[index] -= 1
                 if pie_time_Dic[index] == 0:
                     del pie_time_Dic[index]
         # If all the slices in the pie are present
@@ -691,20 +701,25 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
 
         # If the pie \ slice does not significantly increase the occurrence of the target
         if p_val >= p_val_cutoff_pie_min_sli_and_not_sli:
-            # If the slice is duplicate
-            if not index in found_Dic and duplicate(pie_L, index) is True:
-                # Add the slice to the pie
-                pie_L.append(index)
+            # If the slice has not been found
+            if not index in found_Dic:
+                # If
+                #    1) the function is called when checking the necessity condition,
+                # or 2) the slice is duplicate
+                if (p_val_cutoff_pie != p_val_cutoff_pie_min_sli_and_not_sli
+                    or duplicate(pie_L, index) is True):
+                    # Add the slice to the pie
+                    add(target, pie_L, index)
 
-                # Update tar_con_pie_time_LL
-                tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
+                    # Update tar_con_pie_time_LL
+                    tar_con_pie_time_LL = get_tar_con_pie_time_LL(target, pie_L)
 
-                # Write the pie to the log file
-                spamwriter_log.writerow(["add pie_L: ", decode(pie_L)])
-                f_log.flush()
+                    # Write the pie to the log file
+                    spamwriter_log.writerow(["add pie_L: ", decode(pie_L)])
+                    f_log.flush()
 
-                # Print the pie
-                print(["add pie_L: ", decode(pie_L)])
+                    # Print the pie
+                    print(["add pie_L: ", decode(pie_L)])
 
             return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
@@ -950,7 +965,8 @@ def expand(target, pie_L, tar_con_pie_time_LL):
     tar_con_pie_time_LL = get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, min_slice)
 
     # Add min_slice to the pie
-    pie_L.append(min_slice)
+    add(target, pie_L, min_slice)
+
     # Write pie_L to log file
     spamwriter_log.writerow(['expand pie_L' + ': ', decode(pie_L)])
     f_log.flush()
@@ -1010,7 +1026,7 @@ def check_nec_con(target, pie_L):
         unc_F = False
 
         # The slice added to the pie when checking the sufficiency condition
-        add_idx = None
+        add_idx_L = []
 
         for i in range(len(pie_L)):
             # Initialize
@@ -1039,21 +1055,49 @@ def check_nec_con(target, pie_L):
 
             # If a slice was added when checking the sufficiency condition
             if len(pie_bef_check_suf_con_L) < len(temp_L):
-                # Get the slice
-                [add_idx] = list(set(temp_L) - set(pie_bef_check_suf_con_L))
+                # Get the added slice
+                add_idx_L = list(set(temp_L) - set(pie_bef_check_suf_con_L))
                 break
 
         # If there is unnecessary slice
         if unc_F is True:
             # Remove the slice (since it is not necessary)
             pie_L = list(temp_L)
-        # If a slice was added when checking the sufficiency condition
-        elif add_idx is not None:
-            pie_L.append(add_idx)
+        # If slices were added when checking the sufficiency condition
+        elif len(add_idx_L) > 0:
+            # Add the slices to the pie
+            for add_idx in add_idx_L:
+                add(target, pie_L, add_idx)
         else:
             break
 
     return pie_L
+
+
+# Add index to the pie
+def add(target, pie_L, index):
+    # Add the index to the pie
+    pie_L.append(index)
+
+    # Get the pie where the time window of each slice is the intersection of time windows of slices with the same name
+    pie_int_L = get_pie_int_L(pie_L)
+
+    # get pie_L
+    # For each slice in pie_int_L
+    for slice_L in pie_int_L:
+        # If the slice is not in the pie
+        if not slice_L in decode(pie_L):
+            # Add the slice to slice_LL
+            slice_LL.append(slice_L)
+
+            # Get the index
+            index = len(slice_LL) - 1
+
+            # Add the idnex to pie_L
+            pie_L.append(index)
+
+            # Get the statistics of the target conditioned on the slice
+            get_tar_con_sli_statistics(target, index, None)
 
 
 # Remove the influence of the pie from the data
@@ -1265,33 +1309,51 @@ def get_pie_int_L(pie_L):
 
     # Get the intersection of time windows
     for var in int_win_Dic:
-        win_start = None
-        win_end = None
+        win_LL = []
 
+        # For each slice in the pie
         for index in pie_L:
             var_ind, win_start_ind, win_end_ind = slice_LL[index]
 
+            # If the two slices have the same name
             if var_ind == var:
-                # Get the upperbound of win_start
-                if win_start is None:
-                    win_start = win_start_ind
-                else:
-                    win_start = max(win_start, win_start_ind)
+                # Flag, indicating whehter the current window intersects with a window in win_L, False by default
+                int_F = False
 
-                # Get the lowerbound of win_end
-                if win_end is None:
-                    win_end = win_end_ind
-                else:
-                    win_end = min(win_end, win_end_ind)
+                # For each time window
+                for i in range(len(win_LL)):
+                    win_start = win_LL[i][0]
+                    win_end = win_LL[i][1]
 
-        int_win_Dic[var] = [win_start, win_end]
+                    # Get the intersection
+                    if win_end < win_end_ind:
+                        if win_end >= win_start_ind:
+                            win_LL[i][0] = max(win_start, win_start_ind)
+                            win_LL[i][1] = win_end
+                            int_F = True
+                            break
+                    elif win_end_ind >= win_start:
+                        win_LL[i][0] = max(win_start, win_start_ind)
+                        win_LL[i][1] = win_end_ind
+                        int_F = True
+                        break
+
+                # If there is no window that intersects with the current one
+                if int_F is False:
+                    # Add the current one
+                    win_LL.append([win_start_ind, win_end_ind])
+
+        # Update int_win_Dic
+        int_win_Dic[var] = list(win_LL)
 
     # Initialize
     pie_int_L = []
-    for var in int_win_Dic:
-        win_start, win_end = int_win_Dic[var]
 
-        pie_int_L.append([var, win_start, win_end])
+    # For each var
+    for var in int_win_Dic:
+        # Add each slice
+        for [win_start, win_end] in int_win_Dic[var]:
+            pie_int_L.append([var, win_start, win_end])
 
     return pie_int_L
 
