@@ -707,7 +707,8 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
                 #    1) the function is called when checking the necessity condition,
                 # or 2) the slice is duplicate
                 if (p_val_cutoff_pie != p_val_cutoff_pie_min_sli_and_not_sli
-                    or duplicate(pie_L, index) is True):
+                    or duplicate(pie_L, index) is True
+                    or sample_size_cutoff_met_F is True):
                     # Add the slice to the pie
                     add(target, pie_L, index)
 
@@ -1100,6 +1101,40 @@ def add(target, pie_L, index):
             get_tar_con_sli_statistics(target, index, None)
 
 
+# Add index to the pie
+# def add(target, pie_L, index):
+#     # Add the index to the pie
+#     pie_L.append(index)
+#
+#     # Get the pie where the time window of each slice is the intersection of time windows of slices with the same name
+#     pie_int_L = get_pie_int_L(pie_L)
+#
+#     # Update pie_L
+#     pie_back_up_L = list(pie_L)
+#     pie_L = []
+#
+#     # For each slice in pie_int_L
+#     for slice_L in pie_int_L:
+#         # If the slice is not in the pie
+#         if not slice_L in decode(pie_back_up_L):
+#             # Add the slice to slice_LL
+#             slice_LL.append(slice_L)
+#
+#             # Get the index
+#             index = len(slice_LL) - 1
+#
+#             # Add the idnex to pie_L
+#             pie_L.append(index)
+#
+#             # Get the statistics of the target conditioned on the slice
+#             get_tar_con_sli_statistics(target, index, None)
+#         else:
+#             for index in pie_back_up_L:
+#                 if slice_LL[index] == slice_L:
+#                     pie_L.append(index)
+#                     break
+
+
 # Remove the influence of the pie from the data
 def remove_inf(target, tar_con_pie_time_LL):
     # Remove the influence of the pie from the data
@@ -1127,8 +1162,11 @@ def shrink(target, pie_L):
 
     # For each slice in the pie
     for index in pie_L:
-        # If the slice has been replaced and put back when checking the necessity
-        if index in replaced_Dic:
+        # If
+        #    1) the slice has been replaced and put back when checking the necessity,
+        # or 2) a superset of some slice in the pie
+        if (index in replaced_Dic
+            or is_sup_set(index, pie_L)):
             continue
 
         spamwriter_log.writerow(["shrink slice_LL[index]: ", slice_LL[index]])
@@ -1222,7 +1260,7 @@ def shrink(target, pie_L):
 
     # For each slice in the pie
     for index in pie_L:
-        # If the slice has been replaced and put back when checking the necessity
+        # If the slice has been replaced and put back when checking the necessity,
         if index in replaced_Dic:
             continue
 
@@ -1248,8 +1286,7 @@ def shrink(target, pie_L):
 
         # If P(target | pie \ slice) is None
         if pro_tar_con_pie_not_sli is None:
-            max_slice = None
-            break
+            continue
 
         # Update max_slice and max_pro
         if max_pro is None or max_pro < pro_tar_con_pie_not_sli:
