@@ -546,7 +546,7 @@ def get_start_end_Dic(pie_L):
     return [start_Dic, end_Dic]
 
 
-# Check sufficient condition, i.e., P(target | pie) >> P(target)
+# Check sufficient condition
 def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_min_sli_and_not_sli, check_nec_con_F):
     # Write the target and pie to the log file
     spamwriter_log.writerow(["check_suf_con target: ", target])
@@ -567,10 +567,13 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         # Write empty line to the log file
         spamwriter_log.writerow('')
         f_log.flush()
+
         return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
     # Get P(target | pie)
     pro_tar_con_pie, num_tar_con_pie, num_tar_1_con_pie = get_pro_num_tar_con_pie(target, tar_con_pie_time_LL)
+
+    # Write to the log file
     spamwriter_log.writerow(["check_suf_con pro_tar_con_pie: ", pro_tar_con_pie])
     spamwriter_log.writerow(["check_suf_con num_tar_con_pie: ", num_tar_con_pie])
     spamwriter_log.writerow(["check_suf_con num_tar_1_con_pie: ", num_tar_1_con_pie])
@@ -586,11 +589,14 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         # Write empty line to the log file
         spamwriter_log.writerow('')
         f_log.flush()
+
         return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
     # Get numerator
     pro_tar = pro_tar_Dic[target]
     numerator = pro_tar_con_pie - pro_tar
+
+    # Write to the log file
     spamwriter_log.writerow(["check_suf_con numerator: ", numerator])
     f_log.flush()
 
@@ -605,6 +611,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         # Write empty line to the log file
         spamwriter_log.writerow('')
         f_log.flush()
+
         return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
     # Get z value
@@ -612,7 +619,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
     # Get p value
     p_val = stats.norm.sf(z_val)
 
-    # Write z value to the log file
+    # Write z value and p value to the log file
     spamwriter_log.writerow(["check_suf_con z_val: ", z_val])
     spamwriter_log.writerow(["check_suf_con p_val: ", p_val])
     spamwriter_log.writerow('')
@@ -633,6 +640,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
             # Write empty line to the log file
             spamwriter_log.writerow('')
             f_log.flush()
+
             continue
 
         # Get pie_vote_F_L
@@ -642,12 +650,15 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         if pie_vote_F_L is not None:
             # Get the vote of the slice
             vote_F =  pie_vote_F_L[1]
+
             # Write the vote to the log file
             spamwriter_log.writerow(["vote_F: ", vote_F])
+
             if vote_F is not None and vote_F >= p_val_cutoff_pie_min_sli_and_not_sli:
                 # Write empty line to the log file
                 spamwriter_log.writerow('')
                 f_log.flush()
+
                 return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
 
         # Get the list of list of timepoints where the target can be changed by the slice
@@ -729,7 +740,7 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         if p_val >= p_val_cutoff_pie_min_sli_and_not_sli:
             # If the slice has not been found
             if not index in found_Dic:
-                # If
+                # If:
                 #     1) the function is called when checking the sufficient condition,
                 # and 2) the slice is duplicate
                 # or  3) not enough sample (so that expand will not be called)
@@ -1176,7 +1187,7 @@ def shrink(target, pie_L, check_nec_con_F):
 
     # For each slice in the pie
     for index in pie_L:
-        # If
+        # If:
         #     1) the function is called when checking the necessary condition
         # and 2) the slice has been replaced and put back when checking the necessity,
         # or  3) the slice is a superset of some slice in the pie
