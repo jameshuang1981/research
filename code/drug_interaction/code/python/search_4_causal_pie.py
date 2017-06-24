@@ -304,6 +304,8 @@ def search():
         spamwriter_log.writerow(['search ' + target + ': ', target])
         f_log.flush()
 
+        #print(get_pie_int_L([['src_8', 2, 6], ['src_8', 2, 2], ['src_10', 1, 2], ['src_3', 1, 6], ['src_0', 1, 3], ['src_0', 1, 2], ['src_0', 2, 6]]))
+
         # Iterative Deepening Search
         ids(target)
 
@@ -445,7 +447,7 @@ def dls(target, pie_size_cutoff):
             break
         else:
             # Shrink the pie
-            [pie_L, tar_con_pie_time_LL] = shrink(target, pie_L)
+            [pie_L, tar_con_pie_time_LL] = shrink(target, pie_L, 1)
 
             # If the pie cannot be shrinked anymore
             if len(pie_L) == 0:
@@ -547,14 +549,14 @@ def get_start_end_Dic(pie_L):
 
 # Check sufficient condition, i.e., P(target | pie) >> P(target)
 def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cutoff_pie_min_sli_and_not_sli):
-    # Update check_suf_con_cou
-    global check_suf_con_cou
-    check_suf_con_cou += 1
-
     # Write the target and pie to the log file
     spamwriter_log.writerow(["check_suf_con target: ", target])
     spamwriter_log.writerow(["check_suf_con pie_L: ", decode(pie_L)])
     f_log.flush()
+
+    # Update check_suf_con_cou
+    global check_suf_con_cou
+    check_suf_con_cou += 1
 
     # Flag, indicating whether there is enough sample, False by default
     sample_size_cutoff_met_F = False
@@ -614,8 +616,14 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
 
     # Check the sufficiency conditioned on pie \ slice
     for index in range(len(slice_LL)):
+        # Write the slice to the log file
+        spamwriter_log.writerow(["check_suf_con slice_LL[index]: ", slice_LL[index]])
+        f_log.flush()
+
         # If the slice is in the pie or a superset of some slice in the pie
         if index in pie_L or is_sup_set(index, pie_L):
+            spamwriter_log.writerow('')
+            f_log.flush()
             continue
 
         # Get pie_vote_F_L
@@ -626,11 +634,9 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
             # Get the vote of the slice
             vote_F =  pie_vote_F_L[1]
             if vote_F is not None and vote_F >= p_val_cutoff_pie_min_sli_and_not_sli:
+                spamwriter_log.writerow('')
+                f_log.flush()
                 return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
-
-        # Write the slice to the log file
-        spamwriter_log.writerow(["check_suf_con slice_LL[index]: ", slice_LL[index]])
-        f_log.flush()
 
         # Get the list of list of timepoints where the target can be changed by the slice
         tar_con_sli_time_LL = tar_con_sli_time_LL_Dic[target][index]
@@ -658,6 +664,9 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
             # Update conditioned_Dic
             conditioned_Dic[index].append([list(pie_L), vote_F])
 
+            spamwriter_log.writerow('')
+            f_log.flush()
+
             continue
 
         # Get numerator
@@ -679,6 +688,9 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
 
             # Update conditioned_Dic
             conditioned_Dic[index].append([list(pie_L), vote_F])
+
+            spamwriter_log.writerow('')
+            f_log.flush()
 
             continue
 
@@ -882,6 +894,11 @@ def get_tar_con_pie_and_not_sli_time_LL(tar_con_pie_time_LL, tar_con_sli_time_LL
 
 # Expand the pie by adding the slice that yields the minimum z value of P(target | pie and not slice) - P(target | not slice)
 def expand(target, pie_L, tar_con_pie_time_LL):
+    # Write the target and pie to the log file
+    spamwriter_log.writerow(["expand target: ", target])
+    spamwriter_log.writerow(["expand pie_L: ", decode(pie_L)])
+    f_log.flush()
+
     # This is the slice that yields the minimum z value
     min_slice = None
     # This is the minimum z value
@@ -1034,7 +1051,7 @@ def check_nec_con(target, pie_L):
             temp_L = list(pie_L)
 
             # Get pie \ slice by shrinking
-            temp_L, tar_con_temp_time_LL = shrink(target, temp_L)
+            temp_L, tar_con_temp_time_LL = shrink(target, temp_L, 0)
 
             # If the pie cannot be shrinked anymore
             if len(temp_L) != len(pie_L) - 1:
@@ -1088,51 +1105,25 @@ def add(target, pie_L, index):
     for slice_L in pie_int_L:
         # If the slice is not in the pie
         if not slice_L in decode(pie_L):
-            # Add the slice to slice_LL
-            slice_LL.append(slice_L)
+            # Get the index of the slice in slice_LL, None by default
+            index = None
+            for i in range(len(slice_LL)):
+                if slice_LL[i] == slice_L:
+                    index = i
+                    break
 
-            # Get the index
-            index = len(slice_LL) - 1
+            if index is None:
+                # Add the slice to slice_LL
+                slice_LL.append(slice_L)
+
+                # Get the index
+                index = len(slice_LL) - 1
+
+                # Get the statistics of the target conditioned on the slice
+                get_tar_con_sli_statistics(target, index, None)
 
             # Add the idnex to pie_L
             pie_L.append(index)
-
-            # Get the statistics of the target conditioned on the slice
-            get_tar_con_sli_statistics(target, index, None)
-
-
-# Add index to the pie
-# def add(target, pie_L, index):
-#     # Add the index to the pie
-#     pie_L.append(index)
-#
-#     # Get the pie where the time window of each slice is the intersection of time windows of slices with the same name
-#     pie_int_L = get_pie_int_L(pie_L)
-#
-#     # Update pie_L
-#     pie_back_up_L = list(pie_L)
-#     pie_L = []
-#
-#     # For each slice in pie_int_L
-#     for slice_L in pie_int_L:
-#         # If the slice is not in the pie
-#         if not slice_L in decode(pie_back_up_L):
-#             # Add the slice to slice_LL
-#             slice_LL.append(slice_L)
-#
-#             # Get the index
-#             index = len(slice_LL) - 1
-#
-#             # Add the idnex to pie_L
-#             pie_L.append(index)
-#
-#             # Get the statistics of the target conditioned on the slice
-#             get_tar_con_sli_statistics(target, index, None)
-#         else:
-#             for index in pie_back_up_L:
-#                 if slice_LL[index] == slice_L:
-#                     pie_L.append(index)
-#                     break
 
 
 # Remove the influence of the pie from the data
@@ -1148,7 +1139,12 @@ def remove_inf(target, tar_con_pie_time_LL):
 # Shrink the pie by removing the slice that yields,
 #    1) the maximum z value of P(target | pie \ slice and not slice) - P(target | not slice)
 # or 2) the maximum P(target | pie \ slice)
-def shrink(target, pie_L):
+def shrink(target, pie_L, check_suf_con_F):
+    # Write the target and pie to the log file
+    spamwriter_log.writerow(["shrink target: ", target])
+    spamwriter_log.writerow(["shrink pie_L: ", decode(pie_L)])
+    f_log.flush()
+
     # If the pie is None or empty
     if pie_L is None or len(pie_L) == 0:
         return [pie_L, []]
@@ -1165,7 +1161,7 @@ def shrink(target, pie_L):
         # If
         #    1) the slice has been replaced and put back when checking the necessity,
         # or 2) a superset of some slice in the pie
-        if (index in replaced_Dic
+        if (check_suf_con_F == 0 and index in replaced_Dic
             or is_sup_set(index, pie_L)):
             continue
 
@@ -1201,6 +1197,7 @@ def shrink(target, pie_L):
         # If P(target | pie \ slice and not slice) is None or P(target | not slice) is None
         if pro_tar_con_pie_min_sli_and_not_sli is None or pro_tar_con_not_sli is None:
             max_slice = None
+            spamwriter_log.writerow('')
             break
 
         # Get numerator
@@ -1218,6 +1215,7 @@ def shrink(target, pie_L):
         # If denominator is zero
         if denominator == 0:
             max_slice = None
+            spamwriter_log.writerow('')
             break
 
         # Get z value
@@ -1333,6 +1331,68 @@ def is_sup_set(idx_sup, pie_L):
     return False
 
 
+# # Get the pie where the time window of each slice is the intersection of time windows of slices with the same name
+# def get_pie_int_L(pie_L):
+#     # The dictionary of the intersection of time windows
+#     int_win_Dic = {}
+#
+#     # Get the name of the slices
+#     for index in pie_L:
+#         var, win_start, win_end = slice_LL[index]
+#         if not var in int_win_Dic:
+#             int_win_Dic[var] = []
+#
+#     # Get the intersection of time windows
+#     for var in int_win_Dic:
+#         win_LL = []
+#
+#         # For each slice in the pie
+#         for index in pie_L:
+#             var_ind, win_start_ind, win_end_ind = slice_LL[index]
+#
+#             # If the two slices have the same name
+#             if var_ind == var:
+#                 # Flag, indicating whehter the current window intersects with a window in win_L, False by default
+#                 int_F = False
+#
+#                 # For each time window
+#                 for i in range(len(win_LL)):
+#                     win_start = win_LL[i][0]
+#                     win_end = win_LL[i][1]
+#
+#                     # Get the intersection
+#                     if win_end < win_end_ind:
+#                         if win_end >= win_start_ind:
+#                             win_LL[i][0] = max(win_start, win_start_ind)
+#                             win_LL[i][1] = win_end
+#                             int_F = True
+#                             break
+#                     elif win_end_ind >= win_start:
+#                         win_LL[i][0] = max(win_start, win_start_ind)
+#                         win_LL[i][1] = win_end_ind
+#                         int_F = True
+#                         break
+#
+#                 # If there is no window that intersects with the current one
+#                 if int_F is False:
+#                     # Add the current one
+#                     win_LL.append([win_start_ind, win_end_ind])
+#
+#         # Update int_win_Dic
+#         int_win_Dic[var] = list(win_LL)
+#
+#     # Initialize
+#     pie_int_L = []
+#
+#     # For each var
+#     for var in int_win_Dic:
+#         # Add each slice
+#         for [win_start, win_end] in int_win_Dic[var]:
+#             pie_int_L.append([var, win_start, win_end])
+#
+#     return pie_int_L
+
+
 # Get the pie where the time window of each slice is the intersection of time windows of slices with the same name
 def get_pie_int_L(pie_L):
     # The dictionary of the intersection of time windows
@@ -1354,29 +1414,28 @@ def get_pie_int_L(pie_L):
 
             # If the two slices have the same name
             if var_ind == var:
-                # Flag, indicating whehter the current window intersects with a window in win_L, False by default
-                int_F = False
+                len_win_LL = len(win_LL)
 
                 # For each time window
-                for i in range(len(win_LL)):
+                for i in range(len_win_LL):
                     win_start = win_LL[i][0]
                     win_end = win_LL[i][1]
 
                     # Get the intersection
                     if win_end < win_end_ind:
                         if win_end >= win_start_ind:
-                            win_LL[i][0] = max(win_start, win_start_ind)
-                            win_LL[i][1] = win_end
-                            int_F = True
-                            break
+                            win_start_temp = max(win_start, win_start_ind)
+                            win_end_temp = win_end
+                            if not [win_start_temp, win_end_temp] in win_LL:
+                                win_LL.append([win_start_temp, win_end_temp])
                     elif win_end_ind >= win_start:
-                        win_LL[i][0] = max(win_start, win_start_ind)
-                        win_LL[i][1] = win_end_ind
-                        int_F = True
-                        break
+                        win_start_temp = max(win_start, win_start_ind)
+                        win_end_temp = win_end_ind
+                        if not [win_start_temp, win_end_temp] in win_LL:
+                            win_LL.append([win_start_temp, win_end_temp])
 
                 # If there is no window that intersects with the current one
-                if int_F is False:
+                if not [win_start_ind, win_end_ind] in win_LL:
                     # Add the current one
                     win_LL.append([win_start_ind, win_end_ind])
 
