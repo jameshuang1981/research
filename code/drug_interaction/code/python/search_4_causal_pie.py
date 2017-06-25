@@ -300,7 +300,7 @@ def get_tar_con_sli_statistics(target, index, tar_con_pie_time_LL):
 # Search for the causal pies
 def search():
     for target in tar_Dic:
-        # Write target to log file
+        # Write target to the log file
         spamwriter_log.writerow(['search ' + target + ': ', target])
         spamwriter_log.writerow('')
         f_log.flush()
@@ -329,7 +329,7 @@ def ids(target):
             if pie_size_cutoff_met_tem_F is True:
                 pie_size_cutoff_met_F = True
 
-        # Write the number of check_suf_con to log file
+        # Write the number of check_suf_con to the log file
         spamwriter_log.writerow(['check_suf_con_cou: ', check_suf_con_cou])
         spamwriter_log.writerow('')
         f_log.flush()
@@ -446,7 +446,7 @@ def dls(target, pie_size_cutoff):
             break
         else:
             # Shrink the pie
-            [pie_L, tar_con_pie_time_LL] = shrink(target, pie_L, 1)
+            [pie_L, tar_con_pie_time_LL] = shrink(target, pie_L, 0)
 
             # If the pie cannot be shrinked anymore
             if len(pie_L) == 0:
@@ -551,6 +551,9 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
     # Write the target and pie to the log file
     spamwriter_log.writerow(["check_suf_con target: ", target])
     spamwriter_log.writerow(["check_suf_con pie_L: ", decode(pie_L)])
+    spamwriter_log.writerow(["check_suf_p_val_cutoff_pie: ", p_val_cutoff_pie])
+    spamwriter_log.writerow(["check_suf_con p_val_cutoff_pie_min_sli_and_not_sli: ", p_val_cutoff_pie_min_sli_and_not_sli])
+
     f_log.flush()
 
     # Update check_suf_con_cou
@@ -635,8 +638,15 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         spamwriter_log.writerow(["check_suf_con slice_LL[index]: ", slice_LL[index]])
         f_log.flush()
 
-        # If the slice is in the pie or a superset of some slice in the pie
-        if index in pie_L or is_sup_set(index, pie_L):
+        # If:
+        #     1) the slice is in the pie,
+        # or  2) a superset of some slice in the pie,
+        # or  3) the function is called when checking the necessary condition,
+        # and 4) the slice is duplicate
+        if (index in pie_L
+            or is_sup_set(index, pie_L)
+            or check_nec_con_F == 1
+            and duplicate(pie_L, index)):
             # Write empty line to the log file
             spamwriter_log.writerow('')
             f_log.flush()
@@ -660,6 +670,8 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
                 f_log.flush()
 
                 return [pie_L, tar_con_pie_time_LL, sample_size_cutoff_met_F, suf_F]
+
+            continue
 
         # Get the list of list of timepoints where the target can be changed by the slice
         tar_con_sli_time_LL = tar_con_sli_time_LL_Dic[target][index]
@@ -955,7 +967,7 @@ def expand(target, pie_L, tar_con_pie_time_LL):
             # Get P(target | not slice)
             pro_tar_con_not_sli = pro_tar_con_not_sli_Dic[target][index]
 
-            # Write log file
+            # Write the log file
             spamwriter_log.writerow(
                 ["expand pro_tar_con_pie_and_not_sli: ", pro_tar_con_pie_and_not_sli])
             spamwriter_log.writerow(
@@ -993,7 +1005,7 @@ def expand(target, pie_L, tar_con_pie_time_LL):
             # Get z value
             z_val = numerator / denominator
 
-            # Write z value to log file
+            # Write z value to the log file
             spamwriter_log.writerow(["expand z_val: ", z_val])
             spamwriter_log.writerow('')
             f_log.flush()
@@ -1012,7 +1024,7 @@ def expand(target, pie_L, tar_con_pie_time_LL):
     # Add min_slice to the pie
     add(target, pie_L, min_slice)
 
-    # Write pie_L to log file
+    # Write pie_L to the log file
     spamwriter_log.writerow(['expand pie_L' + ': ', decode(pie_L)])
     f_log.flush()
 
@@ -1057,7 +1069,7 @@ def get_tar_con_pie_sli_time_LL(target, pie_L, tar_con_pie_time_LL, index):
 
 # Check the necessary condition and exclude the slices that are not in the causal pie
 def check_nec_con(target, pie_L):
-    # Write the target and pie to log file
+    # Write the target and pie to the log file
     spamwriter_log.writerow(["check_nec_con target: ", target])
     spamwriter_log.writerow(["check_nec_con pie_L: ", decode(pie_L)])
     spamwriter_log.writerow('')
@@ -1079,7 +1091,7 @@ def check_nec_con(target, pie_L):
             temp_L = list(pie_L)
 
             # Get pie \ slice by shrinking
-            temp_L, tar_con_temp_time_LL = shrink(target, temp_L, 0)
+            temp_L, tar_con_temp_time_LL = shrink(target, temp_L, 1)
 
             # If the pie cannot be shrinked anymore
             if len(temp_L) != len(pie_L) - 1:
@@ -1171,7 +1183,7 @@ def remove_inf(target, tar_con_pie_time_LL):
 def shrink(target, pie_L, check_nec_con_F):
     # Write the target and pie to the log file
     spamwriter_log.writerow(["shrink target: ", target])
-    spamwriter_log.writerow(["shrink pie_L: ", decode(pie_L)])
+    spamwriter_log.writerow(["before shrink pie_L: ", decode(pie_L)])
     f_log.flush()
 
     # If the pie is None or empty
@@ -1218,7 +1230,7 @@ def shrink(target, pie_L, check_nec_con_F):
         # Get P(target | not slice)
         pro_tar_con_not_sli = pro_tar_con_not_sli_Dic[target][index]
 
-        # Write log file
+        # Write the log file
         spamwriter_log.writerow(["shrink pro_tar_con_pie_min_sli_and_not_sli: ", pro_tar_con_pie_min_sli_and_not_sli])
         spamwriter_log.writerow(["shrink num_tar_con_pie_min_sli_and_not_sli: ", num_tar_con_pie_min_sli_and_not_sli])
         spamwriter_log.writerow(["shrink num_tar_1_con_pie_min_sli_and_not_sli: ", num_tar_1_con_pie_min_sli_and_not_sli])
@@ -1228,7 +1240,11 @@ def shrink(target, pie_L, check_nec_con_F):
         # If P(target | pie \ slice and not slice) is None or P(target | not slice) is None
         if pro_tar_con_pie_min_sli_and_not_sli is None or pro_tar_con_not_sli is None:
             max_slice = None
+
+            # Write empty line to the log file
             spamwriter_log.writerow('')
+            f_log.flush()
+
             break
 
         # Get numerator
@@ -1246,13 +1262,17 @@ def shrink(target, pie_L, check_nec_con_F):
         # If denominator is zero
         if denominator == 0:
             max_slice = None
+
+            # Write empty line to the log file
             spamwriter_log.writerow('')
+            f_log.flush()
+
             break
 
         # Get z value
         z_val = numerator / denominator
 
-        # Write z value to log file
+        # Write z value to the log file
         spamwriter_log.writerow(["shrink z_val: ", z_val])
         spamwriter_log.writerow('')
         f_log.flush()
@@ -1268,8 +1288,9 @@ def shrink(target, pie_L, check_nec_con_F):
         # Remove max_slice from the pie
         pie_L.remove(max_slice)
 
-        # Write pie_L to log file
-        spamwriter_log.writerow(['shrink pie_L' + ': ', decode(pie_L)])
+        # Write pie_L to the log file
+        spamwriter_log.writerow(['after shrink pie_L' + ': ', decode(pie_L)])
+        spamwriter_log.writerow('')
         f_log.flush()
 
         # Print the pie
@@ -1307,7 +1328,7 @@ def shrink(target, pie_L, check_nec_con_F):
         pro_tar_con_pie_not_sli, num_tar_con_pie_not_sli, num_tar_1_con_pie_not_sli = get_pro_num_tar_con_pie(
             target, tar_con_pie_not_sli_time_LL)
 
-        # Write log file
+        # Write the log file
         spamwriter_log.writerow(["shrink pro_tar_con_pie_not_sli: ", pro_tar_con_pie_not_sli])
         spamwriter_log.writerow(["shrink num_tar_con_pie_not_sli: ", num_tar_con_pie_not_sli])
         spamwriter_log.writerow(["shrink num_tar_1_con_pie_not_sli: ", num_tar_1_con_pie_not_sli])
@@ -1330,7 +1351,7 @@ def shrink(target, pie_L, check_nec_con_F):
 
     # Remove max_slice from the pie
     pie_L.remove(max_slice)
-    # Write pie_L to log file
+    # Write pie_L to the log file
     spamwriter_log.writerow(['shrink pie_L' + ': ', decode(pie_L)])
     f_log.flush()
 
