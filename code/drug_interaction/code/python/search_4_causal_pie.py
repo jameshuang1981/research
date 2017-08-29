@@ -290,23 +290,25 @@ def get_tar_con_sli_statistics(target, index, tar_con_pie_time_LL):
         if val_Dic[target][time] != -1:
             val_L.append(val_Dic[target][time])
 
-    # Update
-    pro_tar_con_not_sli_Dic[target][index] = np.mean(val_L)
-    not_pro_tar_con_not_slic_Dic[target][index] = 1 - pro_tar_con_not_sli_Dic[target][index]
-    num_tar_con_not_sli_Dic[target][index] = len(val_L)
-    num_tar_1_con_not_sli_Dic[target][index] = sum(val_L)
+    # If the slice is not always present
+    if len(val_L) > 0:
+        # Update
+        pro_tar_con_not_sli_Dic[target][index] = np.mean(val_L)
+        not_pro_tar_con_not_slic_Dic[target][index] = 1 - pro_tar_con_not_sli_Dic[target][index]
+        num_tar_con_not_sli_Dic[target][index] = len(val_L)
+        num_tar_1_con_not_sli_Dic[target][index] = sum(val_L)
 
 
 # Search for the causal pies
-def search():
+def search_4_all():
     for target in tar_Dic:
         # Write target to the log file
         spamwriter_log.writerow(['search ' + target + ': ', target])
         spamwriter_log.writerow('')
         f_log.flush()
 
-        # Iterative Deepening Search
-        ids(target)
+        # Search for the 
+        search_4_one(target)
 
 
 # Iterative Deepening Search
@@ -643,10 +645,12 @@ def check_suf_con(target, pie_L, tar_con_pie_time_LL, p_val_cutoff_pie, p_val_cu
         # or  2) a superset of some slice in the pie,
         # or  3) the function is called when checking the necessary condition,
         # and 4) the slice is duplicate
+        # or  5) the slice is always present
         if (index in pie_L
             or is_sup_set(index, pie_L)
             or check_nec_con_F == 1
-            and duplicate(pie_L, index)):
+            and duplicate(pie_L, index)
+            or not index in pro_tar_con_not_sli_Dic[target]):
             # Write empty line to the log file
             spamwriter_log.writerow('')
             f_log.flush()
@@ -948,9 +952,11 @@ def expand(target, pie_L, tar_con_pie_time_LL):
         # If the slice has not been included,
         # or removed,
         # or replaced yet
+        # and is not always present
         if (not index in pie_L
             and not index in removed_Dic
-            and not index in replaced_Dic):
+            and not index in replaced_Dic
+            and index in pro_tar_con_not_sli_Dic[target]):
 
             spamwriter_log.writerow(["expand slice_LL[index]: ", slice_LL[index]])
             f_log.flush()
@@ -1203,9 +1209,11 @@ def shrink(target, pie_L, check_nec_con_F):
         #     1) the function is called when checking the necessary condition
         # and 2) the slice has been replaced and put back when checking the necessity,
         # or  3) the slice is a superset of some slice in the pie
+        # or  4) the slice is always present
         if (check_nec_con_F == 1
             and index in replaced_Dic
-            or is_sup_set(index, pie_L)):
+            or is_sup_set(index, pie_L)
+            or not index in pro_tar_con_not_sli_Dic[target]):
             continue
 
         spamwriter_log.writerow(["shrink slice_LL[index]: ", slice_LL[index]])
